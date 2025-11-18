@@ -93,26 +93,8 @@
     {
       "id": "chairperson-photo",
       "description": "Portrait of Mrs. Suman Vinod Morye, Founder & Chairperson",
-      "imageUrl": "https://storage.googleapis.com/aifire.appspot.com/users%2Fuser-g5wT6LeN0yXRKzR1kYxC%2Fprojects%2Fdefault-firebase-project-for-studi%2Fimages%2F1722421379468-original.jpeg?alt=media",
+      "imageUrl": "/images/founder1.jpg",
       "imageHint": "woman portrait"
-    },
-    {
-      "id": "team-2",
-      "description": "Professional headshot of a team member.",
-      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjMyMjg0OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional headshot"
-    },
-    {
-      "id": "team-3",
-      "description": "Professional headshot of a team member.",
-      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjMyMjg0OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional headshot"
-    },
-    {
-      "id": "team-4",
-      "description": "Professional headshot of a team member.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496358961-3c82861ab8f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjMyMjg0OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional headshot"
     },
     {
       "id": "gallery-1",
