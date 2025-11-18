@@ -230,9 +230,9 @@ export const GALLERY_IMAGES = [
 ];
 
 export const CONTACT_INFO = {
-  address: '123 Progress Ave, Unity City, 12345',
-  email: 'info@vikhyatfoundation.org',
-  phone: '(123) 456-7890',
+  address: '6th Floor Govind Smruti Building, Opposite Patel Basta Bazaar, Lohar Ali, Thane (W) 400601',
+  email: 'vikhyatfoundation@gmail.com',
+  phone: '+91 9619578549',
   socials: {
     facebook: '#',
     twitter: '#',
