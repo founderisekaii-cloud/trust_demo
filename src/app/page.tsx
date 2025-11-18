@@ -40,7 +40,7 @@ function Hero() {
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/get-involved">Get Involved</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+          <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/about-us">Learn More</Link>
           </Button>
         </div>
