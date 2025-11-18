@@ -52,47 +52,6 @@ const OurStory = () => {
   );
 };
 
-const OurTeam = () => {
-  return (
-    <section className="py-16 md:py-24 bg-secondary">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Leadership</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Meet the dedicated individual guiding our mission and steering our efforts toward a better future.
-          </p>
-        </div>
-        <div className="mt-12 flex justify-center">
-          {TEAM_MEMBERS.map((member) => {
-            const teamImage = findImage(member.imageUrl);
-            return (
-              <Card key={member.id} className="text-center border-0 shadow-none bg-transparent max-w-sm">
-                <CardHeader className="p-0">
-                  <div className="relative w-full aspect-square rounded-lg overflow-hidden mx-auto shadow-md">
-                    {teamImage && (
-                      <Image 
-                        src={teamImage.imageUrl} 
-                        alt={member.name} 
-                        fill 
-                        className="object-cover"
-                        data-ai-hint={teamImage.imageHint}
-                      />
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent className="mt-4 p-0">
-                  <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
-                  <p className="text-sm text-primary">{member.title}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const OurValues = () => {
     const values = [
         { title: 'Integrity', description: 'We operate with unwavering honesty, transparency, and accountability in all that we do.' },
@@ -190,7 +149,6 @@ export default function AboutUsPage() {
             </div>
         </header>
         <OurStory />
-        <OurTeam />
         <OurValues />
         <BestWishers />
     </div>
