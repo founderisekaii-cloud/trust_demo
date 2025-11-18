@@ -5,7 +5,7 @@ import { Facebook, Twitter, Linkedin, HandHeart } from 'lucide-react';
 import { NAV_LINKS, CONTACT_INFO } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export function Footer() {
   const socialLinks = [
@@ -15,15 +15,6 @@ export function Footer() {
   ];
   const { toast } = useToast();
   const [email, setEmail] = useState('');
-  const [contactInfo, setContactInfo] = useState({
-    address: '',
-    email: '',
-    phone: '',
-  });
-
-  useEffect(() => {
-    setContactInfo(CONTACT_INFO);
-  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,9 +63,9 @@ export function Footer() {
             <div>
               <h3 className="font-headline font-semibold tracking-wider uppercase">Contact</h3>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>{contactInfo.address}</li>
-                <li>{contactInfo.email}</li>
-                <li>{contactInfo.phone}</li>
+                <li>{CONTACT_INFO.address}</li>
+                <li>{CONTACT_INFO.email}</li>
+                <li>{CONTACT_INFO.phone}</li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1">
