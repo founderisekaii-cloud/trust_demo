@@ -99,13 +99,14 @@ export default function ContactPage() {
       
       <section>
         <div className="w-full h-96">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.282998399583!2d-73.98784168459384!3d40.75583397932709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c65a2527%3A0x1d64115433625773!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus" 
+           <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d235.50961929715052!2d72.97666752704521!3d19.188478923788903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s6th%20Floor%20Govind%20Smruti%20Building%2C%20Opposite%20Patel%20Basta%20Bazaar%2C%20Lohar%20Ali%2C%20Thane%20400601!5e0!3m2!1shi!2sin!4v1763491956385!5m2!1shi!2sin" 
                 width="100%" 
                 height="100%" 
                 style={{border:0}} 
                 allowFullScreen={false} 
-                loading="lazy"
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
                 title="Google Maps Location"
             ></iframe>
         </div>
@@ -113,5 +114,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-    
