@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm, useFormState } from 'react-hook-form';
@@ -98,7 +99,7 @@ export function VolunteerForm() {
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Jane Appleseed" {...field} />
+                      <Input placeholder="Enter your full name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -111,7 +112,7 @@ export function VolunteerForm() {
                   <FormItem>
                     <FormLabel>Your Skills</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Project Management, Graphic Design, Public Speaking" {...field} />
+                      <Input placeholder="e.g., Project Management, Teaching, Event Planning" {...field} />
                     </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -124,7 +125,7 @@ export function VolunteerForm() {
                   <FormItem>
                     <FormLabel>Interests & Motivations</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="I'm passionate about child education and community building..." className="min-h-[120px]" {...field} />
+                      <Textarea placeholder="Tell us what you're passionate about" className="min-h-[120px]" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -137,7 +138,7 @@ export function VolunteerForm() {
                   <FormItem>
                     <FormLabel>Availability</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., 5-10 hours/week, weekends only" {...field} />
+                      <Input placeholder="e.g., Evenings, Weekends, 10 hours/week" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
