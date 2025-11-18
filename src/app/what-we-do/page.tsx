@@ -2,7 +2,7 @@
 import { FOCUS_AREAS } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, CheckCircle, BrainCircuit, HeartHandshake, Users, Leaf, Sprout, BookOpen } from 'lucide-react';
+import { ArrowLeft, CheckCircle, BrainCircuit, HeartHandshake, Users, Leaf, Sprout, BookOpen, Landmark } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -11,6 +11,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'Women Empowerment': Users,
   'Environment & Sustainability': Leaf,
   'Rural Development': Sprout,
+  'Cultural & Religious Activities': Landmark,
 };
 
 export default function WhatWeDoPage() {
@@ -34,7 +35,7 @@ export default function WhatWeDoPage() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-1 gap-12">
-            {FOCUS_AREAS.slice(0, 5).map((area) => {
+            {FOCUS_AREAS.map((area) => {
               const Icon = iconMap[area.title] || BookOpen;
               return (
                 <Card key={area.title} className="overflow-hidden group w-full">
