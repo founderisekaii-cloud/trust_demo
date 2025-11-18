@@ -29,17 +29,6 @@ const OurStory = () => {
              <div className="mt-12 bg-secondary p-6 rounded-lg">
                 <h3 className="text-2xl font-headline font-semibold mb-4">The Chairman's Vision</h3>
                  <div className="flex items-center gap-6">
-                    {chairpersonImage && (
-                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg shrink-0">
-                        <Image 
-                            src={chairpersonImage.imageUrl} 
-                            alt="Mrs. Suman Vinod Morye, Founder & Chairperson" 
-                            fill 
-                            className="object-cover"
-                            data-ai-hint={chairpersonImage.imageHint}
-                        />
-                    </div>
-                    )}
                     <p className="text-muted-foreground italic">
                         "Our vision is one of holistic empowerment. We strive to create a world where every individual has the opportunity not just to survive, but to thrive. By focusing on education, health, and sustainable development, we are planting the seeds for a future where communities are self-reliant, resilient, and filled with hope. Our work is driven by the belief that compassion, when combined with strategic action, can move mountains."
                     </p>
