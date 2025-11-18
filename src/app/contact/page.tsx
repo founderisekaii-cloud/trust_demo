@@ -7,14 +7,8 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-
-export const metadata: Metadata = {
-  title: 'Contact Us | Vikhyat Foundation',
-  description: 'Get in touch with Vikhyat Foundation. We\'d love to hear from you.',
-};
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
