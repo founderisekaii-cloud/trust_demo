@@ -5,7 +5,7 @@ import { Footer } from '@/components/app/footer';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'TrustForward | Empowering Communities, Driving Social Change',
+  title: 'Vikhyat Foundation | Empowering Communities, Driving Social Change',
   description: 'A political and social trust dedicated to building a more just, equitable, and prosperous society.',
 };
 

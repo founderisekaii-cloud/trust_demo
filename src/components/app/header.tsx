@@ -18,7 +18,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold font-headline">
           <HandHeart className="h-7 w-7 text-primary" />
-          <span>TrustForward</span>
+          <span>Vikhyat Foundation</span>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-6">
@@ -55,7 +55,7 @@ export function Header() {
                 <div className="flex items-center justify-between border-b pb-4">
                   <Link href="/" className="flex items-center gap-2 text-lg font-bold font-headline" onClick={() => setIsMobileMenuOpen(false)}>
                     <HandHeart className="h-6 w-6 text-primary" />
-                    <span>TrustForward</span>
+                    <span>Vikhyat Foundation</span>
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
                     <X className="h-6 w-6" />

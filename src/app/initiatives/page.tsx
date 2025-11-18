@@ -9,7 +9,7 @@ import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'What We Do | TrustForward',
+  title: 'What We Do | Vikhyat Foundation',
   description: 'Explore our ongoing and past initiatives, from community development to policy advocacy.',
 };
 

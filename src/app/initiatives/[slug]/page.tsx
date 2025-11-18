@@ -20,12 +20,12 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
   if (!initiative) {
     return {
-      title: 'Initiative Not Found | TrustForward',
+      title: 'Initiative Not Found | Vikhyat Foundation',
     };
   }
 
   return {
-    title: `${initiative.title} | TrustForward`,
+    title: `${initiative.title} | Vikhyat Foundation`,
     description: initiative.shortDescription,
   };
 }

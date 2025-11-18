@@ -1,12 +1,12 @@
+
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { FOCUS_AREAS, INITIATIVES, NEWS_ARTICLES, TESTIMONIALS } from '@/lib/data';
+import { FOCUS_AREAS, TESTIMONIALS } from '@/lib/data';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, BookOpen, HeartHandshake, Landmark, Users } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { ArrowRight, BookOpen, HeartHandshake, Landmark, Users, Sprout, BrainCircuit, Leaf, Award } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -30,10 +30,10 @@ function Hero() {
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative text-center p-4">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold drop-shadow-md">
-          Empowering Communities, Driving Social Change
+          Vikhyat Foundation
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-neutral-200 drop-shadow-sm">
-          TrustForward is a dedicated political and social trust committed to building a more just, equitable, and prosperous society for all.
+          The purpose of Vikhyat Foundation is educational, social, cultural, religious, health and sports development.
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
@@ -52,10 +52,16 @@ function Mission() {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Mission & Vision</h2>
-        <div className="mt-6 max-w-3xl mx-auto">
-          <p className="text-lg text-muted-foreground">
-            We believe in the power of collective action to create lasting change. Our mission is to identify critical social challenges, foster community-led solutions, and advocate for policies that promote fairness and opportunity. We envision a world where every individual has the chance to thrive.
+        <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Purpose, Mission & Vision</h2>
+        <div className="mt-6 max-w-4xl mx-auto text-left">
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            At the heart of the Vikhyat Foundation lies a profound and multifaceted purpose: to be a catalyst for holistic development across society. Our core objective is to drive meaningful progress in the educational, social, cultural, religious, health, and sports sectors. We believe that a thriving community is one where every individual has the opportunity to flourish in all aspects of life. This foundational purpose guides every initiative we undertake, ensuring that our efforts are always directed towards creating a more equitable, knowledgeable, and vibrant world for all. We are committed to nurturing talent, preserving culture, promoting well-being, and fostering a spirit of unity and progress.
+          </p>
+          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            Our mission translates this purpose into tangible action. We are dedicated to promoting and carrying on comprehensive health care, making medical aid accessible to those in need, and working tirelessly for the relief of poverty. A cornerstone of our work is the provision of skill-based education and training, empowering individuals with the practical tools they need to achieve economic independence and personal growth. In times of crisis, we extend our hand to help the victims of natural calamities, providing immediate relief and long-term support to rebuild their lives. Furthermore, we are deeply committed to environmental preservation, understanding that a healthy planet is the bedrock of a healthy society. Our mission is one of active service, addressing immediate needs while building a foundation for sustainable, long-term community upliftment.
+          </p>
+           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            Our vision is to build the infrastructure of compassion and opportunity. We aim to establish and maintain a network of institutions that serve as pillars of support for the community. This includes creating welfare hostels that provide safe and nurturing homes for the vulnerable, ashrams and dharmshalas that offer spiritual solace and shelter, and state-of-the-art educational and skill training centers that serve as hubs of innovation and learning. Through these establishments, we envision a future where every person, regardless of their background, has access to the resources they need to reach their full potential. Our vision is not just about building structures, but about creating enduring ecosystems of support, empowerment, and holistic development that will benefit generations to come.
           </p>
         </div>
       </div>
@@ -63,11 +69,12 @@ function Mission() {
   );
 }
 
-const iconMap = {
-  Education: BookOpen,
-  Healthcare: HeartHandshake,
-  'Community Development': Users,
-  'Policy Advocacy': Landmark,
+const iconMap: { [key: string]: React.ElementType } = {
+  'Education & Skill Development': BrainCircuit,
+  'Health & Wellness': HeartHandshake,
+  'Women Empowerment': Users,
+  'Environment & Sustainability': Leaf,
+  'Rural Development': Sprout,
 };
 
 function FocusAreas() {
@@ -75,14 +82,14 @@ function FocusAreas() {
     <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Focus Areas</h2>
+          <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Areas of Impact</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            We concentrate our efforts on four key pillars to maximize our impact and drive systemic change.
+            We concentrate our efforts on key pillars to maximize our impact and drive systemic change.
           </p>
         </div>
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {FOCUS_AREAS.map((area) => {
-            const Icon = iconMap[area.title as keyof typeof iconMap] || BookOpen;
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {FOCUS_AREAS.slice(0, 5).map((area) => {
+            const Icon = iconMap[area.title] || BookOpen;
             return(
             <Card key={area.title} className="text-center hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="items-center">
@@ -96,7 +103,7 @@ function FocusAreas() {
               </CardContent>
               <CardFooter className="justify-center">
                  <Button variant="ghost" asChild>
-                   <Link href={`/initiatives/${area.slug}`}>Learn More <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                   <Link href={`/what-we-do`}>Learn More <ArrowRight className="ml-2 h-4 w-4" /></Link>
                  </Button>
               </CardFooter>
             </Card>
@@ -107,90 +114,15 @@ function FocusAreas() {
   );
 }
 
-function FeaturedInitiative() {
-    const featured = INITIATIVES.find(i => i.slug === 'urban-renewal-project');
-    if (!featured) return null;
-    const image = findImage('featured-initiative');
 
-    return (
-        <section className="py-16 md:py-24 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div className='relative aspect-video rounded-lg overflow-hidden shadow-lg'>
-                        {image && <Image src={image.imageUrl} alt={image.description} fill className="object-cover" data-ai-hint={image.imageHint} />}
-                    </div>
-                    <div>
-                        <Badge variant="outline">Featured Initiative</Badge>
-                        <h2 className="mt-4 text-3xl md:text-4xl font-headline font-bold">{featured.title}</h2>
-                        <p className="mt-4 text-lg text-muted-foreground">{featured.shortDescription}</p>
-                        <p className="mt-2 text-muted-foreground">{featured.longDescription.substring(0, 150)}...</p>
-                        <Button asChild size="lg" className="mt-6">
-                            <Link href={`/initiatives/${featured.slug}`}>Support Our Campaign</Link>
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function LatestNews() {
-  return (
-    <section className="py-16 md:py-24 bg-secondary">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-12">
-            <div className="text-left">
-                <h2 className="text-3xl md:text-4xl font-headline font-bold">Latest News & Updates</h2>
-                <p className="mt-2 max-w-2xl text-lg text-muted-foreground">
-                    Stay informed about our work and impact.
-                </p>
-            </div>
-            <Button variant="outline" asChild>
-                <Link href="/news">View All News</Link>
-            </Button>
-        </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {NEWS_ARTICLES.map((article) => {
-            const image = findImage(article.imageUrl);
-            return (
-              <Card key={article.id} className="flex flex-col overflow-hidden group">
-                {image && 
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <Image src={image.imageUrl} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" data-ai-hint={image.imageHint} />
-                  </div>
-                }
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary">{article.category}</Badge>
-                    <p className="text-sm text-muted-foreground">{article.date}</p>
-                  </div>
-                  <CardTitle className="font-headline text-lg mt-2">{article.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground">{article.shortDescription}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="link" asChild className="p-0 h-auto">
-                    <Link href={`/news/${article.slug}`}>Read More <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
+function WellWishers() {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">Voices of Our Community</h2>
+          <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Well Wishers</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Hear from the people whose lives have been changed through our collective efforts.
+            Hear from the people who believe in our mission and witness the change we create together.
           </p>
         </div>
         <Carousel className="mt-12 w-full max-w-4xl mx-auto" opts={{ loop: true }}>
@@ -224,6 +156,11 @@ function Testimonials() {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+        <div className="mt-8 text-center">
+          <Button asChild variant="outline">
+            <Link href="/successful-project">View Successful Projects</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
@@ -241,7 +178,7 @@ function FinalCta() {
                     <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                         <Link href="/get-involved#volunteer-form">Volunteer With Us</Link>
                     </Button>
-                    <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                    <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                         <Link href="/get-involved">Donate Now</Link>
                     </Button>
                 </div>
@@ -256,9 +193,7 @@ export default function Home() {
       <Hero />
       <Mission />
       <FocusAreas />
-      <FeaturedInitiative />
-      <LatestNews />
-      <Testimonials />
+      <WellWishers />
       <FinalCta />
     </main>
   );

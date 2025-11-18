@@ -9,8 +9,8 @@ import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'News & Media | TrustForward',
-  description: 'Stay informed with the latest articles, press releases, and announcements from TrustForward.',
+  title: 'News & Media | Vikhyat Foundation',
+  description: 'Stay informed with the latest articles, press releases, and announcements from Vikhyat Foundation.',
 };
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
@@ -24,7 +24,7 @@ export default function NewsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-headline font-bold">News & Media</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            The latest articles, press releases, public announcements, and opinion pieces from TrustForward.
+            The latest articles, press releases, public announcements, and opinion pieces from Vikhyat Foundation.
           </p>
         </div>
       </header>

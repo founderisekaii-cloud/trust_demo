@@ -4,7 +4,7 @@ import { GALLERY_IMAGES } from '@/lib/data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Gallery | TrustForward',
+  title: 'Gallery | Vikhyat Foundation',
   description: 'A visual journey through our events, community work, and impact stories.',
 };
 

@@ -1,21 +1,25 @@
+'use client';
 import Image from 'next/image';
 import { ContactForm } from '@/components/app/contact-form';
 import { CONTACT_METHODS, CONTACT_INFO } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Linkedin, Twitter, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | TrustForward',
-  description: 'Get in touch with TrustForward. We\'d love to hear from you.',
+  title: 'Contact Us | Vikhyat Foundation',
+  description: 'Get in touch with Vikhyat Foundation. We\'d love to hear from you.',
 };
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function ContactPage() {
   const heroImage = findImage('contact-hero');
+  const router = useRouter();
   const socialLinks = [
     { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
     { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
@@ -36,6 +40,10 @@ export default function ContactPage() {
           />
         }
         <div className="absolute inset-0 bg-black/60" />
+        <Button variant="ghost" onClick={() => router.back()} className="absolute top-6 left-4 text-white hover:bg-white/10 z-10">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </Button>
         <div className="relative text-center p-4">
           <h1 className="text-4xl md:text-5xl font-headline font-bold">Contact Us</h1>
           <p className="mt-2 text-lg md:text-xl text-neutral-200">We're here to answer your questions.</p>

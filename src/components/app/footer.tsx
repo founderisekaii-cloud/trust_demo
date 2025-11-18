@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 import { Facebook, Twitter, Linkedin, HandHeart } from 'lucide-react';
 import { NAV_LINKS, CONTACT_INFO } from '@/lib/data';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export function Footer() {
   const socialLinks = [
@@ -9,6 +13,18 @@ export function Footer() {
     { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
     { icon: Linkedin, href: CONTACT_INFO.socials.linkedin, label: 'LinkedIn' },
   ];
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(`Subscribing ${email}`);
+    toast({
+      title: 'Success!',
+      description: 'Thank you for joining our movement!',
+    });
+    setEmail('');
+  };
 
   return (
     <footer className="bg-secondary text-secondary-foreground">
@@ -17,7 +33,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 text-2xl font-headline font-bold">
               <HandHeart className="h-8 w-8 text-primary" />
-              <span>TrustForward</span>
+              <span>Vikhyat Foundation</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Empowering communities, driving social change, and building a better future together.
@@ -57,15 +73,22 @@ export function Footer() {
               <p className="mt-4 text-sm text-muted-foreground">
                 Be the first to know about our latest initiatives and how you can make a difference.
               </p>
-              <form className="mt-4 flex flex-col sm:flex-row gap-2">
-                <input type="email" placeholder="Enter your email" className="w-full px-4 py-2 rounded-md border-input bg-background" />
+              <form onSubmit={handleSubscribe} className="mt-4 flex flex-col sm:flex-row gap-2">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="w-full px-4 py-2 rounded-md border-input bg-background"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
                 <Button type="submit" variant="default">Subscribe</Button>
               </form>
             </div>
           </div>
         </div>
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} TrustForward. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Vikhyat Foundation. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

@@ -19,12 +19,12 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
   if (!article) {
     return {
-      title: 'Article Not Found | TrustForward',
+      title: 'Article Not Found | Vikhyat Foundation',
     };
   }
 
   return {
-    title: `${article.title} | TrustForward`,
+    title: `${article.title} | Vikhyat Foundation`,
     description: article.shortDescription,
   };
 }

@@ -1,39 +1,74 @@
-import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone } from 'lucide-react';
+import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about-us', label: 'About Us' },
-  { href: '/initiatives', label: 'What We Do' },
-  { href: '/news', label: 'News & Media' },
-  { href: '/gallery', label: 'Gallery' },
+  { href: '/what-we-do', label: 'What We Do' },
+  { href: '/successful-project', label: 'Successful Project' },
   { href: '/get-involved', label: 'Get Involved' },
   { href: '/contact', label: 'Contact' },
 ];
 
 export const FOCUS_AREAS = [
   {
-    icon: BookOpen,
-    title: 'Education',
-    description: 'Empowering future generations through access to quality education and learning resources.',
-    slug: 'community-education-program'
+    icon: BrainCircuit,
+    title: 'Education & Skill Development',
+    description: 'Fostering intellectual growth and practical skills through comprehensive educational programs, from scholarships to vocational training, ensuring everyone has the opportunity to learn and grow.',
+    slug: 'education-and-skill-development',
+    points: [
+      'Awarding scholarships and financial aid to deserving students from marginalized backgrounds.',
+      'Conducting digital literacy programs for all age groups to bridge the technology gap.',
+      'Establishing vocational training centers to equip youth with job-oriented skills.',
+      'Providing essential resources and infrastructure support to under-equipped schools.'
+    ]
   },
   {
     icon: HeartHandshake,
-    title: 'Healthcare',
-    description: 'Ensuring accessible and affordable healthcare services for every community member.',
-    slug: 'public-health-initiative'
+    title: 'Health & Wellness',
+    description: 'Promoting community health through proactive and accessible healthcare solutions, including medical camps, awareness programs, and vital support for maternal and child wellness.',
+    slug: 'health-and-wellness',
+    points: [
+        'Organizing free medical camps and health check-ups in remote and underserved areas.',
+        'Running awareness campaigns on preventive healthcare, hygiene, and nutrition.',
+        'Supporting maternal and child health through pre-natal and post-natal care services.',
+        'Promoting blood and organ donation awareness to save lives.'
+    ]
   },
   {
     icon: Users,
-    title: 'Community Development',
-    description: 'Fostering vibrant, sustainable communities through local empowerment and infrastructure projects.',
-    slug: 'urban-renewal-project'
+    title: 'Women Empowerment',
+    description: 'Championing the rights and advancement of women by fostering economic independence, health awareness, and leadership skills to create a more equitable society.',
+    slug: 'women-empowerment',
+    points: [
+        'Facilitating the formation of Self-Help Groups (SHGs) for financial independence.',
+        'Providing support and mentorship for women-led small businesses and entrepreneurship.',
+        'Conducting workshops on menstrual hygiene and distributing sanitary products.',
+        'Advocating for gender equality and working to eliminate gender-based discrimination.'
+    ]
   },
   {
-    icon: Landmark,
-    title: 'Policy Advocacy',
-    description: 'Championing fair and effective policies that address the root causes of social challenges.',
-    slug: 'policy-reform-advocacy'
+    icon: Leaf,
+    title: 'Environment & Sustainability',
+    description: 'Committing to the preservation of our planet through proactive environmental initiatives, including reforestation, waste reduction, and promoting sustainable practices for a greener future.',
+    slug: 'environment-and-sustainability',
+    points: [
+        'Organizing mass tree plantation drives to combat deforestation and improve air quality.',
+        'Implementing community-based waste management and recycling programs.',
+        'Promoting water conservation and sanitation projects in water-scarce regions.',
+        'Conducting workshops on climate change adaptation and sustainable living practices.'
+    ]
+  },
+  {
+    icon: Sprout,
+    title: 'Rural Development',
+    description: 'Uplifting rural communities by enhancing livelihoods, ensuring access to basic amenities like clean water, and fostering local entrepreneurship to create self-sufficient and thriving villages.',
+    slug: 'rural-development',
+    points: [
+        'Implementing programs for sustainable agriculture and livelihood enhancement.',
+        'Ensuring access to clean and safe drinking water through borewells and filtration systems.',
+        'Promoting rural entrepreneurship with a focus on local crafts and produce.',
+        'Improving rural infrastructure, including roads, community halls, and sanitation facilities.'
+    ]
   },
 ];
 
@@ -108,7 +143,7 @@ export const NEWS_ARTICLES = [
   {
     id: 1,
     slug: 'new-literacy-center-opens',
-    title: 'TrustForward Opens New Literacy Center Downtown',
+    title: 'Vikhyat Foundation Opens New Literacy Center Downtown',
     category: 'Press Release',
     date: 'October 26, 2023',
     shortDescription: 'Our new center will serve over 200 children and adults weekly, offering free classes and resources.',
@@ -126,7 +161,7 @@ export const NEWS_ARTICLES = [
   {
     id: 3,
     slug: 'partnership-with-tech-corp',
-    title: 'TrustForward Announces Strategic Partnership with TechCorp',
+    title: 'Vikhyat Foundation Announces Strategic Partnership with TechCorp',
     category: 'Success Story',
     date: 'September 30, 2023',
     shortDescription: 'TechCorp will provide technology and volunteers for our Community Education Program, bridging the digital divide.',
@@ -137,23 +172,23 @@ export const NEWS_ARTICLES = [
 export const TESTIMONIALS = [
   {
     id: 1,
-    name: 'Maria S.',
-    title: 'Program Beneficiary',
-    quote: "TrustForward's education program gave me the confidence to go back to school and finish my degree. I'm so grateful for their support.",
+    name: 'Aarav Sharma',
+    title: 'Well Wisher',
+    quote: "The dedication of Vikhyat Foundation is truly inspiring. Their work in education and community health is creating a tangible, positive impact that promises a brighter future for so many. I am proud to support their noble mission.",
     imageUrl: 'testimonial-1'
   },
   {
     id: 2,
-    name: 'David L.',
-    title: 'Community Leader',
-    quote: "I've seen the direct impact of TrustForward's work in our neighborhood. They don't just provide resources; they build relationships and trust.",
+    name: 'Priya Mehta',
+    title: 'Well Wisher',
+    quote: "Seeing the foundation's commitment to empowering women and protecting the environment gives me immense hope. They are not just providing aid; they are building a sustainable and equitable world for generations to come.",
     imageUrl: 'testimonial-2'
   },
   {
     id: 3,
-    name: 'Dr. Emily Chen',
-    title: 'Volunteer Doctor',
-    quote: "Volunteering with the Public Health Initiative has been incredibly rewarding. It's an honor to serve my community in such a meaningful way.",
+    name: 'Rohan Gupta',
+    title: 'Well Wisher',
+    quote: "Vikhyat Foundation's holistic approach to rural development and healthcare is transformative. Their ability to mobilize communities and create lasting change is a testament to their exceptional leadership and vision.",
     imageUrl: 'testimonial-3'
   },
 ];
@@ -196,7 +231,7 @@ export const GALLERY_IMAGES = [
 
 export const CONTACT_INFO = {
   address: '123 Progress Ave, Unity City, 12345',
-  email: 'info@trustforward.org',
+  email: 'info@vikhyatfoundation.org',
   phone: '(123) 456-7890',
   socials: {
     facebook: '#',
