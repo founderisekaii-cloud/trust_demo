@@ -4,15 +4,9 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { TEAM_MEMBERS, TESTIMONIALS } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
-import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-export const metadata: Metadata = {
-  title: 'About Us | Vikhyat Foundation',
-  description: 'Learn about the story, team, and values that drive Vikhyat Foundation.',
-};
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
