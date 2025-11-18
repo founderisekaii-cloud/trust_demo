@@ -70,14 +70,14 @@ const OurTeam = () => {
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Leadership</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Meet the dedicated individuals guiding our mission and steering our efforts toward a better future.
+            Meet the dedicated individual guiding our mission and steering our efforts toward a better future.
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-12 flex justify-center">
           {TEAM_MEMBERS.map((member) => {
             const teamImage = findImage(member.imageUrl);
             return (
-              <Card key={member.id} className="text-center border-0 shadow-none bg-transparent">
+              <Card key={member.id} className="text-center border-0 shadow-none bg-transparent max-w-sm">
                 <CardHeader className="p-0">
                   <div className="relative w-full aspect-square rounded-lg overflow-hidden mx-auto shadow-md">
                     {teamImage && (
@@ -207,5 +207,3 @@ export default function AboutUsPage() {
     </div>
   );
 }
-
-    

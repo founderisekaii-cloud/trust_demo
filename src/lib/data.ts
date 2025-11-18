@@ -199,24 +199,6 @@ export const TEAM_MEMBERS = [
     name: 'Mrs. Suman Vinod Morye',
     title: 'Founder & Chairperson',
     imageUrl: 'chairperson-photo'
-  },
-  {
-    id: 2,
-    name: 'John Smith',
-    title: 'Director of Initiatives',
-    imageUrl: 'team-2'
-  },
-  {
-    id: 3,
-    name: 'Alice Johnson',
-    title: 'Director of Policy',
-    imageUrl: 'team-3'
-  },
-  {
-    id: 4,
-    name: 'Robert Brown',
-    title: 'Community Outreach Coordinator',
-    imageUrl: 'team-4'
   }
 ];
 
@@ -236,7 +218,7 @@ export const CONTACT_INFO = {
   socials: {
     facebook: 'https://www.facebook.com/people/Vikhyat-Foundation/61583891132823/',
     twitter: '#',
-    instagram: 'https://www.instagram.com/vikhyat_foundation/',
+    instagram: 'https://www.instagram.com/accounts/login/?next=%2Fvikhyat_foundation%2F&source=omni_redirect',
     whatsapp: 'https://wa.me/919619578549'
   }
 };
@@ -296,5 +278,3 @@ export const SOCIAL_LINKS = [
   { icon: Instagram, href: CONTACT_INFO.socials.instagram, label: 'Instagram' },
   { icon: MessageCircle, href: CONTACT_INFO.socials.whatsapp, label: 'WhatsApp'},
 ];
-
-    
