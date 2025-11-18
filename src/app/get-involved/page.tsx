@@ -4,14 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { GET_INVOLVED_OPTIONS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Get Involved | Vikhyat Foundation',
-  description: 'Join our movement. Volunteer, donate, or partner with us to make a difference.',
-};
 
 export default function GetInvolvedPage() {
   const router = useRouter();
