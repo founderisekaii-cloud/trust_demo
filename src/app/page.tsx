@@ -1,4 +1,5 @@
 
+'use client';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { FOCUS_AREAS, TESTIMONIALS } from '@/lib/data';
 
