@@ -1,4 +1,4 @@
-import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout } from 'lucide-react';
+import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -196,9 +196,9 @@ export const TESTIMONIALS = [
 export const TEAM_MEMBERS = [
   {
     id: 1,
-    name: 'Jane Doe',
-    title: 'Founder & Executive Director',
-    imageUrl: 'team-1'
+    name: 'Mrs. Suman Vinod Morye',
+    title: 'Founder & Chairperson',
+    imageUrl: 'chairperson-photo'
   },
   {
     id: 2,
@@ -232,11 +232,12 @@ export const GALLERY_IMAGES = [
 export const CONTACT_INFO = {
   address: '6th Floor Govind Smruti Building, Opposite Patel Basta Bazaar, Lohar Ali, Thane (W) 400601',
   email: 'vikhyatfoundation@gmail.com',
-  phone: '+91 9619578549',
+  phone: '+919619578549',
   socials: {
-    facebook: '#',
+    facebook: 'https://www.facebook.com/people/Vikhyat-Foundation/61583891132823/',
     twitter: '#',
-    linkedin: '#',
+    instagram: 'https://www.instagram.com/vikhyat_foundation/',
+    whatsapp: 'https://wa.me/919619578549'
   }
 };
 
@@ -287,4 +288,13 @@ export const CONTACT_METHODS = [
         title: "Call Us",
         value: CONTACT_INFO.phone,
     }
-]
+];
+
+export const SOCIAL_LINKS = [
+  { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
+  { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
+  { icon: Instagram, href: CONTACT_INFO.socials.instagram, label: 'Instagram' },
+  { icon: MessageCircle, href: CONTACT_INFO.socials.whatsapp, label: 'WhatsApp'},
+];
+
+    

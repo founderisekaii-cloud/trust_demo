@@ -1,3 +1,4 @@
+
 'use client';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -12,7 +13,7 @@ const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 const OurStory = () => {
   const storyImage = findImage('about-story');
-  const chairpersonImage = findImage('team-1');
+  const chairpersonImage = findImage('chairperson-photo');
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +33,7 @@ const OurStory = () => {
                     <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg shrink-0">
                         <Image 
                             src={chairpersonImage.imageUrl} 
-                            alt="Chairperson" 
+                            alt="Mrs. Suman Vinod Morye, Founder & Chairperson" 
                             fill 
                             className="object-cover"
                             data-ai-hint={chairpersonImage.imageHint}
@@ -206,3 +207,5 @@ export default function AboutUsPage() {
     </div>
   );
 }
+
+    

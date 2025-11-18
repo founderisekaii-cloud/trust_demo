@@ -1,18 +1,15 @@
+
 'use client';
 
 import Link from 'next/link';
-import { Facebook, Twitter, Linkedin, HandHeart } from 'lucide-react';
-import { NAV_LINKS, CONTACT_INFO } from '@/lib/data';
+import { HandHeart } from 'lucide-react';
+import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 
 export function Footer() {
-  const socialLinks = [
-    { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
-    { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
-    { icon: Linkedin, href: CONTACT_INFO.socials.linkedin, label: 'LinkedIn' },
-  ];
+  
   const { toast } = useToast();
   const [email, setEmail] = useState('');
 
@@ -39,12 +36,15 @@ export function Footer() {
               Empowering communities, driving social change, and building a better future together.
             </p>
             <div className="mt-6 flex space-x-4">
-              {socialLinks.map((social) => (
-                <Link key={social.label} href={social.href} className="text-muted-foreground hover:text-primary">
-                  <social.icon className="h-6 w-6" />
-                  <span className="sr-only">{social.label}</span>
-                </Link>
-              ))}
+              {SOCIAL_LINKS.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <Link key={social.label} href={social.href} className="text-muted-foreground hover:text-primary">
+                    <Icon className="h-6 w-6" />
+                    <span className="sr-only">{social.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
           <div className="grid grid-cols-2 md:col-span-3 md:grid-cols-3 gap-8">
@@ -94,3 +94,5 @@ export function Footer() {
     </footer>
   );
 }
+
+    

@@ -1,10 +1,11 @@
+
 'use client';
 import Image from 'next/image';
 import { ContactForm } from '@/components/app/contact-form';
-import { CONTACT_METHODS, CONTACT_INFO } from '@/lib/data';
+import { CONTACT_METHODS, CONTACT_INFO, SOCIAL_LINKS } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Facebook, Linkedin, Twitter, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
@@ -20,11 +21,6 @@ const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 export default function ContactPage() {
   const heroImage = findImage('contact-hero');
   const router = useRouter();
-  const socialLinks = [
-    { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
-    { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
-    { icon: Linkedin, href: CONTACT_INFO.socials.linkedin, label: 'LinkedIn' },
-  ];
 
   return (
     <div>
@@ -91,12 +87,15 @@ export default function ContactPage() {
                   Stay connected and up-to-date with our work.
                 </p>
                 <div className="mt-4 flex space-x-4">
-                  {socialLinks.map((social) => (
-                    <Link key={social.label} href={social.href} className="text-muted-foreground hover:text-primary transition-colors p-2 bg-secondary rounded-full">
-                      <social.icon className="h-6 w-6" />
-                      <span className="sr-only">{social.label}</span>
-                    </Link>
-                  ))}
+                  {SOCIAL_LINKS.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <Link key={social.label} href={social.href} className="text-muted-foreground hover:text-primary transition-colors p-2 bg-secondary rounded-full">
+                        <Icon className="h-6 w-6" />
+                        <span className="sr-only">{social.label}</span>
+                      </Link>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -120,3 +119,5 @@ export default function ContactPage() {
     </div>
   );
 }
+
+    
