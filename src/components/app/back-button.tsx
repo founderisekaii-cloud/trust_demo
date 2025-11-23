@@ -12,7 +12,7 @@ export function BackButton() {
     <Button
       variant="ghost"
       onClick={() => router.back()}
-      className="fixed bottom-4 left-4 z-50 bg-black/20 text-white hover:bg-black/40 backdrop-blur-sm"
+      className="fixed top-4 left-4 z-50 text-primary hover:text-primary/80"
       aria-label="Go back to previous page"
     >
       <ArrowLeft className="mr-2 h-4 w-4" />
