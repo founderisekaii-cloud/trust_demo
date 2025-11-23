@@ -6,17 +6,28 @@ import { GET_INVOLVED_OPTIONS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { PageHero } from '@/components/app/page-hero';
+import { DonationForm } from '@/components/app/donation-form';
 
 
 export default function GetInvolvedPage() {
+  const getInvolvedCards = GET_INVOLVED_OPTIONS.filter(option => option.title !== 'Donate');
+
   return (
     <div>
       <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
       
+      <section id="donate-section" className="py-16 md:py-24 bg-secondary scroll-mt-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+                <DonationForm />
+            </div>
+        </div>
+      </section>
+
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {GET_INVOLVED_OPTIONS.map((option) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {getInvolvedCards.map((option) => {
               const Icon = option.icon;
               return (
                 <Card key={option.title} className="flex flex-col text-center items-center">
@@ -41,7 +52,7 @@ export default function GetInvolvedPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-secondary">
+      <section id="volunteer-form" className="py-16 md:py-24 bg-secondary scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <VolunteerForm />

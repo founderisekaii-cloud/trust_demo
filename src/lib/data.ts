@@ -256,7 +256,7 @@ export const GET_INVOLVED_OPTIONS = [
         icon: HeartHandshake,
         title: "Donate",
         description: "Your generous contribution fuels our initiatives and helps us reach more people. Every donation, big or small, creates a ripple of change.",
-        link: "#",
+        link: "#donate-section",
         cta: "Donate Now"
     },
     {

@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import { Toaster } from '@/components/ui/toaster';
+import Script from 'next/script';
 import { BackButton } from '@/components/app/back-button';
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
         </div>
         <Toaster />
         <BackButton />
+        <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       </body>
     </html>
   );
