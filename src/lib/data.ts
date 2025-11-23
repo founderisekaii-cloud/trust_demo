@@ -233,7 +233,7 @@ export const GALLERY_IMAGES = [
 ];
 
 export const CONTACT_INFO = {
-  address: '6th Floor Govind Smruti Building, Opposite Patel Basta Bazaar, Lohar Ali, Thane (W) 400601',
+  address: 'Govind building, station road, thane west 400601',
   email: 'vikhyatfoundation@gmail.com',
   phone: '+919619578549',
   socials: {
