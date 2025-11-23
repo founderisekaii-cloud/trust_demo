@@ -191,6 +191,27 @@ export const TESTIMONIALS = [
     quote: "Vikhyat Foundation's holistic approach to rural development and healthcare is transformative. Their ability to mobilize communities and create lasting change is a testament to their exceptional leadership and vision.",
     imageUrl: 'testimonial-3'
   },
+  {
+    id: 4,
+    name: 'Anjali Desai',
+    title: 'Well Wisher',
+    quote: "The focus on skill development has opened up so many new opportunities for the youth in our area. Vikhyat Foundation is truly building a foundation for a prosperous future.",
+    imageUrl: 'testimonial-4'
+  },
+  {
+    id: 5,
+    name: 'Vikram Singh',
+    title: 'Well Wisher',
+    quote: "I am continually impressed by the transparency and efficiency of their operations. Every contribution is maximized for impact, and their dedication is clear in everything they do.",
+    imageUrl: 'testimonial-5'
+  },
+  {
+    id: 6,
+    name: 'Saanvi Iyer',
+    title: 'Well Wisher',
+    quote: "Their cultural and religious activities bring our community together, fostering a sense of unity and shared heritage that is invaluable. It's more than social work; it's community building at its finest.",
+    imageUrl: 'testimonial-6'
+  },
 ];
 
 export const TEAM_MEMBERS = [

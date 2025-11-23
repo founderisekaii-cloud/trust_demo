@@ -89,8 +89,8 @@ const BestWishers = () => {
             Words of encouragement and support from leaders and partners who believe in our vision.
           </p>
         </div>
-        <div className="mt-12 max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          {TESTIMONIALS.slice(0, 2).map((testimonial) => {
+        <div className="mt-12 max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((testimonial) => {
             const image = findImage(testimonial.imageUrl);
             return (
               <Card key={testimonial.id}>
@@ -111,11 +111,6 @@ const BestWishers = () => {
               </Card>
             );
           })}
-        </div>
-        <div className="mt-12 text-center">
-          <Button asChild>
-            <Link href="/successful-project">See Our Successful Projects</Link>
-          </Button>
         </div>
       </div>
     </section>
