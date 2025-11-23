@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { NAV_LINKS } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import { Logo } from './logo';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold font-headline">
-            <HandHeart className="h-7 w-7 text-primary" />
+            <Logo className="h-8 w-8 text-primary" />
             <span>Vikhyat Foundation</span>
           </Link>
           <p className="text-xs text-muted-foreground ml-9">Reg. No. 12345/2024</p>
@@ -58,7 +59,7 @@ export function Header() {
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between border-b pb-4">
                   <Link href="/" className="flex items-center gap-2 text-lg font-bold font-headline" onClick={() => setIsMobileMenuOpen(false)}>
-                    <HandHeart className="h-6 w-6 text-primary" />
+                    <Logo className="h-7 w-7 text-primary" />
                     <span>Vikhyat Foundation</span>
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>

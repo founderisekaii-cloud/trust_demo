@@ -7,6 +7,7 @@ import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
+import { Logo } from './logo';
 
 export function Footer() {
   
@@ -29,7 +30,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 text-2xl font-headline font-bold">
-              <HandHeart className="h-8 w-8 text-primary" />
+              <Logo className="h-10 w-10 text-primary" />
               <span>Vikhyat Foundation</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
