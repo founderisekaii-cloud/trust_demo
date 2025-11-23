@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { PageHero } from '@/components/app/page-hero';
 
 
 export default function GetInvolvedPage() {
@@ -14,14 +15,7 @@ export default function GetInvolvedPage() {
 
   return (
     <div>
-      <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">Get Involved</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
-            You have the power to create change. Discover the many ways you can contribute to our mission and make a lasting impact.
-          </p>
-        </div>
-      </header>
+      <PageHero title="Get Involved" subtitle="You have the power to create change. Discover the many ways you can contribute to our mission and make a lasting impact." />
       
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

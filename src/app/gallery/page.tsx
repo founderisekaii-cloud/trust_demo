@@ -1,7 +1,9 @@
+
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { GALLERY_IMAGES } from '@/lib/data';
 import type { Metadata } from 'next';
+import { PageHero } from '@/components/app/page-hero';
 
 export const metadata: Metadata = {
   title: 'Gallery | Vikhyat Foundation',
@@ -13,14 +15,7 @@ const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 export default function GalleryPage() {
   return (
     <div>
-      <header className="bg-secondary py-16 md:py-24 text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">Our Gallery</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            A visual journey through our events, community work, and impact stories. See the change you help create.
-          </p>
-        </div>
-      </header>
+      <PageHero title="Our Gallery" subtitle="A visual journey through our events, community work, and impact stories. See the change you help create." />
       
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

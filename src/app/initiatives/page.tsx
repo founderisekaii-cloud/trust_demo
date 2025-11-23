@@ -1,3 +1,4 @@
+
 import { INITIATIVES } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
+import { PageHero } from '@/components/app/page-hero';
 
 export const metadata: Metadata = {
   title: 'What We Do | Vikhyat Foundation',
@@ -20,14 +22,7 @@ export default function InitiativesPage() {
   
   return (
     <div>
-      <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">What We Do</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
-            A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow.
-          </p>
-        </div>
-      </header>
+      <PageHero title="What We Do" subtitle="A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow." />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

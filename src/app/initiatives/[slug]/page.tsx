@@ -1,3 +1,4 @@
+
 import { INITIATIVES } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle, Target } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import type { Metadata, ResolvingMetadata } from 'next';
+import { PageHero } from '@/components/app/page-hero';
 
 type Props = {
   params: { slug: string };
@@ -48,15 +50,7 @@ export default function InitiativeDetailPage({ params }: Props) {
 
   return (
     <div>
-        <header className="bg-secondary py-16 text-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <Badge variant="outline">{initiative.category}</Badge>
-                <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold">{initiative.title}</h1>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                    {initiative.shortDescription}
-                </p>
-            </div>
-        </header>
+        <PageHero title={initiative.title} subtitle={initiative.shortDescription} />
 
         <article className="py-16 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">

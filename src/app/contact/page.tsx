@@ -9,32 +9,16 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { PageHero } from '@/components/app/page-hero';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function ContactPage() {
-  const heroImage = findImage('contact-hero');
   const router = useRouter();
 
   return (
     <div>
-      <header className="relative h-64 md:h-80 w-full flex items-center justify-center text-white">
-        {heroImage && 
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
-          />
-        }
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative text-center p-4">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">Contact Us</h1>
-          <p className="mt-2 text-lg md:text-xl text-neutral-200">We're here to answer your questions.</p>
-        </div>
-      </header>
+      <PageHero title="Contact Us" subtitle="We're here to answer your questions." />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

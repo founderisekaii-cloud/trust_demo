@@ -1,9 +1,11 @@
+
 'use client';
 import { FOCUS_AREAS } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, CheckCircle, BrainCircuit, HeartHandshake, Users, Leaf, Sprout, BookOpen, Landmark } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { PageHero } from '@/components/app/page-hero';
 
 const iconMap: { [key: string]: React.ElementType } = {
   'Education & Skill Development': BrainCircuit,
@@ -19,14 +21,7 @@ export default function WhatWeDoPage() {
   
   return (
     <div>
-      <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">Our Areas of Impact</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
-            A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow.
-          </p>
-        </div>
-      </header>
+      <PageHero title="Our Areas of Impact" subtitle="A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow." />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

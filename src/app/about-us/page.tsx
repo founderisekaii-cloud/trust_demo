@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { PageHero } from '@/components/app/page-hero';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -122,15 +123,7 @@ export default function AboutUsPage() {
 
   return (
     <div>
-        <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-4xl md:text-5xl font-headline font-bold">About Vikhyat Foundation</h1>
-                <p className="mt-2 text-lg text-primary-foreground/90">Humanity at Heart, Progress in Action</p>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
-                    The story, people, and principles behind our commitment to social progress.
-                </p>
-            </div>
-        </header>
+        <PageHero title="About Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
         <OurStory />
         <OurValues />
         <BestWishers />

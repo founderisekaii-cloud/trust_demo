@@ -3,20 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { PageHero } from "@/components/app/page-hero";
 
 export default function OurActivityPage() {
     const router = useRouter();
 
     return (
         <div>
-            <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center relative">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h1 className="text-4xl md:text-5xl font-headline font-bold">Our Activity</h1>
-                    <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
-                        Highlights of our impactful work and the positive change we've driven in communities.
-                    </p>
-                </div>
-            </header>
+            <PageHero title="Our Activity" subtitle="Highlights of our impactful work and the positive change we've driven in communities." />
             <section className="py-16 md:py-24">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-2xl font-semibold">Content Coming Soon</h2>
