@@ -22,7 +22,7 @@ export default function InitiativesPage() {
   
   return (
     <div>
-      <PageHero title="What We Do" subtitle="A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

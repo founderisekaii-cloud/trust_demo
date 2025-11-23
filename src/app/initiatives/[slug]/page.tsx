@@ -6,8 +6,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Target } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Target } from 'lucide-react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { PageHero } from '@/components/app/page-hero';
 
@@ -50,7 +49,7 @@ export default function InitiativeDetailPage({ params }: Props) {
 
   return (
     <div>
-        <PageHero title={initiative.title} subtitle={initiative.shortDescription} />
+        <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
 
         <article className="py-16 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">

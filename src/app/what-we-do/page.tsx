@@ -2,9 +2,7 @@
 'use client';
 import { FOCUS_AREAS } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, CheckCircle, BrainCircuit, HeartHandshake, Users, Leaf, Sprout, BookOpen, Landmark } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { CheckCircle, BrainCircuit, HeartHandshake, Users, Leaf, Sprout, BookOpen, Landmark } from 'lucide-react';
 import { PageHero } from '@/components/app/page-hero';
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -17,11 +15,9 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 export default function WhatWeDoPage() {
-  const router = useRouter();
-  
   return (
     <div>
-      <PageHero title="Our Areas of Impact" subtitle="A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

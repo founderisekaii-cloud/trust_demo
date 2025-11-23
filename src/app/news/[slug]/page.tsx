@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import { Calendar, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { PageHero } from '@/components/app/page-hero';
@@ -48,7 +48,7 @@ export default function NewsArticlePage({ params }: Props) {
 
   return (
     <div>
-        <PageHero title={article.title} subtitle={article.category} />
+        <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
         <article className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <header>

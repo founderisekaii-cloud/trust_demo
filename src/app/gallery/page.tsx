@@ -15,7 +15,7 @@ const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 export default function GalleryPage() {
   return (
     <div>
-      <PageHero title="Our Gallery" subtitle="A visual journey through our events, community work, and impact stories. See the change you help create." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
       
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

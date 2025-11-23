@@ -4,9 +4,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { TESTIMONIALS } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { CheckCircle } from 'lucide-react';
 import { PageHero } from '@/components/app/page-hero';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
@@ -119,11 +117,9 @@ const BestWishers = () => {
 
 
 export default function AboutUsPage() {
-  const router = useRouter();
-
   return (
     <div>
-        <PageHero title="About Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
+        <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
         <OurStory />
         <OurValues />
         <BestWishers />

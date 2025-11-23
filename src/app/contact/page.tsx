@@ -2,23 +2,18 @@
 'use client';
 import Image from 'next/image';
 import { ContactForm } from '@/components/app/contact-form';
-import { CONTACT_METHODS, CONTACT_INFO, SOCIAL_LINKS } from '@/lib/data';
+import { CONTACT_METHODS, SOCIAL_LINKS } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import { PageHero } from '@/components/app/page-hero';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function ContactPage() {
-  const router = useRouter();
-
   return (
     <div>
-      <PageHero title="Contact Us" subtitle="We're here to answer your questions." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

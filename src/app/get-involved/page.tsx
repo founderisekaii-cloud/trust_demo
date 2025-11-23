@@ -5,17 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { GET_INVOLVED_OPTIONS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { PageHero } from '@/components/app/page-hero';
 
 
 export default function GetInvolvedPage() {
-  const router = useRouter();
-
   return (
     <div>
-      <PageHero title="Get Involved" subtitle="You have the power to create change. Discover the many ways you can contribute to our mission and make a lasting impact." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
       
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

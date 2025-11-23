@@ -22,7 +22,7 @@ export default function NewsPage() {
 
   return (
     <div>
-      <PageHero title="News & Media" subtitle="The latest articles, press releases, public announcements, and opinion pieces from Vikhyat Foundation." />
+      <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
