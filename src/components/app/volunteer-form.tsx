@@ -29,64 +29,9 @@ const formSchema = z.object({
 
 type VolunteerFormValues = z.infer<typeof formSchema>;
 
-type SuggestionState = {
-  suggestions: SuggestVolunteerOpportunitiesOutput | null;
-  error: string | null;
-}
-
-async function suggestOpportunitiesAction(
-  prevState: SuggestionState,
-  formData: VolunteerFormValues
-): Promise<SuggestionState> {
-  try {
-    const suggestions = await suggestVolunteerOpportunities(formData);
-
-    // Send emails regardless of suggestions
-    // Email to user
-    await sendEmail({
-      to: formData.email,
-      subject: "We've Received Your Volunteer Application | Vikhyat Foundation",
-      react: VolunteerApplicationEmail({
-        name: formData.name,
-        skills: formData.skills,
-        interests: formData.interests,
-        availability: formData.availability,
-        suggestions: suggestions.suggestedProjects,
-      }),
-    });
-    
-    // Email to admin
-    await sendEmail({
-      to: 'vikhyatfoundation@gmail.com',
-      subject: `New Volunteer Application: ${formData.name}`,
-      react: NewVolunteerEmail({
-        name: formData.name,
-        email: formData.email,
-        skills: formData.skills,
-        interests: formData.interests,
-        availability: formData.availability,
-        suggestions: suggestions.suggestedProjects,
-      }),
-    });
-
-    if (!suggestions || !suggestions.suggestedProjects) {
-        return { suggestions: null, error: "Could not generate suggestions, but your application has been received." };
-    }
-    return { suggestions, error: null };
-  } catch (e) {
-    console.error(e);
-    // The email sending itself will be handled gracefully, but we catch other potential errors here.
-    return { suggestions: null, error: 'An unexpected error occurred while processing your application.' };
-  }
-}
-
 export function VolunteerForm() {
   const { toast } = useToast();
-  const [state, formAction] = React.useReducer(suggestOpportunitiesAction, {
-    suggestions: null,
-    error: null,
-  });
-
+  const [suggestions, setSuggestions] = React.useState<SuggestVolunteerOpportunitiesOutput | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const form = useForm<VolunteerFormValues>({
@@ -100,26 +45,59 @@ export function VolunteerForm() {
     },
   });
 
-  const onSubmit = async (values: VolunteerFormValues) => {
+  async function onSubmit(formData: VolunteerFormValues) {
     setIsSubmitting(true);
-    await formAction(values);
-    setIsSubmitting(false);
-    toast({
-        title: "Application Sent!",
-        description: "Thank you for your interest! We've sent you a confirmation email with some suggested projects.",
-    });
-  };
-  
-  React.useEffect(() => {
-    if (state.error) {
+    setSuggestions(null);
+
+    try {
+      const suggested_opportunities = await suggestVolunteerOpportunities(formData);
+
+      // Send emails
+      await sendEmail({
+        to: formData.email,
+        subject: "We've Received Your Volunteer Application | Vikhyat Foundation",
+        react: VolunteerApplicationEmail({
+          name: formData.name,
+          skills: formData.skills,
+          interests: formData.interests,
+          availability: formData.availability,
+          suggestions: suggested_opportunities.suggestedProjects,
+        }),
+      });
+      
+      await sendEmail({
+        to: 'vikhyatfoundation@gmail.com',
+        subject: `New Volunteer Application: ${formData.name}`,
+        react: NewVolunteerEmail({
+          name: formData.name,
+          email: formData.email,
+          skills: formData.skills,
+          interests: formData.interests,
+          availability: formData.availability,
+          suggestions: suggested_opportunities.suggestedProjects,
+        }),
+      });
+
+      if (suggested_opportunities && suggested_opportunities.suggestedProjects) {
+        setSuggestions(suggested_opportunities);
+      }
+      
+      toast({
+          title: "Application Sent!",
+          description: "Thank you! We've sent a confirmation email with some suggested projects.",
+      });
+
+    } catch (e) {
+      console.error(e);
       toast({
         variant: 'destructive',
-        title: 'Suggestion Error',
-        description: state.error,
+        title: 'An Error Occurred',
+        description: 'An unexpected error occurred while processing your application, but your submission may have been received. Please check your email.',
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [state.error, toast]);
-
+  };
 
   return (
     <div id="volunteer-form" className="scroll-mt-20">
@@ -217,7 +195,7 @@ export function VolunteerForm() {
             </div>
           )}
 
-          {state.suggestions && state.suggestions.suggestedProjects.length > 0 && !isSubmitting && (
+          {suggestions && suggestions.suggestedProjects.length > 0 && !isSubmitting && (
             <div className="mt-10">
               <h3 className="flex items-center gap-2 text-xl md:text-2xl font-headline font-semibold">
                 <Sparkles className="h-6 w-6 text-accent" />
@@ -225,7 +203,7 @@ export function VolunteerForm() {
               </h3>
               <p className="text-muted-foreground mt-1">Based on your profile, we think you'd be a great fit for these projects. We've also emailed you this list!</p>
               <div className="mt-6 grid gap-4">
-                {state.suggestions.suggestedProjects.map((project) => {
+                {suggestions.suggestedProjects.map((project) => {
                     const slug = project.projectName.toLowerCase().replace(/\s+/g, '-');
                     return (
                         <Card key={project.projectName} className="hover:shadow-md transition-shadow">
