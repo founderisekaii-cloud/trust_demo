@@ -22,7 +22,7 @@ export async function sendEmail({ to, subject, react }: SendEmailProps) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Vikhyat Foundation <noreply@vikhyatfoundation.org>', // You must verify this domain in Resend
+      from: 'Vikhyat Foundation <onboarding@resend.dev>', // Changed to Resend's default test address
       to: to,
       subject: subject,
       react: react,
