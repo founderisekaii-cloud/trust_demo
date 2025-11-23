@@ -23,6 +23,12 @@ export function Footer() {
     setEmail('');
   };
 
+  const policyLinks = [
+    { href: '/privacy-policy', label: 'Privacy Policy' },
+    { href: '/refund-policy', label: 'Refund Policy' },
+    { href: '/terms-of-service', label: 'Terms of Service' },
+  ];
+
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -93,6 +99,13 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+           <div className="flex justify-center gap-4 mb-4">
+            {policyLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+                {link.label}
+              </Link>
+            ))}
+          </div>
           <p>&copy; {new Date().getFullYear()} Vikhyat Foundation. All Rights Reserved.</p>
         </div>
       </div>
