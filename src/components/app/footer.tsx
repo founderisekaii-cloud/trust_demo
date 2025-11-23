@@ -28,8 +28,12 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center gap-2">
               <Logo className="h-20 w-auto" />
+               <div className="flex flex-col">
+                  <span className="font-headline text-xl font-bold">Vikhyat Foundation</span>
+                  <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+              </div>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Empowering communities, driving social change, and building a better future together.

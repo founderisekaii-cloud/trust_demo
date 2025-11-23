@@ -21,6 +21,10 @@ export function Header() {
         <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
                 <Logo className="h-16 w-auto" />
+                <div className="flex flex-col">
+                    <span className="font-headline text-xl font-bold">Vikhyat Foundation</span>
+                    <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+                </div>
             </Link>
         </div>
         
@@ -58,6 +62,10 @@ export function Header() {
                 <div className="flex items-center justify-between border-b pb-4">
                   <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                     <Logo className="h-16 w-auto" />
+                     <div className="flex flex-col">
+                        <span className="font-headline text-lg font-bold">Vikhyat Foundation</span>
+                        <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+                    </div>
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
                     <X className="h-6 w-6" />
