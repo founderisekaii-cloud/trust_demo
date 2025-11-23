@@ -16,27 +16,28 @@ const OurStory = () => {
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Story & Chairperson</h2>
-            <p className="mt-6 text-lg text-muted-foreground">
-              The Vikhyat Foundation was born from a simple yet powerful idea: that real, lasting change comes from the ground up, nurtured by a deep-seated commitment to community and compassion. Founded in 2015 by a group of passionate community organizers, visionary academics, and dedicated citizens, we identified a critical disconnect between those in power and the communities they are meant to serve. We saw untapped potential, unheard voices, and unmet needs, and we were moved to act. Our journey began not with a grand gesture, but with a single, focused local initiative. We immersed ourselves in one neighborhood, taking the time to listen intently to the hopes, challenges, and aspirations of its residents. 
-            </p>
-            <p className="mt-4 text-muted-foreground">
-              This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take charge of their own development. The resounding success of that pilot project—a flourishing community garden that became a hub for social connection and healthy living—became the blueprint for our expanding mission. Today, the Vikhyat Foundation has grown from that single seed of an idea into a formidable force for good, championing causes across education, healthcare, environmental sustainability, and policy advocacy. Yet, our core philosophy remains unchanged: listen with empathy, empower with dignity, and act with conviction. Our journey is a living testament to the extraordinary power that is unleashed when people come together with a shared purpose and an unwavering belief in a better tomorrow.
-            </p>
-          </div>
-          <div className="relative w-full h-80 md:h-[500px] rounded-lg overflow-hidden shadow-lg">
+        <div>
             {chairpersonImage && (
-              <Image 
-                src={chairpersonImage.imageUrl} 
-                alt={chairpersonImage.description} 
-                fill 
-                className="object-cover"
-                data-ai-hint={chairpersonImage.imageHint}
-              />
+              <div className="relative w-full sm:w-1/2 max-w-md float-right ml-6 mb-4 rounded-lg overflow-hidden shadow-lg">
+                <Image 
+                  src={chairpersonImage.imageUrl} 
+                  alt={chairpersonImage.description} 
+                  width={500}
+                  height={500}
+                  className="object-cover"
+                  data-ai-hint={chairpersonImage.imageHint}
+                />
+              </div>
             )}
-          </div>
+            <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Story & Chairperson</h2>
+            <div className="mt-6 text-lg text-muted-foreground space-y-4">
+              <p>
+                The Vikhyat Foundation was born from a simple yet powerful idea: that real, lasting change comes from the ground up, nurtured by a deep-seated commitment to community and compassion. Founded in 2015 by a group of passionate community organizers, visionary academics, and dedicated citizens, we identified a critical disconnect between those in power and the communities they are meant to serve. We saw untapped potential, unheard voices, and unmet needs, and we were moved to act. Our journey began not with a grand gesture, but with a single, focused local initiative. We immersed ourselves in one neighborhood, taking the time to listen intently to the hopes, challenges, and aspirations of its residents. 
+              </p>
+              <p>
+                This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take charge of their own development. The resounding success of that pilot project—a flourishing community garden that became a hub for social connection and healthy living—became the blueprint for our expanding mission. Today, the Vikhyat Foundation has grown from that single seed of an idea into a formidable force for good, championing causes across education, healthcare, environmental sustainability, and policy advocacy. Yet, our core philosophy remains unchanged: listen with empathy, empower with dignity, and act with conviction. Our journey is a living testament to the extraordinary power that is unleashed when people come together with a shared purpose and an unwavering belief in a better tomorrow.
+              </p>
+            </div>
         </div>
       </div>
     </section>
