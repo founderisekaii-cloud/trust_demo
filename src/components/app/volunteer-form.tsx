@@ -52,47 +52,55 @@ export function VolunteerForm() {
     try {
       const suggested_opportunities = await suggestVolunteerOpportunities(formData);
 
-      // Send emails
-      await sendEmail({
-        to: formData.email,
-        subject: "We've Received Your Volunteer Application | Vikhyat Foundation",
-        react: React.createElement(VolunteerApplicationEmail, {
-          name: formData.name,
-          skills: formData.skills,
-          interests: formData.interests,
-          availability: formData.availability,
-          suggestions: suggested_opportunities.suggestedProjects,
-        }),
-      });
-      
-      await sendEmail({
-        to: 'vikhyatfoundation@gmail.com',
-        subject: `New Volunteer Application: ${formData.name}`,
-        react: React.createElement(NewVolunteerEmail, {
-          name: formData.name,
-          email: formData.email,
-          skills: formData.skills,
-          interests: formData.interests,
-          availability: formData.availability,
-          suggestions: suggested_opportunities.suggestedProjects,
-        }),
-      });
-
       if (suggested_opportunities && suggested_opportunities.suggestedProjects) {
         setSuggestions(suggested_opportunities);
       }
       
-      toast({
-          title: "Application Sent!",
-          description: "Thank you! We've sent a confirmation email with some suggested projects.",
-      });
+      // We can send emails even if AI suggestions fail
+      const [userEmailResult, adminEmailResult] = await Promise.all([
+        sendEmail({
+          to: formData.email,
+          subject: "We've Received Your Volunteer Application | Vikhyat Foundation",
+          react: React.createElement(VolunteerApplicationEmail, {
+            name: formData.name,
+            skills: formData.skills,
+            interests: formData.interests,
+            availability: formData.availability,
+            suggestions: suggested_opportunities.suggestedProjects,
+          }),
+        }),
+        sendEmail({
+          to: 'vikhyatfoundation@gmail.com',
+          subject: `New Volunteer Application: ${formData.name}`,
+          react: React.createElement(NewVolunteerEmail, {
+            name: formData.name,
+            email: formData.email,
+            skills: formData.skills,
+            interests: formData.interests,
+            availability: formData.availability,
+            suggestions: suggested_opportunities.suggestedProjects,
+          }),
+        })
+      ]);
+      
+      if (userEmailResult.success) {
+          toast({
+              title: "Application Sent!",
+              description: "Thank you! We've sent a confirmation email with some suggested projects.",
+          });
+      } else {
+          toast({
+              title: "Application Submitted!",
+              description: "Your application was received, but we had trouble sending a confirmation email.",
+          });
+      }
 
     } catch (e) {
       console.error(e);
       toast({
         variant: 'destructive',
         title: 'An Error Occurred',
-        description: 'An unexpected error occurred while processing your application, but your submission may have been received. Please check your email.',
+        description: 'Your application was submitted, but an unexpected error occurred while generating suggestions. Please check your email for a confirmation.',
       });
     } finally {
       setIsSubmitting(false);

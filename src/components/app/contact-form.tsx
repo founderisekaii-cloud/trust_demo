@@ -24,45 +24,6 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-async function submitContactForm(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
-  try {
-    // Email to user
-    const userEmailResult = await sendEmail({
-      to: data.email,
-      subject: "We've Received Your Message | Vikhyat Foundation",
-      react: React.createElement(ContactFormEmail, {
-        name: data.name,
-        subject: data.subject,
-        message: data.message,
-      }),
-    });
-    
-    // Email to admin
-    const adminEmailResult = await sendEmail({
-      to: 'vikhyatfoundation@gmail.com',
-      subject: `New Inquiry: ${data.subject}`,
-      react: React.createElement(NewContactInquiryEmail, {
-        name: data.name,
-        email: data.email,
-        subject: data.subject,
-        message: data.message,
-      }),
-    });
-
-    if (userEmailResult.success && adminEmailResult.success) {
-        return { success: true, message: 'Your message has been sent successfully!' };
-    } else {
-        // We can still return success to the user as their main action (submitting the form) is complete.
-        // The email is a secondary notification.
-        return { success: true, message: 'Your message was submitted, but there was an issue with sending a confirmation email.' };
-    }
-
-  } catch (error) {
-    console.error('Failed to send email', error);
-    return { success: false, message: 'There was an error sending your message. Please try again.' };
-  }
-}
-
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -77,23 +38,55 @@ export function ContactForm() {
     },
   });
 
-  async function onSubmit(values: ContactFormValues) {
+  async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
-    const result = await submitContactForm(values);
-    setIsSubmitting(false);
+    
+    try {
+      // Parallelize email sending
+      const [userEmailResult, adminEmailResult] = await Promise.all([
+        sendEmail({
+          to: data.email,
+          subject: "We've Received Your Message | Vikhyat Foundation",
+          react: React.createElement(ContactFormEmail, {
+            name: data.name,
+            subject: data.subject,
+            message: data.message,
+          }),
+        }),
+        sendEmail({
+          to: 'vikhyatfoundation@gmail.com',
+          subject: `New Inquiry: ${data.subject}`,
+          react: React.createElement(NewContactInquiryEmail, {
+            name: data.name,
+            email: data.email,
+            subject: data.subject,
+            message: data.message,
+          }),
+        })
+      ]);
 
-    if (result.success) {
-      toast({
-        title: 'Success!',
-        description: result.message,
-      });
-      form.reset();
-    } else {
+      if (userEmailResult.success && adminEmailResult.success) {
+        toast({
+          title: 'Success!',
+          description: 'Your message has been sent successfully!',
+        });
+        form.reset();
+      } else {
+        toast({
+          title: 'Message Sent!',
+          description: "Your message was submitted, but there was an issue sending a confirmation email. We'll get back to you shortly.",
+        });
+        form.reset();
+      }
+    } catch (error) {
+      console.error('Failed to send contact form email', error);
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
-        description: result.message,
+        description: 'There was an error sending your message. Please try again.',
       });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
