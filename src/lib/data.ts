@@ -250,7 +250,7 @@ export const GET_INVOLVED_OPTIONS = [
         title: "Volunteer",
         description: "Join our team of passionate volunteers and make a hands-on difference. Find an opportunity that matches your skills and passion.",
         link: "#get-involved-form",
-        cta: "Apply Now"
+        cta: "Find Opportunities"
     },
     {
         icon: HeartHandshake,
@@ -265,6 +265,13 @@ export const GET_INVOLVED_OPTIONS = [
         description: "Be an ambassador for our cause. Share our story on social media, talk to your friends and family, and help us grow our movement.",
         link: "#",
         cta: "Share Our Mission"
+    },
+    {
+        icon: Scale,
+        title: "Partnerships",
+        description: "We collaborate with corporations, non-profits, and community groups to amplify our impact. Let's work together for a better future.",
+        link: "#get-involved-form",
+        cta: "Become a Partner"
     },
 ];
 

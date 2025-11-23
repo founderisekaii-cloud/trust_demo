@@ -12,7 +12,7 @@ import * as React from 'react';
 
 
 export default function GetInvolvedPage() {
-  const getInvolvedCards = GET_INVOLVED_OPTIONS.filter(option => option.title !== 'Donate' && option.title !== 'Partnerships');
+  const getInvolvedCards = GET_INVOLVED_OPTIONS.filter(option => option.title !== 'Donate');
 
   return (
     <div>
