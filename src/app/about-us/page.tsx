@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { TEAM_MEMBERS, TESTIMONIALS } from '@/lib/data';
+import { TESTIMONIALS } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -12,12 +12,22 @@ import { useRouter } from 'next/navigation';
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 const OurStory = () => {
-  const storyImage = findImage('about-story');
   const chairpersonImage = findImage('chairperson-photo');
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative w-full h-80 md:h-[500px] rounded-lg overflow-hidden shadow-lg order-first">
+            {chairpersonImage && (
+              <Image 
+                src={chairpersonImage.imageUrl} 
+                alt={chairpersonImage.description} 
+                fill 
+                className="object-cover"
+                data-ai-hint={chairpersonImage.imageHint}
+              />
+            )}
+          </div>
           <div>
             <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Story & Chairperson</h2>
             <p className="mt-6 text-lg text-muted-foreground">
@@ -26,25 +36,6 @@ const OurStory = () => {
             <p className="mt-4 text-muted-foreground">
               This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take charge of their own development. The resounding success of that pilot project—a flourishing community garden that became a hub for social connection and healthy living—became the blueprint for our expanding mission. Today, the Vikhyat Foundation has grown from that single seed of an idea into a formidable force for good, championing causes across education, healthcare, environmental sustainability, and policy advocacy. Yet, our core philosophy remains unchanged: listen with empathy, empower with dignity, and act with conviction. Our journey is a living testament to the extraordinary power that is unleashed when people come together with a shared purpose and an unwavering belief in a better tomorrow.
             </p>
-             <div className="mt-12 bg-secondary p-6 rounded-lg">
-                <h3 className="text-2xl font-headline font-semibold mb-4">The Chairman's Vision</h3>
-                 <div className="flex items-center gap-6">
-                    <p className="text-muted-foreground italic">
-                        "Our vision is one of holistic empowerment. We strive to create a world where every individual has the opportunity not just to survive, but to thrive. By focusing on education, health, and sustainable development, we are planting the seeds for a future where communities are self-reliant, resilient, and filled with hope. Our work is driven by the belief that compassion, when combined with strategic action, can move mountains."
-                    </p>
-                </div>
-            </div>
-          </div>
-          <div className="relative w-full h-80 md:h-[500px] rounded-lg overflow-hidden shadow-lg">
-            {storyImage && (
-              <Image 
-                src={storyImage.imageUrl} 
-                alt={storyImage.description} 
-                fill 
-                className="object-cover"
-                data-ai-hint={storyImage.imageHint}
-              />
-            )}
           </div>
         </div>
       </div>
