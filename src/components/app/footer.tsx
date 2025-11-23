@@ -5,22 +5,40 @@ import Link from 'next/link';
 import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { useState } from 'react';
+import * as React from 'react';
 import { Logo } from './logo';
+import { subscribeToAction } from '@/actions/subscribe';
+import { Loader2 } from 'lucide-react';
 
 export function Footer() {
-  
   const { toast } = useToast();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(`Subscribing ${email}`);
-    toast({
-      title: 'Success!',
-      description: 'Thank you for joining our movement!',
-    });
-    setEmail('');
+    setIsSubmitting(true);
+
+    try {
+      const result = await subscribeToAction({ email });
+      if (result.success) {
+        toast({
+          title: 'Success!',
+          description: "Thank you for joining our movement! We've received your subscription.",
+        });
+        setEmail('');
+      } else {
+        throw new Error(result.error || 'An unknown error occurred.');
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Subscription Failed',
+        description: (error as Error).message || 'Could not subscribe. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const policyLinks = [
@@ -92,8 +110,12 @@ export function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
-                <Button type="submit" variant="default">Subscribe</Button>
+                <Button type="submit" variant="default" disabled={isSubmitting}>
+                  {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                </Button>
               </form>
             </div>
           </div>

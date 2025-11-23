@@ -13,9 +13,10 @@ interface SendEmailProps {
   to: string | string[];
   subject: string;
   react: React.ReactElement;
+  reply_to?: string | string[];
 }
 
-export async function sendEmail({ to, subject, react }: SendEmailProps) {
+export async function sendEmail({ to, subject, react, reply_to }: SendEmailProps) {
   if (!process.env.RESEND_API_KEY) {
     console.log('RESEND_API_KEY is not set. Skipping email sending.');
     return { success: false, error: 'RESEND_API_KEY is not configured.' };
@@ -24,6 +25,7 @@ export async function sendEmail({ to, subject, react }: SendEmailProps) {
   // In a sandbox environment, Resend requires sending to a verified email.
   // We'll redirect all emails to the sandbox recipient for testing purposes.
   const recipient = process.env.NODE_ENV === 'development' ? RESEND_SANDBOX_RECIPIENT : to;
+  const defaultReplyTo = ['vikhyatfoundation@gmail.com', 'vikasashokdubey98@gmail.com'];
 
   try {
     const { data, error } = await resend.emails.send({
@@ -31,7 +33,7 @@ export async function sendEmail({ to, subject, react }: SendEmailProps) {
       to: recipient,
       subject: subject,
       react: react,
-      reply_to: ['vikhyatfoundation@gmail.com', 'vikasashokdubey98@gmail.com'],
+      reply_to: reply_to || defaultReplyTo,
     });
 
     if (error) {
