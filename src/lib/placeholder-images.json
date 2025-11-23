@@ -3,157 +3,157 @@
     {
       "id": "hero-1",
       "description": "A diverse group of people collaborating in a modern office space.",
-      "imageUrl": "/images/logo.png",
+      "imageUrl": "https://images.unsplash.com/photo-1699371830139-cb02e94878f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29tbXVuaXR5JTIwY29sbGFib3JhdGlvbnxlbnwwfHx8fDE3NjM5MTkzMDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "community collaboration"
     },
     {
       "id": "hero-2",
       "description": "A speaker passionately addressing a crowd at a community event.",
-      "imageUrl": "/images/hero-public-speaking.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1715610258704-e8f9f5710fe0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwdWJsaWMlMjBzcGVha2luZ3xlbnwwfHx8fDE3NjM4NDcxMTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "public speaking"
     },
     {
       "id": "hero-3",
       "description": "Hands of different people coming together, symbolizing unity.",
-      "imageUrl": "/images/hero-unity-hands.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1706514682457-31d5db8dffab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx1bml0eSUyMGhhbmRzfGVufDB8fHx8MTc2MzkxOTMwMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "unity hands"
     },
     {
       "id": "initiative-education",
       "description": "Children in a classroom setting, engaged in learning.",
-      "imageUrl": "/images/initiative-education-classroom.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1581726707445-75cbe4efc586?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjaGlsZHJlbiUyMGNsYXNzcm9vbXxlbnwwfHx8fDE3NjM4NTYyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "children classroom"
     },
     {
       "id": "initiative-healthcare",
       "description": "A doctor checking a patient's blood pressure in a clinic.",
-      "imageUrl": "/images/initiative-healthcare-checkup.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1621525434111-87a99d170b0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtZWRpY2FsJTIwY2hlY2t1cHxlbnwwfHx8fDE3NjM4MTgzNjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "medical checkup"
     },
     {
       "id": "initiative-community",
       "description": "Volunteers working together to build a house.",
-      "imageUrl": "/images/initiative-community-building.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1566821500855-7976094bcfa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx2b2x1bnRlZXJzJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzYzOTE5MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "volunteers building"
     },
     {
       "id": "initiative-policy",
       "description": "A government building with prominent columns.",
-      "imageUrl": "/images/initiative-policy-government.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1573181759662-1c146525b21f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwYnVpbGRpbmd8ZW58MHx8fHwxNzYzODM0MjQxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "government building"
     },
     {
       "id": "featured-initiative",
       "description": "A vibrant community garden with people tending to plants.",
-      "imageUrl": "/images/featured-initiative-community-garden.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1611843467160-25afb8df1074?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjBnYXJkZW58ZW58MHx8fHwxNzYzOTA4NjI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "community garden"
     },
     {
       "id": "news-1",
       "description": "A person writing notes during a meeting.",
-      "imageUrl": "/images/news-writing-notes.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3cml0aW5nJTIwbm90ZXN8ZW58MHx8fHwxNzYzODk5MDc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "writing notes"
     },
     {
       "id": "news-2",
       "description": "A panel of speakers on a stage at a conference.",
-      "imageUrl": "/images/news-conference-panel.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1573339886938-ee9beed4104c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb25mZXJlbmNlJTIwcGFuZWx8ZW58MHx8fHwxNzYzOTE5MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "conference panel"
     },
     {
       "id": "news-3",
       "description": "A handshake between two business professionals.",
-      "imageUrl": "/images/news-business-handshake.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1681505531034-8d67054e07f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxidXNpbmVzcyUyMGhhbmRzaGFrZXxlbnwwfHx8fDE3NjM4NjI3OTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "business handshake"
     },
     {
       "id": "testimonial-1",
       "description": "Portrait of a smiling person.",
-      "imageUrl": "/images/testimonial-person-1.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1542596594-649edbc13630?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-2",
       "description": "Portrait of another smiling person.",
-      "imageUrl": "/images/testimonial-person-2.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-3",
       "description": "Portrait of a third smiling person.",
-      "imageUrl": "/images/testimonial-person-3.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1554727242-741c14fa561c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-4",
       "description": "Portrait of a fourth smiling person.",
-      "imageUrl": "/images/testimonial-person-4.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8d29tYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MzY1MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "woman portrait"
     },
     {
       "id": "testimonial-5",
       "description": "Portrait of a fifth smiling person.",
-      "imageUrl": "/images/testimonial-person-5.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MDkyNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "man portrait"
     },
     {
       "id": "testimonial-6",
       "description": "Portrait of a sixth smiling person.",
-      "imageUrl": "/images/testimonial-person-6.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MDkyNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "man portrait"
     },
     {
       "id": "about-story",
       "description": "A winding road through a scenic landscape.",
-      "imageUrl": "/images/about-us-story-road.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1489641024260-20e5cb3ee4aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3aW5kaW5nJTIwcm9hZHxlbnwwfHx8fDE3NjM5MTkzMDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "winding road"
     },
     {
       "id": "chairperson-photo",
       "description": "Portrait of Mrs. Suman Vinod Morye, Founder & Chairperson",
-      "imageUrl": "/images/chairperson-suman-morye.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1592621385612-4d7129426394?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc2MzgzNjUwNXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "woman portrait"
     },
     {
       "id": "gallery-1",
       "description": "A group of volunteers planting trees in a park.",
-      "imageUrl": "/images/gallery-volunteers-planting.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1758599668360-48ba8ba71b47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx2b2x1bnRlZXJzJTIwcGxhbnRpbmd8ZW58MHx8fHwxNzYzOTE5MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "volunteers planting"
     },
     {
       "id": "gallery-2",
       "description": "A charity run event with many participants.",
-      "imageUrl": "/images/gallery-charity-run.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFyaXR5JTIwcnVufGVufDB8fHx8MTc2MzkxOTMwMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "charity run"
     },
     {
       "id": "gallery-3",
       "description": "People gathered at a town hall meeting.",
-      "imageUrl": "/images/gallery-town-hall.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1647102253566-77e7ad728965?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0b3duJTIwaGFsbHxlbnwwfHx8fDE3NjM4Mjg0OTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "town hall"
     },
     {
       "id": "gallery-4",
       "description": "A community fair with tents and people.",
-      "imageUrl": "/images/gallery-community-fair.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1761503389996-f5157aa070a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjb21tdW5pdHklMjBmYWlyfGVufDB8fHx8MTc2MzkxOTMwMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "community fair"
     },
     {
       "id": "gallery-5",
       "description": "Close-up of hands holding soil with a small sprout.",
-      "imageUrl": "/images/gallery-hands-sprout.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1746728126444-2948335c095f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYW5kcyUyMHNwcm91dHxlbnwwfHx8fDE3NjM5MTkzMDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "hands sprout"
     },
     {
       "id": "gallery-6",
       "description": "A group photo of the smiling volunteer team.",
-      "imageUrl": "/images/gallery-team-photo.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1532498551838-b7a1cfac622e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWFtJTIwcGhvdG98ZW58MHx8fHwxNzYzODI4NzQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "team photo"
     },
     {
       "id": "contact-hero",
       "description": "A modern building facade.",
-      "imageUrl": "/images/contact-hero-office.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxvZmZpY2UlMjBidWlsZGluZ3xlbnwwfHx8fDE3NjM4MzQ3NTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "office building"
     }
   ]
