@@ -53,23 +53,23 @@ export function GetInvolvedForm() {
         sendEmail({
           to: formData.email,
           subject: `We've Received Your ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}`,
-          react: React.createElement(VolunteerApplicationEmail, {
-            name: formData.name,
-            interests: formData.message,
-            skills: formData.skills || '',
-            availability: ''
-          }),
+          react: <VolunteerApplicationEmail
+            name={formData.name}
+            interests={formData.message}
+            skills={formData.skills || ''}
+            availability=""
+          />,
         }),
         sendEmail({
           to: 'founder.isekaii@gmail.com', // Admin email
           subject: `New ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}: ${formData.name}`,
-          react: React.createElement(NewVolunteerEmail, {
-            name: formData.name,
-            email: formData.email,
-            interests: formData.message,
-            skills: formData.skills || '',
-            availability: ''
-          }),
+          react: <NewVolunteerEmail
+            name={formData.name}
+            email={formData.email}
+            interests={formData.message}
+            skills={formData.skills || ''}
+            availability=""
+          />,
         })
       ]);
       

@@ -47,21 +47,21 @@ export function ContactForm() {
         sendEmail({
           to: data.email,
           subject: "We've Received Your Message | Vikhyat Foundation",
-          react: React.createElement(ContactFormEmail, {
-            name: data.name,
-            subject: data.subject,
-            message: data.message,
-          }),
+          react: <ContactFormEmail
+            name={data.name}
+            subject={data.subject}
+            message={data.message}
+          />,
         }),
         sendEmail({
           to: 'vikhyatfoundation@gmail.com',
           subject: `New Inquiry: ${data.subject}`,
-          react: React.createElement(NewContactInquiryEmail, {
-            name: data.name,
-            email: data.email,
-            subject: data.subject,
-            message: data.message,
-          }),
+          react: <NewContactInquiryEmail
+            name={data.name}
+            email={data.email}
+            subject={data.subject}
+            message={data.message}
+          />,
         })
       ]);
 
