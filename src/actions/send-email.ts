@@ -26,7 +26,7 @@ export async function sendEmail({ to, subject, react }: SendEmailProps) {
       to: to,
       subject: subject,
       react: react,
-      reply_to: 'vikhyatfoundation@gmail.com',
+      reply_to: ['vikhyatfoundation@gmail.com', 'vikasashokdubey98@gmail.com'],
     });
 
     if (error) {
