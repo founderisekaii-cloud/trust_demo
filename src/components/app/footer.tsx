@@ -31,7 +31,10 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 text-2xl font-headline font-bold">
               <Logo className="h-10 w-10 text-primary" />
-              <span>Vikhyat Foundation</span>
+              <div className="flex flex-col">
+                <span>Vikhyat Foundation</span>
+                <span className="text-xs font-normal text-muted-foreground mt-1">Humanity at Heart, Progress in Action</span>
+              </div>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Empowering communities, driving social change, and building a better future together.

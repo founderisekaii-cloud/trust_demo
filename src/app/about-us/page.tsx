@@ -143,6 +143,7 @@ export default function AboutUsPage() {
                     Back
                 </Button>
                 <h1 className="text-4xl md:text-5xl font-headline font-bold">About Vikhyat Foundation</h1>
+                <p className="mt-2 text-lg text-primary-foreground/90">Humanity at Heart, Progress in Action</p>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
                     The story, people, and principles behind our commitment to social progress.
                 </p>

@@ -33,6 +33,7 @@ function Hero() {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold drop-shadow-md">
           Vikhyat Foundation
         </h1>
+        <p className="mt-2 text-lg md:text-xl text-neutral-100 drop-shadow-sm">Humanity at Heart, Progress in Action</p>
         <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-neutral-200 drop-shadow-sm">
           The purpose of Vikhyat Foundation is educational, social, cultural, religious, health and sports development.
         </p>

@@ -17,13 +17,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col">
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold font-headline">
-            <Logo className="h-8 w-8 text-primary" />
-            <span>Vikhyat Foundation</span>
-          </Link>
-          <p className="text-xs text-muted-foreground ml-9">Reg. No. 12345/2024</p>
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-2">
+          <Logo className="h-10 w-10 text-primary" />
+          <div className="flex flex-col">
+            <Link href="/" className="text-xl font-bold font-headline">
+              <span>Vikhyat Foundation</span>
+            </Link>
+            <p className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</p>
+            <p className="text-xs text-muted-foreground mt-1">Reg. No. 12345/2024</p>
+          </div>
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
