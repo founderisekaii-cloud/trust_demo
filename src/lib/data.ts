@@ -1,5 +1,5 @@
 
-import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter, Linkedin, Share2 } from 'lucide-react';
+import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter, Linkedin, Share2, Youtube } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -238,9 +238,9 @@ export const CONTACT_INFO = {
   email: 'vikhyatfoundation@gmail.com',
   phone: '+919619578549',
   socials: {
-    facebook: 'https://www.facebook.com/people/Vikhyat-Foundation/61583891132823/',
-    twitter: '#',
-    instagram: 'https://www.instagram.com/accounts/login/?next=%2Fvikhyat_foundation%2F&source=omni_redirect',
+    facebook: 'https://www.facebook.com/profile.php?id=61583891132823',
+    instagram: 'https://www.instagram.com/vikhyat_foundation/',
+    youtube: 'https://youtube.com/@vikhyatfoundation?si=Zi2wVSugmQaEK5OB',
     whatsapp: 'https://wa.me/919619578549'
   }
 };
@@ -296,15 +296,14 @@ export const CONTACT_METHODS = [
 
 export const SOCIAL_LINKS = [
   { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
-  { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
   { icon: Instagram, href: CONTACT_INFO.socials.instagram, label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn'},
+  { icon: Youtube, href: CONTACT_INFO.socials.youtube, label: 'YouTube' },
   { icon: MessageCircle, href: CONTACT_INFO.socials.whatsapp, label: 'WhatsApp'},
 ];
 
 export const SHARE_PLATFORMS = [
-    { name: 'Facebook', icon: Facebook, color: 'bg-[#1877F2]' },
-    { name: 'Twitter', icon: Twitter, color: 'bg-[#1DA1F2]' },
-    { name: 'LinkedIn', icon: Linkedin, color: 'bg-[#0A66C2]' },
-    { name: 'WhatsApp', icon: MessageCircle, color: 'bg-[#25D366]' },
+    { name: 'Facebook', icon: Facebook },
+    { name: 'Twitter', icon: Twitter },
+    { name: 'LinkedIn', icon: Linkedin },
+    { name: 'WhatsApp', icon: MessageCircle },
 ];
