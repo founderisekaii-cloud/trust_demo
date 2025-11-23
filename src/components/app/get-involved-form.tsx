@@ -12,8 +12,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Loader2, Wand2 } from 'lucide-react';
 import React from 'react';
 import { sendEmail } from '@/actions/send-email';
-import NewVolunteerEmail from '@/emails/new-volunteer-email';
-import VolunteerApplicationEmail from '@/emails/volunteer-application-email';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const formSchema = z.object({
@@ -25,6 +23,42 @@ const formSchema = z.object({
 });
 
 type GetInvolvedFormValues = z.infer<typeof formSchema>;
+
+const createVolunteerConfirmationHtml = (name: string, interests: string, skills: string | undefined, inquiryType: 'volunteer' | 'partner') => {
+  const title = inquiryType === 'volunteer' ? 'Thank You For Your Volunteer Application!' : 'Thank You For Your Partnership Inquiry!';
+  return `
+    <div style="font-family: sans-serif; background-color: #f6f9fc; padding: 20px;">
+      <div style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 4px; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1 style="font-size: 24px; text-align: center;">${title}</h1>
+        <p>We have received your inquiry and will be in touch soon.</p>
+        <p>For your reference, here is a copy of your application:</p>
+        <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
+        ${inquiryType === 'volunteer' ? `<p><strong>Skills:</strong> ${skills || 'Not provided'}</p>` : ''}
+        <p><strong>${inquiryType === 'volunteer' ? 'Interests & Motivations' : 'Partnership Proposal'}:</strong></p>
+        <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; border: 1px solid #e9ecef;">
+          <p style="white-space: pre-wrap; word-wrap: break-word;">${interests}</p>
+        </div>
+        <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
+        <p>Sincerely,<br/>The Vikhyat Foundation Team</p>
+      </div>
+    </div>
+  `;
+};
+
+const createVolunteerAdminHtml = (name: string, email: string, interests: string, skills: string | undefined, inquiryType: 'volunteer' | 'partner') => {
+  const title = inquiryType === 'volunteer' ? 'New Volunteer Application' : 'New Partnership Inquiry';
+  return `
+    <div style="font-family: sans-serif; padding: 20px;">
+      <h1>${title}</h1>
+      <p>From: ${name} (${email})</p>
+      ${inquiryType === 'volunteer' ? `<p><strong>Skills:</strong> ${skills || 'Not provided'}</p>` : ''}
+      <p><strong>${inquiryType === 'volunteer' ? 'Interests & Motivations' : 'Partnership Proposal'}:</strong></p>
+      <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; border: 1px solid #e9ecef;">
+        <p style="white-space: pre-wrap; word-wrap: break-word;">${interests}</p>
+      </div>
+    </div>
+  `;
+};
 
 export function GetInvolvedForm() {
   const { toast } = useToast();
@@ -54,26 +88,13 @@ export function GetInvolvedForm() {
         sendEmail({
           to: formData.email,
           subject: subject,
-          react: <VolunteerApplicationEmail
-            name={formData.name}
-            interests={formData.message}
-            skills={formData.skills || ''}
-            availability=""
-            inquiryType={formData.inquiryType}
-          />,
+          html: createVolunteerConfirmationHtml(formData.name, formData.message, formData.skills, formData.inquiryType),
         }),
         sendEmail({
           to: 'vikhyatfoundation@gmail.com',
           subject: adminSubject,
-          react: <NewVolunteerEmail
-            name={formData.name}
-            email={formData.email}
-            interests={formData.message}
-            skills={formData.skills || ''}
-            availability=""
-            inquiryType={formData.inquiryType}
-          />,
-          reply_to: formData.email,
+          html: createVolunteerAdminHtml(formData.name, formData.email, formData.message, formData.skills, formData.inquiryType),
+          from: `Vikhyat Foundation Forms <contact@vikhyatfoundation.com>`,
         })
       ]);
       

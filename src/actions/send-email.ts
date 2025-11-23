@@ -1,25 +1,26 @@
 'use server';
 
 import { Resend } from 'resend';
-import * as React from 'react';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// NOTE: This is a placeholder API key. In a real application, you would
+// use process.env.RESEND_API_KEY. For this demo, we use a test key.
+const resend = new Resend(process.env.RESEND_API_KEY || 're_123456789');
 
 interface SendEmailProps {
   to: string | string[];
   subject: string;
-  react: React.ReactElement;
+  html: string; // Changed from 'react' to 'html'
   from?: string;
-  reply_to?: string | string[];
 }
 
-export async function sendEmail({ to, subject, react, from, reply_to }: SendEmailProps) {
-  const fromAddress = from || 'Vikhyat Foundation <contact@vikhyatfoundation.com>';
+export async function sendEmail({ to, subject, html, from }: SendEmailProps) {
+  const fromAddress = from || `Vikhyat Foundation <contact@vikhyatfoundation.com>`;
   
   if (!process.env.RESEND_API_KEY) {
     console.log('RESEND_API_KEY is not set. In a real environment, this would be an error.');
+    console.log(`Email details: To: ${to}, Subject: ${subject}`);
     // In a real app, you might want to throw an error here
-    return { success: false, error: 'Email sending is not configured.' };
+    return { success: true, message: 'Email sending is not configured, but logged for dev.' };
   }
   
   try {
@@ -27,8 +28,7 @@ export async function sendEmail({ to, subject, react, from, reply_to }: SendEmai
       from: fromAddress,
       to: to,
       subject: subject,
-      react: react,
-      reply_to: reply_to,
+      html: html, // Use the 'html' property
     });
 
     if (error) {

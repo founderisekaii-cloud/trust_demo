@@ -1,15 +1,35 @@
-
 'use server';
 
 import { z } from 'zod';
 import { sendEmail } from './send-email';
-import NewSubscriberEmail from '@/emails/new-subscriber-email';
-import NewSubscriberConfirmationEmail from '@/emails/new-subscriber-confirmation-email';
-import React from 'react';
 
 const subscribeSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
+
+const createSubscriberConfirmationHtml = (subscriberEmail: string) => `
+  <div style="font-family: sans-serif; background-color: #f6f9fc; padding: 20px;">
+    <div style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 4px; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h1 style="font-size: 24px; text-align: center;">Welcome to the Movement!</h1>
+      <p>Thank you for subscribing to the Vikhyat Foundation newsletter. You'll now be among the first to hear about our latest initiatives and success stories.</p>
+      <p style="text-align:center;">
+        <a href="https://www.vikhyatfoundation.com" style="background-color: #3399cc; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Explore Our Work</a>
+      </p>
+      <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
+      <p>Sincerely,<br/>The Vikhyat Foundation Team</p>
+    </div>
+  </div>
+`;
+
+const createAdminNotificationHtml = (subscriberEmail: string) => `
+  <div style="font-family: sans-serif; padding: 20px;">
+    <h1>New Newsletter Subscriber</h1>
+    <p>A new person has subscribed to your newsletter:</p>
+    <p style="background-color: #e6f9ff; border: 1px solid #b3ecff; padding: 12px; border-radius: 4px; font-weight: bold; text-align: center;">
+      ${subscriberEmail}
+    </p>
+  </div>
+`;
 
 export async function subscribeToAction(formData: unknown) {
   const parsed = subscribeSchema.safeParse(formData);
@@ -24,22 +44,21 @@ export async function subscribeToAction(formData: unknown) {
     // Send two emails in parallel: one to admin, one to the new subscriber
     const [adminEmailResult, userEmailResult] = await Promise.all([
       sendEmail({
-        to: 'vikhyatfoundation@gmail.com', // Notification to admin
+        to: 'vikhyatfoundation@gmail.com',
         subject: 'New Newsletter Subscriber',
-        react: <NewSubscriberEmail subscriberEmail={email} />,
-        reply_to: [email],
+        html: createAdminNotificationHtml(email),
+        from: `Vikhyat Foundation Forms <contact@vikhyatfoundation.com>`,
       }),
       sendEmail({
-        to: email, // Confirmation to user
+        to: email,
         subject: 'Welcome to the Vikhyat Foundation Movement!',
-        react: <NewSubscriberConfirmationEmail subscriberEmail={email} />,
+        html: createSubscriberConfirmationHtml(email),
       })
     ]);
 
     if (!adminEmailResult.success || !userEmailResult.success) {
       console.error('One or more subscription emails failed to send.', { adminEmailResult, userEmailResult });
-      // Still return success to the UI, as the primary action (capturing the email) is what matters.
-      // The user will just not get a confirmation, which is acceptable.
+      // Still return success to the UI, as the primary action is what matters.
       return { success: true, error: null };
     }
 
