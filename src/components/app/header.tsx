@@ -25,7 +25,6 @@ export function Header() {
               <span>Vikhyat Foundation</span>
             </Link>
             <p className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</p>
-            <p className="text-xs text-muted-foreground mt-1">MU/0001548/2024</p>
           </div>
         </div>
         
