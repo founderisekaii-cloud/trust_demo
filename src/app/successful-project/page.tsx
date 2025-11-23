@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function SuccessfulProjectPage() {
+export default function OurActivityPage() {
     const router = useRouter();
 
     return (
@@ -14,7 +14,7 @@ export default function SuccessfulProjectPage() {
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back
                     </Button>
-                    <h1 className="text-4xl md:text-5xl font-headline font-bold">Successful Projects</h1>
+                    <h1 className="text-4xl md:text-5xl font-headline font-bold">Our Activity</h1>
                     <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
                         Highlights of our impactful work and the positive change we've driven in communities.
                     </p>

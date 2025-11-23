@@ -4,7 +4,7 @@ export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about-us', label: 'About Us' },
   { href: '/what-we-do', label: 'What We Do' },
-  { href: '/successful-project', label: 'Successful Project' },
+  { href: '/our-activity', label: 'Our Activity' },
   { href: '/get-involved', label: 'Get Involved' },
   { href: '/contact', label: 'Contact' },
 ];
