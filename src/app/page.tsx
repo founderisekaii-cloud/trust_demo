@@ -29,6 +29,10 @@ function Hero() {
           Vikhyat Foundation
         </h1>
         <p className="mt-2 text-lg md:text-xl text-neutral-100 drop-shadow-sm">Humanity at Heart, Progress in Action</p>
+        <div className="mt-4 text-sm text-neutral-200 space-y-1">
+            <p>Reg. No. MH/0000513/2024</p>
+            <p>F-62211(THANE)</p>
+        </div>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/get-involved">Get Involved</Link>
