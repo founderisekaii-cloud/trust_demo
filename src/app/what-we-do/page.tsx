@@ -21,10 +21,6 @@ export default function WhatWeDoPage() {
     <div>
       <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Button variant="ghost" onClick={() => router.back()} className="absolute top-6 left-4 text-primary-foreground hover:bg-primary/50">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-          </Button>
           <h1 className="text-4xl md:text-5xl font-headline font-bold">Our Areas of Impact</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
             A comprehensive overview of our programs and projects, each designed to tackle critical social challenges and create a better tomorrow.

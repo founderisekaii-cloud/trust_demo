@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import { Toaster } from '@/components/ui/toaster';
+import { BackButton } from '@/components/app/back-button';
 
 export const metadata: Metadata = {
   title: 'Vikhyat Foundation | Empowering Communities, Driving Social Change',
@@ -29,6 +30,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <Toaster />
+        <BackButton />
       </body>
     </html>
   );

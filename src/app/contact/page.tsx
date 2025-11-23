@@ -30,10 +30,6 @@ export default function ContactPage() {
           />
         }
         <div className="absolute inset-0 bg-black/60" />
-        <Button variant="ghost" onClick={() => router.back()} className="absolute top-6 left-4 text-white hover:bg-white/10 z-10">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
-        </Button>
         <div className="relative text-center p-4">
           <h1 className="text-4xl md:text-5xl font-headline font-bold">Contact Us</h1>
           <p className="mt-2 text-lg md:text-xl text-neutral-200">We're here to answer your questions.</p>

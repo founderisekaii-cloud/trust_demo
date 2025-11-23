@@ -124,10 +124,6 @@ export default function AboutUsPage() {
     <div>
         <header className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <Button variant="ghost" onClick={() => router.back()} className="absolute top-20 left-4 text-primary-foreground hover:bg-primary/50">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back
-                </Button>
                 <h1 className="text-4xl md:text-5xl font-headline font-bold">About Vikhyat Foundation</h1>
                 <p className="mt-2 text-lg text-primary-foreground/90">Humanity at Heart, Progress in Action</p>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80">
