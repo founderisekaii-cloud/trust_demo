@@ -48,28 +48,33 @@ export function GetInvolvedForm() {
     setIsSubmitting(true);
     
     try {
-      // We can send emails even if AI suggestions fail
+      const subject = `We've Received Your ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}`;
+      const adminSubject = `New ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}: ${formData.name}`;
+
       const [userEmailResult, adminEmailResult] = await Promise.all([
         sendEmail({
           to: formData.email,
-          subject: `We've Received Your ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}`,
+          subject: subject,
           react: <VolunteerApplicationEmail
             name={formData.name}
             interests={formData.message}
             skills={formData.skills || ''}
             availability=""
+            inquiryType={formData.inquiryType}
           />,
         }),
         sendEmail({
-          to: 'founder.isekaii@gmail.com', // Admin email
-          subject: `New ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}: ${formData.name}`,
+          to: 'vikhyatfoundation@gmail.com',
+          subject: adminSubject,
           react: <NewVolunteerEmail
             name={formData.name}
             email={formData.email}
             interests={formData.message}
             skills={formData.skills || ''}
             availability=""
+            inquiryType={formData.inquiryType}
           />,
+          reply_to: formData.email,
         })
       ]);
       
@@ -92,7 +97,7 @@ export function GetInvolvedForm() {
       toast({
         variant: 'destructive',
         title: 'An Error Occurred',
-        description: 'Your application was submitted, but an unexpected error occurred. Please check your email for a confirmation.',
+        description: 'There was an error submitting your inquiry. Please try again.',
       });
     } finally {
       setIsSubmitting(false);

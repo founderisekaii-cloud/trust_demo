@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { sendEmail } from './send-email';
 import NewSubscriberEmail from '@/emails/new-subscriber-email';
 import NewSubscriberConfirmationEmail from '@/emails/new-subscriber-confirmation-email';
+import React from 'react';
 
 const subscribeSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),

@@ -62,6 +62,7 @@ export function ContactForm() {
             subject={data.subject}
             message={data.message}
           />,
+          reply_to: data.email,
         })
       ]);
 

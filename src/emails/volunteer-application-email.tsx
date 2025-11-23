@@ -9,7 +9,6 @@ import {
   Preview,
   Section,
   Text,
-  Link,
   Button
 } from '@react-email/components';
 import * as React from 'react';
@@ -19,69 +18,62 @@ interface VolunteerApplicationEmailProps {
   skills: string;
   interests: string;
   availability: string;
-  suggestions?: Array<{
-    projectName: string;
-    projectDescription: string;
-    relevanceScore: number;
-  }>;
+  inquiryType: 'volunteer' | 'partner';
 }
 
-const VolunteerApplicationEmail = ({ name, skills, interests, availability, suggestions }: VolunteerApplicationEmailProps) => (
-  <Html>
-    <Head />
-    <Preview>Thank you for your interest in volunteering with Vikhyat Foundation!</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Heading style={heading}>Thank You, {name}!</Heading>
-        <Text style={paragraph}>
-          We have received your volunteer application and are thrilled to see your interest in joining our mission. Our team will review your information and get in touch with you soon regarding the next steps.
-        </Text>
-        <Text style={paragraph}>
-          For your reference, here is a copy of your application:
-        </Text>
+const VolunteerApplicationEmail = ({ name, skills, interests, inquiryType }: VolunteerApplicationEmailProps) => {
+    const title = inquiryType === 'volunteer' ? 'Thank You For Your Volunteer Application!' : 'Thank You For Your Partnership Inquiry!';
+    const preview = `We've received your ${inquiryType} inquiry.`;
 
-        <Hr style={hr} />
+  return (
+    <Html>
+      <Head />
+      <Preview>{preview}</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Heading style={heading}>Thank You, {name}!</Heading>
+          <Text style={paragraph}>
+            We have received your {inquiryType} inquiry and are thrilled to see your interest in joining our mission. Our team will review your information and get in touch with you soon regarding the next steps.
+          </Text>
+          <Text style={paragraph}>
+            For your reference, here is a copy of your application:
+          </Text>
 
-        <Section style={section}>
-          <Text style={label}>Your Skills:</Text>
-          <Text style={value}>{skills || 'Not provided'}</Text>
-          <Text style={label}>Your Interests & Motivations:</Text>
-          <Text style={value}>{interests}</Text>
-          <Text style={label}>Your Availability:</Text>
-          <Text style={value}>{availability || 'Not provided'}</Text>
-        </Section>
-        
-        {suggestions && suggestions.length > 0 && (
-            <>
-                <Hr style={hr} />
-                <Heading style={subHeading}>Suggested Projects For You</Heading>
-                <Text style={paragraph}>Based on your profile, our AI assistant identified a few projects where you could make a great impact:</Text>
-                {suggestions.map((proj) => {
-                    const slug = proj.projectName.toLowerCase().replace(/\s+/g, '-');
-                    return (
-                        <Section key={proj.projectName} style={projectSection}>
-                            <Text style={projectTitle}>{proj.projectName} ({Math.round(proj.relevanceScore * 100)}% Match)</Text>
-                            <Text style={projectDescription}>{proj.projectDescription}</Text>
-                            <Button style={button} href={`https://www.vikhyatfoundation.com/initiatives/${slug}`}>
-                                Learn More
-                            </Button>
-                        </Section>
-                    )
-                })}
-            </>
-        )}
+          <Hr style={hr} />
 
-        <Hr style={hr} />
+          <Section style={section}>
+             {inquiryType === 'volunteer' && (
+              <>
+                <Text style={label}>Your Skills:</Text>
+                <Text style={value}>{skills || 'Not provided'}</Text>
+              </>
+            )}
+            <Text style={label}>{inquiryType === 'volunteer' ? 'Your Interests & Motivations:' : 'Your Partnership Proposal:'}</Text>
+            <Text style={value}>{interests}</Text>
+          </Section>
 
-        <Text style={footer}>
-          Thank you again for your passion and commitment.
-          <br />
-          The Vikhyat Foundation Team
-        </Text>
-      </Container>
-    </Body>
-  </Html>
-);
+          <Hr style={hr} />
+
+           <Text style={paragraph}>
+            In the meantime, feel free to explore more about our work on our website.
+          </Text>
+          
+          <Button style={button} href="https://www.vikhyatfoundation.com">
+            Explore Our Initiatives
+          </Button>
+
+          <Hr style={hr} />
+
+          <Text style={footer}>
+            Thank you again for your passion and commitment.
+            <br />
+            The Vikhyat Foundation Team
+          </Text>
+        </Container>
+      </Body>
+    </Html>
+  );
+}
 
 export default VolunteerApplicationEmail;
 
@@ -106,12 +98,6 @@ const heading = {
   marginTop: '32px',
   textAlign: 'center' as const,
   color: '#212529',
-};
-
-const subHeading = {
-    ...heading,
-    fontSize: '22px',
-    marginTop: '24px',
 };
 
 const paragraph = {
@@ -145,25 +131,6 @@ const value = {
   wordWrap: 'break-word' as const,
 };
 
-const projectSection = {
-    padding: '16px',
-    margin: '16px 0',
-    border: '1px solid #e9ecef',
-    borderRadius: '4px',
-};
-
-const projectTitle = {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    margin: 0,
-};
-
-const projectDescription = {
-    fontSize: '14px',
-    margin: '4px 0 12px 0',
-    color: '#6c757d',
-};
-
 const hr = {
   borderColor: '#e9ecef',
   margin: '20px 0',
@@ -177,8 +144,10 @@ const button = {
     fontWeight: 'bold',
     textDecoration: 'none',
     textAlign: 'center' as const,
-    display: 'inline-block',
-    padding: '10px 18px',
+    display: 'block',
+    padding: '12px 20px',
+    margin: '16px auto',
+    width: 'fit-content'
 };
 
 const footer = {

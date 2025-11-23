@@ -34,7 +34,7 @@ const ContactFormEmail = ({ name, subject, message }: ContactFormEmailProps) => 
 
         <Hr style={hr} />
 
-        <Section style={{ padding: '0 24px' }}>
+        <Section style={submissionSection}>
             <Text style={label}>Subject</Text>
             <Text style={submissionValue}>{subject}</Text>
             <Text style={label}>Message</Text>
@@ -86,20 +86,24 @@ const paragraph = {
   color: '#495057',
 };
 
+const submissionSection = {
+    padding: '0 24px',
+};
+
 const label = {
-    ...paragraph,
+    fontSize: '14px',
     fontWeight: 'bold',
+    color: '#495057',
     marginBottom: '4px',
-    padding: '0',
 };
 
 const submissionValue = {
-    ...paragraph,
     backgroundColor: '#f8f9fa',
     padding: '12px',
     borderRadius: '4px',
     border: '1px solid #e9ecef',
-    marginTop: '0',
+    fontSize: '15px',
+    color: '#333',
     whiteSpace: 'pre-wrap' as const,
     wordWrap: 'break-word' as const,
 };
