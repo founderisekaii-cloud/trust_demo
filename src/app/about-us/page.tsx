@@ -80,7 +80,7 @@ const OurValues = () => {
 
 const BestWishers = () => {
   return (
-    <section className="py-16 md:py-24 bg-secondary">
+    <section id="best-wishers" className="py-16 md:py-24 bg-secondary scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Best Wishers</h2>

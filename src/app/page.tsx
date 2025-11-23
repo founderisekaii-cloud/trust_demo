@@ -1,15 +1,9 @@
 
 'use client';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { TESTIMONIALS } from '@/lib/data';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -41,7 +35,7 @@ function Hero() {
             <Link href="/get-involved">Get Involved</Link>
           </Button>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/#well-wishers">Well Wisher</Link>
+            <Link href="/about-us#best-wishers">Well Wisher</Link>
           </Button>
         </div>
       </div>
@@ -64,58 +58,6 @@ function Mission() {
            <p className="text-lg text-muted-foreground leading-relaxed">
             Our vision is to build the infrastructure of compassion and opportunity. We aim to establish and maintain a network of institutions that serve as pillars of support for the community. This includes creating welfare hostels that provide safe and nurturing homes for the vulnerable, ashrams and dharmshalas that offer spiritual solace and shelter, and state-of-the-art educational and skill training centers that serve as hubs of innovation and learning. Through these establishments, we envision a future where every person, regardless of their background, has access to the resources they need to reach their full potential. Our vision is not just about building structures, but about creating enduring ecosystems of support, empowerment, and holistic development that will benefit generations to come.
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-function WellWishers() {
-  return (
-    <section id="well-wishers" className="py-16 md:py-24 bg-background scroll-mt-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Well Wishers</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Hear from the people who believe in our mission and witness the change we create together.
-          </p>
-        </div>
-        <Carousel className="mt-12 w-full max-w-4xl mx-auto" opts={{ loop: true }}>
-          <CarouselContent>
-            {TESTIMONIALS.map((testimonial) => {
-              const image = findImage(testimonial.imageUrl);
-              return (
-              <CarouselItem key={testimonial.id}>
-                <div className="p-1">
-                  <Card className="border-none shadow-none">
-                    <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                      <p className="text-xl font-light italic">"{testimonial.quote}"</p>
-                      <div className="mt-6 flex items-center gap-4">
-                        {image && 
-                          <Avatar>
-                            <AvatarImage src={image.imageUrl} alt={testimonial.name} data-ai-hint={image.imageHint} />
-                            <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                          </Avatar>
-                        }
-                        <div>
-                          <p className="font-semibold">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            )})}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-        <div className="mt-8 text-center">
-          <Button asChild variant="outline">
-            <Link href="/our-activity">View Our Activity</Link>
-          </Button>
         </div>
       </div>
     </section>
@@ -148,7 +90,6 @@ export default function Home() {
     <main>
       <Hero />
       <Mission />
-      <WellWishers />
       <FinalCta />
     </main>
   );
