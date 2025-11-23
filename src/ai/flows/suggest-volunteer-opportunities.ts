@@ -15,6 +15,7 @@ import {z} from 'genkit';
 
 const SuggestVolunteerOpportunitiesInputSchema = z.object({
   name: z.string().describe('The full name of the volunteer applicant.'),
+  email: z.string().email().describe('The email address of the volunteer applicant.'),
   skills: z.string().describe('A comma-separated list of skills the applicant possesses.'),
   interests: z.string().describe('A paragraph describing the applicant\'s interests and motivations for volunteering.'),
   availability: z.string().describe('The applicant\'s availability for volunteering (e.g., hours per week, specific days).'),
@@ -43,6 +44,7 @@ const suggestVolunteerOpportunitiesPrompt = ai.definePrompt({
   prompt: `You are an AI assistant designed to suggest relevant volunteer projects based on an applicant's skills and interests.
 
   Applicant Name: {{{name}}}
+  Applicant Email: {{{email}}}
   Applicant Skills: {{{skills}}}
   Applicant Interests: {{{interests}}}
   Applicant Availability: {{{availability}}}

@@ -11,6 +11,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
+import { sendEmail } from '@/actions/send-email';
+import ContactFormEmail from '@/emails/contact-form-email';
+import NewContactInquiryEmail from '@/emails/new-contact-inquiry-email';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -21,13 +24,36 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-// Mock server action
 async function submitContactForm(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
-  console.log('Contact form submitted:', data);
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  // In a real app, you'd send this data to your backend/API
-  return { success: true, message: 'Your message has been sent successfully!' };
+  try {
+    // Email to user
+    await sendEmail({
+      to: data.email,
+      subject: "We've Received Your Message | Vikhyat Foundation",
+      react: ContactFormEmail({
+        name: data.name,
+        subject: data.subject,
+        message: data.message,
+      }),
+    });
+    
+    // Email to admin
+    await sendEmail({
+      to: 'vikhyatfoundation@gmail.com',
+      subject: `New Inquiry: ${data.subject}`,
+      react: NewContactInquiryEmail({
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      }),
+    });
+
+    return { success: true, message: 'Your message has been sent successfully!' };
+  } catch (error) {
+    console.error('Failed to send email', error);
+    return { success: false, message: 'There was an error sending your message. Please try again.' };
+  }
 }
 
 export function ContactForm() {

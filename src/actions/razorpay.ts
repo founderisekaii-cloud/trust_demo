@@ -4,6 +4,8 @@
 import { z } from 'zod';
 import Razorpay from 'razorpay';
 import { randomBytes } from 'crypto';
+import { sendEmail } from './send-email';
+import NewDonationEmail from '@/emails/new-donation-email';
 
 const donationSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -41,6 +43,17 @@ export async function createDonationOrder(prevState: any, formData: unknown) {
     if (!order) {
       throw new Error("Order creation failed");
     }
+
+    // Send notification email
+    await sendEmail({
+        to: ['vikhyatfoundation@gmail.com', email],
+        subject: 'Thank You for Your Donation!',
+        react: NewDonationEmail({
+            donorName: name,
+            amount: amount,
+            orderId: order.id
+        })
+    });
 
     return {
       success: true,
