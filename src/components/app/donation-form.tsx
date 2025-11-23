@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import React, { useEffect, useTransition } from 'react';
 import { createDonationOrder } from '@/actions/razorpay';
 import { HeartHandshake, Loader2 } from 'lucide-react';
 
@@ -33,9 +32,8 @@ const initialState = {
 
 export function DonationForm() {
   const { toast } = useToast();
-  const [state, formAction] = useActionState(createDonationOrder, initialState);
-  const [isPending, startTransition] = useTransition();
-
+  const [state, formAction, isPending] = useActionState(createDonationOrder, initialState);
+  
   const form = useForm<DonationFormValues>({
     resolver: zodResolver(donationSchema),
     defaultValues: {
@@ -46,9 +44,7 @@ export function DonationForm() {
   });
 
   function onSubmit(values: DonationFormValues) {
-    startTransition(() => {
-        formAction(values);
-    });
+    formAction(values);
   }
 
 
