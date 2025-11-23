@@ -1,11 +1,13 @@
 
 'use client';
 
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useActionState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import React, { useEffect } from 'react';
@@ -14,25 +16,41 @@ import { HeartHandshake, Loader2 } from 'lucide-react';
 
 declare const Razorpay: any;
 
+const donationSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  amount: z.coerce.number().min(1, { message: 'Donation amount must be at least ₹1.' }),
+});
+
+type DonationFormValues = z.infer<typeof donationSchema>;
+
+
 const initialState = {
   success: false,
   order: null,
   error: null,
 };
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" className="w-full" disabled={pending}>
-      {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-      {pending ? 'Processing...' : 'Donate Now'}
-    </Button>
-  );
-}
-
 export function DonationForm() {
   const { toast } = useToast();
   const [state, formAction] = useActionState(createDonationOrder, initialState);
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<DonationFormValues>({
+    resolver: zodResolver(donationSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      amount: 0,
+    },
+  });
+
+  function onSubmit(values: DonationFormValues) {
+    startTransition(() => {
+        formAction(values);
+    });
+  }
+
 
   useEffect(() => {
     if (state.success && state.order) {
@@ -52,7 +70,7 @@ export function DonationForm() {
             title: 'Payment Successful!',
             description: `Thank you for your generous donation, ${name}!`,
           });
-          // Here you would typically verify the payment signature on your server
+          form.reset();
         },
         prefill: {
           name,
@@ -85,17 +103,30 @@ export function DonationForm() {
 
     } else if (!state.success && state.error) {
       const formErrors = state.error as any;
-      let errorMessage = 'Please correct the errors and try again.';
-      if (formErrors._form) {
-        errorMessage = formErrors._form.join(', ');
-      }
-      toast({
-        variant: 'destructive',
-        title: 'Validation Error',
-        description: errorMessage,
-      });
+       if (formErrors._form) {
+         toast({
+            variant: 'destructive',
+            title: 'An error occurred',
+            description: formErrors._form.join(', '),
+         });
+       }
     }
-  }, [state, toast]);
+  }, [state, toast, form]);
+
+  useEffect(() => {
+    if (state.error) {
+        const fieldErrors = state.error as any;
+        for (const fieldName in fieldErrors) {
+            if (Object.prototype.hasOwnProperty.call(fieldErrors, fieldName) && fieldName !== '_form') {
+                form.setError(fieldName as keyof DonationFormValues, {
+                    type: 'manual',
+                    message: fieldErrors[fieldName][0],
+                });
+            }
+        }
+    }
+  }, [state.error, form]);
+
 
   return (
     <Card>
@@ -109,24 +140,53 @@ export function DonationForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={formAction} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input id="name" name="name" placeholder="Enter your full name" required />
-            {state.error?.name && <p className="text-sm font-medium text-destructive">{state.error.name[0]}</p>}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
-            <Input id="email" name="email" type="email" placeholder="Enter your email" required />
-             {state.error?.email && <p className="text-sm font-medium text-destructive">{state.error.email[0]}</p>}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="amount">Donation Amount (INR)</Label>
-            <Input id="amount" name="amount" type="number" placeholder="Enter amount" required min="1" />
-             {state.error?.amount && <p className="text-sm font-medium text-destructive">{state.error.amount[0]}</p>}
-          </div>
-          <SubmitButton />
-        </form>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Full Name</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Enter your full name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email Address</FormLabel>
+                            <FormControl>
+                                <Input type="email" placeholder="Enter your email" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="amount"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Donation Amount (INR)</FormLabel>
+                            <FormControl>
+                                <Input type="number" placeholder="Enter amount" {...field} min="1" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit" className="w-full" disabled={isPending}>
+                    {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                    {isPending ? 'Processing...' : 'Donate Now'}
+                </Button>
+            </form>
+        </Form>
       </CardContent>
     </Card>
   );

@@ -11,12 +11,8 @@ const donationSchema = z.object({
   amount: z.coerce.number().min(1, { message: 'Donation amount must be at least ₹1.' }),
 });
 
-export async function createDonationOrder(formData: FormData) {
-  const parsed = donationSchema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    amount: formData.get('amount'),
-  });
+export async function createDonationOrder(prevState: any, formData: unknown) {
+  const parsed = donationSchema.safeParse(formData);
 
   if (!parsed.success) {
     return { success: false, error: parsed.error.flatten().fieldErrors };
@@ -50,10 +46,11 @@ export async function createDonationOrder(formData: FormData) {
         name,
         email,
       },
+      error: null,
     };
   } catch (error) {
     console.error('Razorpay Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    return { success: false, error: { _form: [errorMessage] } };
+    return { success: false, order: null, error: { _form: [errorMessage] } };
   }
 }
