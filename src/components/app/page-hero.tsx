@@ -27,13 +27,6 @@ export function PageHero({ title, subtitle }: { title: string, subtitle: string 
           {title}
         </h1>
         <p className="mt-2 text-lg md:text-xl text-neutral-100 drop-shadow-sm">{subtitle}</p>
-        <div className="mt-4 text-sm md:text-base text-neutral-200 drop-shadow-sm whitespace-nowrap">
-          <span className="mx-2">MU/0001548/2024</span>
-          <span className="mx-2">F-0085513(GBR)</span>
-          <span className="mx-2">CSR000005</span>
-          <span className="mx-2">80G/12A : AAETV6698MF20251</span>
-          <span className="mx-2">MH/2025/0850417</span>
-        </div>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/get-involved">Get Involved</Link>
