@@ -15,14 +15,12 @@ interface SendEmailProps {
 export async function sendEmail({ to, subject, react }: SendEmailProps) {
   if (!process.env.RESEND_API_KEY) {
     console.log('RESEND_API_KEY is not set. Skipping email sending.');
-    // In a real app, you might want to throw an error here
-    // For this demo, we'll just log and continue
-    return;
+    return { success: false, error: 'RESEND_API_KEY is not configured.' };
   }
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Vikhyat Foundation <onboarding@resend.dev>', // Changed to Resend's default test address
+      from: 'Vikhyat Foundation <onboarding@resend.dev>',
       to: to,
       subject: subject,
       react: react,
@@ -31,12 +29,15 @@ export async function sendEmail({ to, subject, react }: SendEmailProps) {
 
     if (error) {
       console.error('Resend error:', error);
-      throw new Error('Failed to send email.');
+      // We will not throw an error here to prevent the whole action from failing.
+      // We'll log it and return an error state.
+      return { success: false, error: error.message };
     }
 
-    return data;
+    return { success: true, data };
   } catch (error) {
     console.error('Error sending email:', error);
-    throw error;
+    // Also catch any other exceptions during the process.
+    return { success: false, error: (error as Error).message };
   }
 }

@@ -75,7 +75,8 @@ async function suggestOpportunitiesAction(
     return { suggestions, error: null };
   } catch (e) {
     console.error(e);
-    return { suggestions: null, error: 'An unexpected error occurred. Please try again.' };
+    // The email sending itself will be handled gracefully, but we catch other potential errors here.
+    return { suggestions: null, error: 'An unexpected error occurred while processing your application.' };
   }
 }
 

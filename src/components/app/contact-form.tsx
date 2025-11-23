@@ -27,7 +27,7 @@ type ContactFormValues = z.infer<typeof formSchema>;
 async function submitContactForm(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
   try {
     // Email to user
-    await sendEmail({
+    const userEmailResult = await sendEmail({
       to: data.email,
       subject: "We've Received Your Message | Vikhyat Foundation",
       react: ContactFormEmail({
@@ -38,7 +38,7 @@ async function submitContactForm(data: ContactFormValues): Promise<{ success: bo
     });
     
     // Email to admin
-    await sendEmail({
+    const adminEmailResult = await sendEmail({
       to: 'vikhyatfoundation@gmail.com',
       subject: `New Inquiry: ${data.subject}`,
       react: NewContactInquiryEmail({
@@ -49,7 +49,15 @@ async function submitContactForm(data: ContactFormValues): Promise<{ success: bo
       }),
     });
 
-    return { success: true, message: 'Your message has been sent successfully!' };
+    if (userEmailResult.success && adminEmailResult.success) {
+        return { success: true, message: 'Your message has been sent successfully!' };
+    } else {
+        console.error("One or more emails failed to send.", { userEmailResult, adminEmailResult });
+        // We can still return success to the user as their main action (submitting the form) is complete.
+        // The email is a secondary notification.
+        return { success: true, message: 'Your message was submitted, but there was an issue with sending a confirmation email.' };
+    }
+
   } catch (error) {
     console.error('Failed to send email', error);
     return { success: false, message: 'There was an error sending your message. Please try again.' };
