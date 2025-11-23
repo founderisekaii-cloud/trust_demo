@@ -47,7 +47,7 @@ function Hero() {
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="py-16 md:py-20 bg-background">
+        <section className="py-8 md:py-10 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl md:text-4xl font-headline font-bold">{title}</h2>
                 <div className="mt-6 max-w-4xl mx-auto text-left">
