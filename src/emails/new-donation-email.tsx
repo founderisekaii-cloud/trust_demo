@@ -114,9 +114,9 @@ const hr = {
 };
 
 const button = {
-    backgroundColor: '#FF9800',
+    backgroundColor: '#3399cc',
     borderRadius: '5px',
-    color: '#000',
+    color: '#fff',
     fontSize: '16px',
     fontWeight: 'bold',
     textDecoration: 'none',

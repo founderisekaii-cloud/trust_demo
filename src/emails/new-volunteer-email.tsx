@@ -17,7 +17,6 @@ interface NewVolunteerEmailProps {
   email: string;
   skills: string;
   interests: string;
-  availability: string;
   inquiryType: 'volunteer' | 'partner';
 }
 
