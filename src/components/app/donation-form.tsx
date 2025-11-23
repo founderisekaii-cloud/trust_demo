@@ -32,7 +32,8 @@ const initialState = {
 
 export function DonationForm() {
   const { toast } = useToast();
-  const [state, formAction, isPending] = useActionState(createDonationOrder, initialState);
+  const [state, formAction] = useActionState(createDonationOrder, initialState);
+  const [isPending, startTransition] = useTransition();
   
   const form = useForm<DonationFormValues>({
     resolver: zodResolver(donationSchema),
@@ -44,7 +45,9 @@ export function DonationForm() {
   });
 
   function onSubmit(values: DonationFormValues) {
-    formAction(values);
+    startTransition(() => {
+      formAction(values);
+    });
   }
 
 
