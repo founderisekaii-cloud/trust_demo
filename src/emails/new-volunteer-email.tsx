@@ -45,11 +45,11 @@ const NewVolunteerEmail = ({ name, email, skills, interests, availability, sugge
           <Text style={label}>Email:</Text>
           <Text style={value}><Link href={`mailto:${email}`}>{email}</Link></Text>
           <Text style={label}>Skills:</Text>
-          <Text style={value}>{skills}</Text>
+          <Text style={value}>{skills || 'Not provided'}</Text>
           <Text style={label}>Interests & Motivations:</Text>
           <Text style={value}>{interests}</Text>
           <Text style={label}>Availability:</Text>
-          <Text style={value}>{availability}</Text>
+          <Text style={value}>{availability || 'Not provided'}</Text>
         </Section>
         
         {suggestions && suggestions.length > 0 && (
@@ -140,7 +140,7 @@ const projectSection = {
     padding: '12px',
     borderRadius: '4px',
     border: '1px solid #e9ecef',
-    margin: '12px 24px',
+    margin: '12px 0',
 };
 
 const projectTitle = {

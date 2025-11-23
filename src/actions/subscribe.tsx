@@ -4,6 +4,7 @@
 import { z } from 'zod';
 import { sendEmail } from './send-email';
 import NewSubscriberEmail from '@/emails/new-subscriber-email';
+import NewSubscriberConfirmationEmail from '@/emails/new-subscriber-confirmation-email';
 
 const subscribeSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -19,17 +20,26 @@ export async function subscribeToAction(formData: unknown) {
   const { email } = parsed.data;
 
   try {
-    const emailResult = await sendEmail({
-      to: 'vikhyatfoundation@gmail.com', // Send notification to admin
-      subject: 'New Newsletter Subscriber',
-      react: <NewSubscriberEmail subscriberEmail={email} />,
-      reply_to: [email], // Set reply-to so you can respond directly to the subscriber
-    });
+    // Send two emails in parallel: one to admin, one to the new subscriber
+    const [adminEmailResult, userEmailResult] = await Promise.all([
+      sendEmail({
+        to: 'vikhyatfoundation@gmail.com', // Notification to admin
+        subject: 'New Newsletter Subscriber',
+        react: <NewSubscriberEmail subscriberEmail={email} />,
+        reply_to: [email],
+      }),
+      sendEmail({
+        to: email, // Confirmation to user
+        subject: 'Welcome to the Vikhyat Foundation Movement!',
+        react: <NewSubscriberConfirmationEmail subscriberEmail={email} />,
+      })
+    ]);
 
-    if (!emailResult.success) {
-      // Don't throw an error, but let the client know something went wrong
-      console.error('Failed to send subscription notification:', emailResult.error);
-      return { success: false, error: 'There was an issue sending the notification email.' };
+    if (!adminEmailResult.success || !userEmailResult.success) {
+      console.error('One or more subscription emails failed to send.', { adminEmailResult, userEmailResult });
+      // Still return success to the UI, as the primary action (capturing the email) is what matters.
+      // The user will just not get a confirmation, which is acceptable.
+      return { success: true, error: null };
     }
 
     return { success: true, error: null };

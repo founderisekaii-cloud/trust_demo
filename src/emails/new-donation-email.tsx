@@ -52,7 +52,7 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
             We invite you to learn more about the impact of your gift and stay connected with our work by visiting our website.
         </Text>
         
-        <Button style={button} href="https://yourwebsite.com">
+        <Button style={button} href="https://www.vikhyatfoundation.com">
           Visit Our Website
         </Button>
         
@@ -105,7 +105,7 @@ const highlight = {
     ...paragraph,
     backgroundColor: '#e6f9ff',
     borderLeft: '4px solid #00b0f0',
-    padding: '16px 24px',
+    padding: '16px',
     margin: '16px 24px',
     fontWeight: 'bold',
 };
@@ -116,14 +116,15 @@ const hr = {
 };
 
 const button = {
-    backgroundColor: '#007bff',
-    borderRadius: '3px',
-    color: '#fff',
+    backgroundColor: '#FF9800',
+    borderRadius: '5px',
+    color: '#000',
     fontSize: '16px',
+    fontWeight: 'bold',
     textDecoration: 'none',
     textAlign: 'center' as const,
     display: 'block',
-    padding: '12px',
+    padding: '14px',
     margin: '16px auto',
     width: '200px',
 };

@@ -32,7 +32,7 @@ const NewContactInquiryEmail = ({ name, email, subject, message }: NewContactInq
 
         <Hr style={hr} />
 
-        <Section>
+        <Section style={{ padding: '0 24px' }}>
             <Text style={label}>From</Text>
             <Text style={submissionValue}>{name} ({email})</Text>
 
@@ -90,13 +90,13 @@ const label = {
     ...paragraph,
     fontWeight: 'bold',
     marginBottom: '4px',
-    padding: '0 24px',
+    padding: '0',
 };
 
 const submissionValue = {
     ...paragraph,
     backgroundColor: '#f8f9fa',
-    padding: '12px 24px',
+    padding: '12px',
     borderRadius: '4px',
     border: '1px solid #e9ecef',
     marginTop: '0',

@@ -7,40 +7,33 @@ import {
   Hr,
   Html,
   Preview,
-  Section,
   Text,
+  Button
 } from '@react-email/components';
 import * as React from 'react';
 
-interface ContactFormEmailProps {
-  name: string;
-  subject: string;
-  message: string;
+interface NewSubscriberConfirmationEmailProps {
+  subscriberEmail: string;
 }
 
-const ContactFormEmail = ({ name, subject, message }: ContactFormEmailProps) => (
+const NewSubscriberConfirmationEmail = ({ subscriberEmail }: NewSubscriberConfirmationEmailProps) => (
   <Html>
     <Head />
-    <Preview>We've received your message from the Vikhyat Foundation website.</Preview>
+    <Preview>Welcome to the Vikhyat Foundation!</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={heading}>Thank You for Contacting Us, {name}!</Heading>
+        <Heading style={heading}>Welcome to the Movement!</Heading>
         <Text style={paragraph}>
-          We have successfully received your message and appreciate you reaching out. Our team will review your inquiry and get back to you as soon as possible.
+          Thank you for subscribing to the Vikhyat Foundation newsletter. We're thrilled to have you with us.
         </Text>
         <Text style={paragraph}>
-          For your reference, here is a copy of your submission:
+          You'll now be among the first to hear about our latest initiatives, success stories, and opportunities to make a difference. We're excited to share our journey with you as we work towards a more just and equitable society.
         </Text>
-
-        <Hr style={hr} />
-
-        <Section style={{ padding: '0 24px' }}>
-            <Text style={label}>Subject</Text>
-            <Text style={submissionValue}>{subject}</Text>
-            <Text style={label}>Message</Text>
-            <Text style={submissionValue}>{message}</Text>
-        </Section>
         
+        <Button style={button} href="https://www.vikhyatfoundation.com">
+          Explore Our Work
+        </Button>
+
         <Hr style={hr} />
 
         <Text style={footer}>
@@ -53,7 +46,7 @@ const ContactFormEmail = ({ name, subject, message }: ContactFormEmailProps) => 
   </Html>
 );
 
-export default ContactFormEmail;
+export default NewSubscriberConfirmationEmail;
 
 const main = {
   backgroundColor: '#f6f9fc',
@@ -86,22 +79,18 @@ const paragraph = {
   color: '#495057',
 };
 
-const label = {
-    ...paragraph,
+const button = {
+    backgroundColor: '#FF9800',
+    borderRadius: '5px',
+    color: '#000',
+    fontSize: '16px',
     fontWeight: 'bold',
-    marginBottom: '4px',
-    padding: '0',
-};
-
-const submissionValue = {
-    ...paragraph,
-    backgroundColor: '#f8f9fa',
-    padding: '12px',
-    borderRadius: '4px',
-    border: '1px solid #e9ecef',
-    marginTop: '0',
-    whiteSpace: 'pre-wrap' as const,
-    wordWrap: 'break-word' as const,
+    textDecoration: 'none',
+    textAlign: 'center' as const,
+    display: 'block',
+    padding: '14px',
+    margin: '16px auto',
+    width: '200px',
 };
 
 const hr = {

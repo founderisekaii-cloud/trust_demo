@@ -44,11 +44,11 @@ const VolunteerApplicationEmail = ({ name, skills, interests, availability, sugg
 
         <Section style={section}>
           <Text style={label}>Your Skills:</Text>
-          <Text style={value}>{skills}</Text>
+          <Text style={value}>{skills || 'Not provided'}</Text>
           <Text style={label}>Your Interests & Motivations:</Text>
           <Text style={value}>{interests}</Text>
           <Text style={label}>Your Availability:</Text>
-          <Text style={value}>{availability}</Text>
+          <Text style={value}>{availability || 'Not provided'}</Text>
         </Section>
         
         {suggestions && suggestions.length > 0 && (
@@ -62,7 +62,7 @@ const VolunteerApplicationEmail = ({ name, skills, interests, availability, sugg
                         <Section key={proj.projectName} style={projectSection}>
                             <Text style={projectTitle}>{proj.projectName} ({Math.round(proj.relevanceScore * 100)}% Match)</Text>
                             <Text style={projectDescription}>{proj.projectDescription}</Text>
-                            <Button style={button} href={`https://yourwebsite.com/initiatives/${slug}`}>
+                            <Button style={button} href={`https://www.vikhyatfoundation.com/initiatives/${slug}`}>
                                 Learn More
                             </Button>
                         </Section>
@@ -147,7 +147,7 @@ const value = {
 
 const projectSection = {
     padding: '16px',
-    margin: '16px 24px',
+    margin: '16px 0',
     border: '1px solid #e9ecef',
     borderRadius: '4px',
 };
@@ -170,14 +170,15 @@ const hr = {
 };
 
 const button = {
-    backgroundColor: '#007bff',
-    borderRadius: '3px',
-    color: '#fff',
+    backgroundColor: '#FF9800',
+    borderRadius: '5px',
+    color: '#000',
     fontSize: '14px',
+    fontWeight: 'bold',
     textDecoration: 'none',
     textAlign: 'center' as const,
     display: 'inline-block',
-    padding: '8px 16px',
+    padding: '10px 18px',
 };
 
 const footer = {
