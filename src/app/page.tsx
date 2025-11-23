@@ -30,7 +30,7 @@ function Hero() {
         </h1>
         <p className="mt-2 text-lg md:text-xl text-neutral-100 drop-shadow-sm">Humanity at Heart, Progress in Action</p>
         <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-neutral-200 drop-shadow-sm">
-          MU/0001548/2024 F-0085513(GBR) CSR000005 80G/12A,AAETV6698MF20251 MH/2025/0850417
+          MU/0001548/2024 F-0085513(GBR) CSR000005 80G/12A : AAETV6698MF20251 MH/2025/0850417
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
