@@ -41,7 +41,7 @@ function Hero() {
             <Link href="/get-involved">Get Involved</Link>
           </Button>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/about-us">Well Wisher</Link>
+            <Link href="/#well-wishers">Well Wisher</Link>
           </Button>
         </div>
       </div>
@@ -73,7 +73,7 @@ function Mission() {
 
 function WellWishers() {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section id="well-wishers" className="py-16 md:py-24 bg-background scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Well Wishers</h2>
