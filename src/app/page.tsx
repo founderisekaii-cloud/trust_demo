@@ -29,7 +29,7 @@ function Hero() {
           Vikhyat Foundation
         </h1>
         <p className="mt-2 text-lg md:text-xl text-neutral-100 drop-shadow-sm">Humanity at Heart, Progress in Action</p>
-        <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-neutral-200 drop-shadow-sm">
+        <p className="mt-4 text-sm md:text-base text-neutral-200 drop-shadow-sm whitespace-nowrap">
           MU/0001548/2024 F-0085513(GBR) CSR000005 80G/12A : AAETV6698MF20251 MH/2025/0850417
         </p>
         <div className="mt-8 flex justify-center gap-4">
@@ -92,7 +92,8 @@ export default function Home() {
         To promote and carry on health care, relief of poverty, medical aid, skill-base education and training, helping the victims of natural calamities and environmental preservation.
       </Section>
       <Section title="Our Vision">
-        To establish and maintain welfare hostels, ashrams, dharmshalas, educational and skill training centers.
+        To establish and maintain welfare hostels, ashrams, dharmshalas, educational and skill
+training centers.
       </Section>
       <FinalCta />
     </main>
