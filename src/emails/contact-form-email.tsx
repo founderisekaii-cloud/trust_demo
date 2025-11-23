@@ -27,10 +27,10 @@ const ContactFormEmail = ({ name, subject, message }: ContactFormEmailProps) => 
         <Heading style={heading}>Thank You for Contacting Us, {name}!</Heading>
         <Text style={paragraph}>
           We have successfully received your message and appreciate you reaching out. Our team will review your inquiry and get back to you as soon as possible.
-        </t>
+        </Text>
         <Text style={paragraph}>
           For your reference, here is a copy of your submission:
-        </t>
+        </Text>
 
         <Hr style={hr} />
 
@@ -47,7 +47,7 @@ const ContactFormEmail = ({ name, subject, message }: ContactFormEmailProps) => 
           Sincerely,
           <br />
           The Vikhyat Foundation Team
-        </t>
+        </Text>
       </Container>
     </Body>
   </Html>

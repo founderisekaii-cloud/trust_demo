@@ -35,7 +35,7 @@ const NewVolunteerEmail = ({ name, email, skills, interests, availability, sugge
         <Heading style={heading}>New Volunteer Application</Heading>
         <Text style={paragraph}>
           A new volunteer application has been submitted through the website.
-        </t>
+        </Text>
 
         <Hr style={hr} />
 
@@ -70,7 +70,7 @@ const NewVolunteerEmail = ({ name, email, skills, interests, availability, sugge
 
         <Text style={footer}>
           This is an automated notification from the Vikhyat Foundation website.
-        </t>
+        </Text>
       </Container>
     </Body>
   </Html>

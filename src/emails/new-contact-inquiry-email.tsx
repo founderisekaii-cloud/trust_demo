@@ -28,7 +28,7 @@ const NewContactInquiryEmail = ({ name, email, subject, message }: NewContactInq
         <Heading style={heading}>New Inquiry Received</Heading>
         <Text style={paragraph}>
           A new message has been submitted through the website's contact form.
-        </t>
+        </Text>
 
         <Hr style={hr} />
 
@@ -47,7 +47,7 @@ const NewContactInquiryEmail = ({ name, email, subject, message }: NewContactInq
 
         <Text style={footer}>
           This is an automated notification from the Vikhyat Foundation website.
-        </t>
+        </Text>
       </Container>
     </Body>
   </Html>

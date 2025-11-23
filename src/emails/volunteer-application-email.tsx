@@ -35,10 +35,10 @@ const VolunteerApplicationEmail = ({ name, skills, interests, availability, sugg
         <Heading style={heading}>Thank You, {name}!</Heading>
         <Text style={paragraph}>
           We have received your volunteer application and are thrilled to see your interest in joining our mission. Our team will review your information and get in touch with you soon regarding the next steps.
-        </t>
+        </Text>
         <Text style={paragraph}>
           For your reference, here is a copy of your application:
-        </t>
+        </Text>
 
         <Hr style={hr} />
 
@@ -77,7 +77,7 @@ const VolunteerApplicationEmail = ({ name, skills, interests, availability, sugg
           Thank you again for your passion and commitment.
           <br />
           The Vikhyat Foundation Team
-        </t>
+        </Text>
       </Container>
     </Body>
   </Html>

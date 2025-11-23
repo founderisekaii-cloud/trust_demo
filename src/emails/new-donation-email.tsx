@@ -28,7 +28,7 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
         <Heading style={heading}>Thank You, {donorName}!</Heading>
         <Text style={paragraph}>
             We are incredibly grateful for your generous donation to the Vikhyat Foundation. Your support is vital to our mission and helps us continue our work in empowering communities and driving social change.
-        </t>
+        </Text>
         
         {amount && (
             <Text style={highlight}>
@@ -38,7 +38,7 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
 
         <Text style={paragraph}>
             Your belief in our cause fuels our commitment. Together, we are building a more just, equitable, and prosperous society.
-        </t>
+        </Text>
 
         {orderId && (
             <Text style={paragraph}>
@@ -50,7 +50,7 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
 
         <Text style={paragraph}>
             We invite you to learn more about the impact of your gift and stay connected with our work by visiting our website.
-        </t>
+        </Text>
         
         <Button style={button} href="https://yourwebsite.com">
           Visit Our Website
@@ -62,7 +62,7 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
           With heartfelt thanks,
           <br />
           The Vikhyat Foundation Team
-        </t>
+        </Text>
       </Container>
     </Body>
   </Html>
