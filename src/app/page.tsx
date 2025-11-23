@@ -1,13 +1,12 @@
 
 'use client';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { FOCUS_AREAS, TESTIMONIALS } from '@/lib/data';
+import { TESTIMONIALS } from '@/lib/data';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { ArrowRight, BookOpen, HeartHandshake, Landmark, Users, Sprout, BrainCircuit, Leaf, Award } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 

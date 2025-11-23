@@ -3,10 +3,9 @@
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { TESTIMONIALS } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
