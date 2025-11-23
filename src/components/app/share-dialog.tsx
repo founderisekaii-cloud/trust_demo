@@ -20,13 +20,7 @@ export function ShareDialog({ children }: { children: React.ReactNode }) {
   const [hasCopied, setHasCopied] = React.useState(false);
   const { toast } = useToast();
 
-  const [shareUrl, setShareUrl] = React.useState('');
-  React.useEffect(() => {
-    // Ensure window is defined (runs only on client)
-    if (typeof window !== 'undefined') {
-      setShareUrl(window.location.origin);
-    }
-  }, []);
+  const shareUrl = 'https://www.vikhyatfoundation.com';
 
   const getShareLink = (platform: string) => {
     const encodedUrl = encodeURIComponent(shareUrl);
