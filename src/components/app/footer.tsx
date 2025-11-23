@@ -68,10 +68,16 @@ export function Footer() {
               {SOCIAL_LINKS.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <Link key={social.label} href={social.href} className="text-muted-foreground hover:text-primary">
+                  <a 
+                    key={social.label} 
+                    href={social.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-muted-foreground hover:text-primary"
+                  >
                     <Icon className="h-6 w-6" />
                     <span className="sr-only">{social.label}</span>
-                  </Link>
+                  </a>
                 );
               })}
             </div>

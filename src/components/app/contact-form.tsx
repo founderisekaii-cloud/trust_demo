@@ -72,9 +72,11 @@ export function ContactForm() {
         });
         form.reset();
       } else {
+        // This case handles if at least one email failed, but we still want to inform the user.
+        // We prioritize telling the user we got their message, even if a confirmation fails.
         toast({
-          title: 'Message Sent!',
-          description: "Your message was submitted, but there was an issue sending a confirmation email. We'll get back to you shortly.",
+          title: 'Message Submitted!',
+          description: "We've received your inquiry and will get back to you shortly. There was an issue sending a confirmation email.",
         });
         form.reset();
       }
