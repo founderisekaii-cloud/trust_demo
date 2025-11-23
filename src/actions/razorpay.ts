@@ -22,7 +22,7 @@ export async function createDonationOrder(prevState: any, formData: unknown) {
 
   try {
     const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
       key_secret: process.env.RAZORPAY_KEY_SECRET!,
     });
 
@@ -42,7 +42,7 @@ export async function createDonationOrder(prevState: any, formData: unknown) {
       success: true,
       order: {
         ...order,
-        key: process.env.RAZORPAY_KEY_ID!,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         name,
         email,
       },
