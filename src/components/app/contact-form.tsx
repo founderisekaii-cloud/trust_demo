@@ -52,7 +52,6 @@ async function submitContactForm(data: ContactFormValues): Promise<{ success: bo
     if (userEmailResult.success && adminEmailResult.success) {
         return { success: true, message: 'Your message has been sent successfully!' };
     } else {
-        console.error("One or more emails failed to send.", { userEmailResult, adminEmailResult });
         // We can still return success to the user as their main action (submitting the form) is complete.
         // The email is a secondary notification.
         return { success: true, message: 'Your message was submitted, but there was an issue with sending a confirmation email.' };
