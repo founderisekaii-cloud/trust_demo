@@ -4,6 +4,8 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { TESTIMONIALS } from '@/lib/data';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -43,25 +45,19 @@ function Hero() {
   );
 }
 
-function Mission() {
-  return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Purpose, Mission & Vision</h2>
-        <div className="mt-6 max-w-4xl mx-auto text-left space-y-6">
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            At the heart of the Vikhyat Foundation lies a profound and multifaceted purpose: to be a catalyst for holistic development across society. Our core objective is to drive meaningful progress in the educational, social, cultural, religious, health, and sports sectors. We believe that a thriving community is one where every individual has the opportunity to flourish in all aspects of life. This foundational purpose guides every initiative we undertake, ensuring that our efforts are always directed towards creating a more equitable, knowledgeable, and vibrant world for all. We are committed to nurturing talent, preserving culture, promoting well-being, and fostering a spirit of unity and progress.
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            To empower vulnerable communities in underprivileged, remote and ultra-remote areas across India by providing quality education, skill development training and development opportunities, compassionate care for the elderly and inclusive support to marginalized communities so that they can break the cycle of poverty and lead self-reliant, meaningful lives. Also in unserved areas, we provide medical assistance, awareness, camps and access to essential health services so that their families can lead healthy and safe lives.
-          </p>
-           <p className="text-lg text-muted-foreground leading-relaxed">
-            Our vision is to build the infrastructure of compassion and opportunity. We aim to establish and maintain a network of institutions that serve as pillars of support for the community. This includes creating welfare hostels that provide safe and nurturing homes for the vulnerable, ashrams and dharmshalas that offer spiritual solace and shelter, and state-of-the-art educational and skill training centers that serve as hubs of innovation and learning. Through these establishments, we envision a future where every person, regardless of their background, has access to the resources they need to reach their full potential. Our vision is not just about building structures, but about creating enduring ecosystems of support, empowerment, and holistic development that will benefit generations to come.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
+function Section({ title, children }: { title: string, children: React.ReactNode }) {
+    return (
+        <section className="py-16 md:py-20 bg-background">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 className="text-3xl md:text-4xl font-headline font-bold">{title}</h2>
+                <div className="mt-6 max-w-4xl mx-auto text-left">
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                        {children}
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 function FinalCta() {
@@ -89,7 +85,15 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Mission />
+      <Section title="Our Purpose">
+        The purpose of Vikhyat Foundation is educational, social, cultural, religious, health and sports development.
+      </Section>
+      <Section title="Our Mission">
+        To promote and carry on health care, relief of poverty, medical aid, skill-base education and training, helping the victims of natural calamities and environmental preservation.
+      </Section>
+      <Section title="Our Vision">
+        To establish and maintain welfare hostels, ashrams, dharmshalas, educational and skill training centers.
+      </Section>
       <FinalCta />
     </main>
   );
