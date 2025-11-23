@@ -30,7 +30,7 @@ async function submitContactForm(data: ContactFormValues): Promise<{ success: bo
     const userEmailResult = await sendEmail({
       to: data.email,
       subject: "We've Received Your Message | Vikhyat Foundation",
-      react: ContactFormEmail({
+      react: React.createElement(ContactFormEmail, {
         name: data.name,
         subject: data.subject,
         message: data.message,
@@ -41,7 +41,7 @@ async function submitContactForm(data: ContactFormValues): Promise<{ success: bo
     const adminEmailResult = await sendEmail({
       to: 'vikhyatfoundation@gmail.com',
       subject: `New Inquiry: ${data.subject}`,
-      react: NewContactInquiryEmail({
+      react: React.createElement(NewContactInquiryEmail, {
         name: data.name,
         email: data.email,
         subject: data.subject,

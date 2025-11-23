@@ -56,7 +56,7 @@ export function VolunteerForm() {
       await sendEmail({
         to: formData.email,
         subject: "We've Received Your Volunteer Application | Vikhyat Foundation",
-        react: VolunteerApplicationEmail({
+        react: React.createElement(VolunteerApplicationEmail, {
           name: formData.name,
           skills: formData.skills,
           interests: formData.interests,
@@ -68,7 +68,7 @@ export function VolunteerForm() {
       await sendEmail({
         to: 'vikhyatfoundation@gmail.com',
         subject: `New Volunteer Application: ${formData.name}`,
-        react: NewVolunteerEmail({
+        react: React.createElement(NewVolunteerEmail, {
           name: formData.name,
           email: formData.email,
           skills: formData.skills,
