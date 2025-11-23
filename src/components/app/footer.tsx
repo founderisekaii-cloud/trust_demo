@@ -2,7 +2,6 @@
 'use client';
 
 import Link from 'next/link';
-import { HandHeart } from 'lucide-react';
 import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
@@ -29,12 +28,8 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 text-2xl font-headline font-bold">
-              <Logo className="h-10 w-10 text-primary" />
-              <div className="flex flex-col">
-                <span>Vikhyat Foundation</span>
-                <span className="text-xs font-normal text-muted-foreground mt-1">Humanity at Heart, Progress in Action</span>
-              </div>
+            <Link href="/" className="flex items-center">
+              <Logo className="h-20 w-auto" />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Empowering communities, driving social change, and building a better future together.

@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { HandHeart, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { NAV_LINKS } from '@/lib/data';
@@ -18,14 +18,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
-          <Logo className="h-10 w-10 text-primary" />
-          <div className="flex flex-col">
-            <Link href="/" className="text-xl font-bold font-headline">
-              <span>Vikhyat Foundation</span>
+        <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-2">
+                <Logo className="h-16 w-auto" />
             </Link>
-            <p className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</p>
-          </div>
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
@@ -60,9 +56,8 @@ export function Header() {
             <SheetContent side="left" className="w-full max-w-xs">
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between border-b pb-4">
-                  <Link href="/" className="flex items-center gap-2 text-lg font-bold font-headline" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Logo className="h-7 w-7 text-primary" />
-                    <span>Vikhyat Foundation</span>
+                  <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Logo className="h-16 w-auto" />
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
                     <X className="h-6 w-6" />
