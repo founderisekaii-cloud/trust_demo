@@ -1,16 +1,18 @@
 
 'use client';
-import { VolunteerForm } from '@/components/app/volunteer-form';
+import { GetInvolvedForm } from '@/components/app/get-involved-form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GET_INVOLVED_OPTIONS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { PageHero } from '@/components/app/page-hero';
 import { DonationForm } from '@/components/app/donation-form';
+import { ShareDialog } from '@/components/app/share-dialog';
+import * as React from 'react';
 
 
 export default function GetInvolvedPage() {
-  const getInvolvedCards = GET_INVOLVED_OPTIONS.filter(option => option.title !== 'Donate');
+  const getInvolvedCards = GET_INVOLVED_OPTIONS.filter(option => option.title !== 'Donate' && option.title !== 'Partnerships');
 
   return (
     <div>
@@ -29,6 +31,7 @@ export default function GetInvolvedPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {getInvolvedCards.map((option) => {
               const Icon = option.icon;
+              const isShare = option.title === 'Spread the Word';
               return (
                 <Card key={option.title} className="flex flex-col text-center items-center">
                   <CardHeader>
@@ -41,9 +44,15 @@ export default function GetInvolvedPage() {
                     <p className="text-muted-foreground">{option.description}</p>
                   </CardContent>
                   <div className="p-6 pt-0">
-                    <Button asChild variant="default" className="w-full">
-                      <Link href={option.link}>{option.cta}</Link>
-                    </Button>
+                    {isShare ? (
+                         <ShareDialog>
+                            <Button variant="default" className="w-full">{option.cta}</Button>
+                        </ShareDialog>
+                    ) : (
+                        <Button asChild variant="default" className="w-full">
+                            <Link href={option.link}>{option.cta}</Link>
+                        </Button>
+                    )}
                   </div>
                 </Card>
               );
@@ -52,10 +61,10 @@ export default function GetInvolvedPage() {
         </div>
       </section>
 
-      <section id="volunteer-form" className="py-16 md:py-24 bg-secondary scroll-mt-20">
+      <section id="get-involved-form" className="py-16 md:py-24 bg-secondary scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <VolunteerForm />
+            <GetInvolvedForm />
           </div>
         </div>
       </section>

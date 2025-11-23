@@ -1,4 +1,4 @@
-import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter } from 'lucide-react';
+import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter, Linkedin, Share2 } from 'lucide-react';
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -249,8 +249,8 @@ export const GET_INVOLVED_OPTIONS = [
         icon: Handshake,
         title: "Volunteer",
         description: "Join our team of passionate volunteers and make a hands-on difference. Find an opportunity that matches your skills and passion.",
-        link: "#volunteer-form",
-        cta: "Find Opportunities"
+        link: "#get-involved-form",
+        cta: "Apply Now"
     },
     {
         icon: HeartHandshake,
@@ -266,14 +266,7 @@ export const GET_INVOLVED_OPTIONS = [
         link: "#",
         cta: "Share Our Mission"
     },
-    {
-        icon: Scale,
-        title: "Partnerships",
-        description: "We collaborate with corporations, non-profits, and community groups to amplify our impact. Let's work together for a better future.",
-        link: "/contact",
-        cta: "Become a Partner"
-    }
-]
+];
 
 export const CONTACT_METHODS = [
     {
@@ -297,5 +290,13 @@ export const SOCIAL_LINKS = [
   { icon: Facebook, href: CONTACT_INFO.socials.facebook, label: 'Facebook' },
   { icon: Twitter, href: CONTACT_INFO.socials.twitter, label: 'Twitter' },
   { icon: Instagram, href: CONTACT_INFO.socials.instagram, label: 'Instagram' },
+  { icon: Linkedin, href: '#', label: 'LinkedIn'},
   { icon: MessageCircle, href: CONTACT_INFO.socials.whatsapp, label: 'WhatsApp'},
+];
+
+export const SHARE_PLATFORMS = [
+    { name: 'Facebook', icon: Facebook, color: 'bg-[#1877F2]' },
+    { name: 'Twitter', icon: Twitter, color: 'bg-[#1DA1F2]' },
+    { name: 'LinkedIn', icon: Linkedin, color: 'bg-[#0A66C2]' },
+    { name: 'WhatsApp', icon: MessageCircle, color: 'bg-[#25D366]' },
 ];
