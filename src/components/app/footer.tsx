@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -24,7 +23,7 @@ export function Footer() {
       if (result.success) {
         toast({
           title: 'Success!',
-          description: "Thank you for joining our movement! We've received your subscription.",
+          description: "Thank you for joining our movement! We've sent you a confirmation email.",
         });
         setEmail('');
       } else {

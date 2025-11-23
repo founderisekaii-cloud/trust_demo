@@ -1,4 +1,3 @@
-
 import {
   Body,
   Container,
@@ -8,8 +7,7 @@ import {
   Html,
   Preview,
   Text,
-  Link,
-  Button
+  Button,
 } from '@react-email/components';
 import * as React from 'react';
 
@@ -70,10 +68,10 @@ const NewDonationEmail = ({ donorName = "A generous donor", amount, orderId }: N
 
 export default NewDonationEmail;
 
+// Styles
 const main = {
   backgroundColor: '#f6f9fc',
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
 };
 
 const container = {
