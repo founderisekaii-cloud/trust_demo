@@ -19,12 +19,21 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/">
+              <div className="flex items-center gap-2">
                 <Logo className="h-16 w-auto" />
                 <div className="flex flex-col">
                     <span className="font-headline text-xl font-bold">Vikhyat Foundation</span>
                     <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+                    <div className="mt-1 text-xs text-neutral-500 whitespace-nowrap">
+                        <span className="mx-1">MU/0001548/2024</span>
+                        <span className="mx-1">F-0085513(GBR)</span>
+                        <span className="mx-1">CSR000005</span>
+                        <span className="mx-1">80G/12A : AAETV6698MF20251</span>
+                        <span className="mx-1">MH/2025/0850417</span>
+                    </div>
                 </div>
+              </div>
             </Link>
         </div>
         
@@ -60,11 +69,13 @@ export function Header() {
             <SheetContent side="left" className="w-full max-w-xs">
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between border-b pb-4">
-                  <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Logo className="h-16 w-auto" />
-                     <div className="flex flex-col">
-                        <span className="font-headline text-lg font-bold">Vikhyat Foundation</span>
-                        <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                    <div className="flex items-center gap-2">
+                        <Logo className="h-16 w-auto" />
+                        <div className="flex flex-col">
+                            <span className="font-headline text-lg font-bold">Vikhyat Foundation</span>
+                            <span className="text-xs text-muted-foreground">Humanity at Heart, Progress in Action</span>
+                        </div>
                     </div>
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
