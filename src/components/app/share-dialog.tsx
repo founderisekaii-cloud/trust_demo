@@ -75,7 +75,7 @@ export function ShareDialog({ children }: { children: React.ReactNode }) {
                             rel="noopener noreferrer"
                             className="w-full"
                         >
-                            <Button variant="outline" className={`w-full text-white hover:opacity-90 ${platform.color} hover:bg-inherit`}>
+                            <Button variant="outline" className="w-full">
                                 <Icon className="mr-2 h-4 w-4" />
                                 {platform.name}
                             </Button>

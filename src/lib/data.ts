@@ -1,3 +1,4 @@
+
 import { BookOpen, HeartHandshake, Landmark, Megaphone, Microscope, Scale, Users, Handshake, Mail, MapPin, Phone, Award, BrainCircuit, Leaf, Sprout, Instagram, MessageCircle, Facebook, Twitter, Linkedin, Share2 } from 'lucide-react';
 
 export const NAV_LINKS = [
@@ -260,7 +261,7 @@ export const GET_INVOLVED_OPTIONS = [
         cta: "Donate Now"
     },
     {
-        icon: Megaphone,
+        icon: Share2,
         title: "Spread the Word",
         description: "Be an ambassador for our cause. Share our story on social media, talk to your friends and family, and help us grow our movement.",
         link: "#",
