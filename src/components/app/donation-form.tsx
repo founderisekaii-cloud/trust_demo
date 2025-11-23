@@ -1,7 +1,8 @@
 
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -31,7 +32,7 @@ function SubmitButton() {
 
 export function DonationForm() {
   const { toast } = useToast();
-  const [state, formAction] = useFormState(createDonationOrder, initialState);
+  const [state, formAction] = useActionState(createDonationOrder, initialState);
 
   useEffect(() => {
     if (state.success && state.order) {
