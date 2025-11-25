@@ -29,12 +29,18 @@ const OurStory = () => {
             )}
             <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Story & Chairperson</h2>
             <div className="mt-6 text-lg text-muted-foreground space-y-4">
-              <p className="font-semibold text-foreground">Shakuntala Raghunath Lokhande (Chairperson)</p>
+              <p className="font-semibold text-foreground">Shakuntala Raghunath Lokhande (Chaireperson)</p>
               <p>
-                This renowned foundation was born from a simple yet powerful idea. But since then, real, lasting change has been possible, made possible by a community deeply rooted in commitment. We saw untapped potential, unheard voices, and unmet needs in the population, and we were motivated to take action. Our journey began not with a grand act, but with a focused local initiative. This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take responsibility for their own development.
+                This renowned foundation was born from a simple yet powerful idea. But since then, real, lasting change has been possible, made possible by a community deeply rooted in commitment. We saw untapped potential, unheard voices, and unmet needs in the population, and we were motivated to take action. Our journey began not with a grand act, but with a focused local initiative. This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take responsibility for
+their own development.
               </p>
               <p>
-                Today, the renowned foundation has grown from that single seed of an idea to a powerful force for good, supporting causes such as education, healthcare, environmental sustainability, and policy advocacy. Yet, our core philosophy remains unchanged. Listen with compassion, empower with dignity, and act with determination. Our journey is living proof of the extraordinary power that emerges when people come together with a shared purpose and an unwavering belief in a better tomorrow.
+                Today, the renowned foundation has grown from that single seed of an idea to a powerful force for
+good, supporting causes such as education, healthcare, environmental sustainability, and policy
+advocacy. Yet, our core philosophy remains unchanged. Listen with compassion, empower with
+dignity, and act with determination. Our journey is living proof of the extraordinary power that
+emerges when people come together with a shared purpose and an unwavering belief in a better
+tomorrow.
               </p>
             </div>
         </div>
@@ -98,7 +104,7 @@ const BestWishers = () => {
                   <div className="mt-4 flex items-center gap-3">
                     {image && (
                       <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                        <Image src={image.imageUrl} alt={testimonial.name} width={48} height={48} className="object-cover" data-ai-hint={image.imageHint} />
+                        <Image src={image.imageUrl} alt={testimonial.name} width={48} height={48} className="object-cover" style={{ height: 'auto' }} data-ai-hint={image.imageHint} />
                       </div>
                     )}
                     <div>

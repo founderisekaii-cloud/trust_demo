@@ -81,7 +81,7 @@ function BestWishers() {
                   <div className="mt-4 flex items-center gap-3">
                     {image && (
                       <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                        <Image src={image.imageUrl} alt={testimonial.name} width={48} height={48} className="object-cover" data-ai-hint={image.imageHint} />
+                        <Image src={image.imageUrl} alt={testimonial.name} width={48} height={48} className="object-cover" style={{ height: 'auto' }} data-ai-hint={image.imageHint} />
                       </div>
                     )}
                     <div>
