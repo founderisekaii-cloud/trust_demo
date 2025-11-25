@@ -25,12 +25,12 @@ const activities = [
     {
         heading: "Women Empowerment",
         description: "Our office bearers are guiding to create awareness about women empowerment and menstrual hygiene.",
-        image: { src: "/images/activity4.jpg", alt: "Women empowerment and menstrual hygiene awareness session." }
+        image: { src: "/images/activity5.jpg", alt: "Women empowerment and menstrual hygiene awareness session." }
     },
     {
         heading: "Public Awareness",
         description: "Our representatives guide the people of the slums towards collective development, cleanliness drive, education and adult education self-reliance.",
-        image: { src: "/images/activity5.jpg", alt: "Public awareness session in a slum area." }
+        image: { src: "/images/activity4.jpg", alt: "Public awareness session in a slum area." }
     }
 ];
 
