@@ -37,7 +37,7 @@ const activities = [
 export default function OurActivityPage() {
     return (
         <div>
-            <PageHero title="OUR ACTIVITIES" subtitle="See Our Work in Action" />
+            <PageHero title="Vikhyat Foundation" subtitle="Humanity at Heart, Progress in Action" />
             <section className="py-16 md:py-24 bg-background">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                     {activities.map((activity, index) => (
