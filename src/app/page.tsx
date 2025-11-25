@@ -64,6 +64,45 @@ function Section({ title, children }: { title: string, children: React.ReactNode
     );
 }
 
+function BestWishers() {
+  return (
+    <section id="best-wishers" className="py-16 md:py-24 bg-secondary scroll-mt-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Best Wishers</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+            Words of encouragement and support from leaders and partners who believe in our vision.
+          </p>
+        </div>
+        <div className="mt-12 max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((testimonial) => {
+            const image = findImage(testimonial.imageUrl);
+            return (
+              <Card key={testimonial.id}>
+                <CardContent className="p-6">
+                  <blockquote className="italic text-muted-foreground">"{testimonial.quote}"</blockquote>
+                  <div className="mt-4 flex items-center gap-3">
+                    {image && (
+                      <div className="relative w-12 h-12 rounded-full overflow-hidden">
+                        <Image src={image.imageUrl} alt={testimonial.name} fill className="object-cover" data-ai-hint={image.imageHint} />
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                      <p className="text-sm text-primary">{testimonial.title}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
 function FinalCta() {
     return (
         <section className="py-16 md:py-24 bg-primary text-primary-foreground">
@@ -99,7 +138,9 @@ export default function Home() {
         To establish and maintain welfare hostels, ashrams, dharmshalas, educational and skill
 training centers.
       </Section>
+      <BestWishers />
       <FinalCta />
     </main>
   );
 }
+
