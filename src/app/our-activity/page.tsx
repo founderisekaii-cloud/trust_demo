@@ -10,27 +10,27 @@ const activities = [
         description: "Some of the officials of the \"Vikhyat foundation\" guiding college students in Pune.",
         subheading: "Topics",
         subdescription: "Students and our officials interacted with each other on topics such as overall development of students, interest in education, career guidance, skills-based occupations, job opportunities in various sectors, environmental balance, importance of water, etc.",
-        image: { src: "/image/activity1.jpg", alt: "Vikhyat Foundation official guiding college students in Pune." }
+        image: { src: "/images/activity1.jpg", alt: "Vikhyat Foundation official guiding college students in Pune." }
     },
     {
         heading: "Welfare Activity",
         description: "Representatives of our board while informing the families of workers in mining-affected areas about various developmental and welfare projects.",
-        image: { src: "/image/activity2.jpg", alt: "Informing families in mining-affected areas about welfare projects." }
+        image: { src: "/images/activity2.jpg", alt: "Informing families in mining-affected areas about welfare projects." }
     },
     {
         heading: "Women's Self-Help Group",
         description: "Our board office bearers guiding the various schemes and activities of the women's self-help group.",
-        image: { src: "/image/activity3.jpg", alt: "Guiding a women's self-help group." }
+        image: { src: "/images/activity3.jpg", alt: "Guiding a women's self-help group." }
     },
     {
         heading: "Women Empowerment",
         description: "Our office bearers are guiding to create awareness about women empowerment and menstrual hygiene.",
-        image: { src: "/image/activity4.jpg", alt: "Women empowerment and menstrual hygiene awareness session." }
+        image: { src: "/images/activity4.jpg", alt: "Women empowerment and menstrual hygiene awareness session." }
     },
     {
         heading: "Public Awareness",
         description: "Our representatives guide the people of the slums towards collective development, cleanliness drive, education and adult education self-reliance.",
-        image: { src: "/image/activity5.jpg", alt: "Public awareness session in a slum area." }
+        image: { src: "/images/activity5.jpg", alt: "Public awareness session in a slum area." }
     }
 ];
 

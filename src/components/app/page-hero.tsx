@@ -1,26 +1,19 @@
 
 'use client';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
-const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
-
 export function PageHero({ title, subtitle }: { title: string, subtitle: string }) {
-  const heroImage = findImage('hero-1');
   return (
     <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-white">
-      {heroImage && 
-        <Image
-          src={heroImage.imageUrl}
-          alt={heroImage.description}
-          fill
-          className="object-cover"
-          priority
-          data-ai-hint={heroImage.imageHint}
-        />
-      }
+      <Image
+        src="/images/background.jpg"
+        alt="Vikhyat Foundation background"
+        fill
+        className="object-cover"
+        priority
+      />
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative text-center p-4">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold drop-shadow-md">
