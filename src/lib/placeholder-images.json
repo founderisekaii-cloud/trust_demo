@@ -69,37 +69,37 @@
     {
       "id": "testimonial-1",
       "description": "Portrait of a smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1542596594-649edbc13630?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher1.jpg",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-2",
       "description": "Portrait of another smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher2.jpg",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-3",
       "description": "Portrait of a third smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1554727242-741c14fa561c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2Mzg5MjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher3.jpg",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-4",
       "description": "Portrait of a fourth smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8d29tYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MzY1MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher4.jpg",
       "imageHint": "woman portrait"
     },
     {
       "id": "testimonial-5",
       "description": "Portrait of a fifth smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MDkyNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher5.jpg",
       "imageHint": "man portrait"
     },
     {
       "id": "testimonial-6",
       "description": "Portrait of a sixth smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjM4MDkyNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/well_wisher6.jpg",
       "imageHint": "man portrait"
     },
     {

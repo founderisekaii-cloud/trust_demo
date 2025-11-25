@@ -173,44 +173,44 @@ export const NEWS_ARTICLES = [
 export const TESTIMONIALS = [
   {
     id: 1,
-    name: 'Aarav Sharma',
-    title: 'Well Wisher',
-    quote: "The dedication of Vikhyat Foundation is truly inspiring. Their work in education and community health is creating a tangible, positive impact that promises a brighter future for so many. I am proud to support their noble mission.",
+    name: 'Mr. Sachin Sukhadev Khandekar',
+    title: 'Politian',
+    quote: "The Vikhyat Foundation is a social organization that is currently working towards the comprehensive development and rehabilitation of people in remote and ultra-remote areas. My warmest wishes for this work of the renowned foundation and its future endeavors.",
     imageUrl: 'testimonial-1'
   },
   {
     id: 2,
-    name: 'Priya Mehta',
-    title: 'Well Wisher',
-    quote: "Seeing the foundation's commitment to empowering women and protecting the environment gives me immense hope. They are not just providing aid; they are building a sustainable and equitable world for generations to come.",
+    name: 'Mr. Lokesh Ullhas Patil',
+    title: 'Businessman',
+    quote: 'The need of the hour today is IT Skills along with education. I wish the “Vikhayt Foundation” to all the best for this initiative of going to the localities and educating the college students there about the importance of IT Skills and also providing them with training.',
     imageUrl: 'testimonial-2'
   },
   {
     id: 3,
-    name: 'Rohan Gupta',
+    name: 'Dr. Pradnya G. Bengale',
     title: 'Well Wisher',
-    quote: "Vikhyat Foundation's holistic approach to rural development and healthcare is transformative. Their ability to mobilize communities and create lasting change is a testament to their exceptional leadership and vision.",
+    quote: 'The Vikhyat Foundation is doing work that befits the phrase "Human service is true wealth". Today, it is very important to create public awareness among the people about health problems and their solutions. Thank you, Vikhyat Foundation',
     imageUrl: 'testimonial-3'
   },
   {
     id: 4,
-    name: 'Anjali Desai',
-    title: 'Well Wisher',
-    quote: "The focus on skill development has opened up so many new opportunities for the youth in our area. Vikhyat Foundation is truly building a foundation for a prosperous future.",
+    name: 'Sangeeta Sawant',
+    title: 'Lawyer',
+    quote: 'The government has created many schemes for the benefit of the people. I appreciate the fact that some of these schemes are being brought to the people through the “Vikhyat Foundation”. Best wishes for the future.',
     imageUrl: 'testimonial-4'
   },
   {
     id: 5,
-    name: 'Vikram Singh',
-    title: 'Well Wisher',
-    quote: "I am continually impressed by the transparency and efficiency of their operations. Every contribution is maximized for impact, and their dedication is clear in everything they do.",
+    name: 'Anushka G. Ghag',
+    title: 'Business Women',
+    quote: 'The “Vikhyat Foundation” is undertaking many initiatives under the concept of "Skill Development", which is benefiting the younger generation. The aim of creating a skilled new generation is truly commendable.',
     imageUrl: 'testimonial-5'
   },
   {
     id: 6,
-    name: 'Saanvi Iyer',
-    title: 'Well Wisher',
-    quote: "Their cultural and religious activities bring our community together, fostering a sense of unity and shared heritage that is invaluable. It's more than social work; it's community building at its finest.",
+    name: 'Shivani Thorat',
+    title: 'Actress',
+    quote: 'I thank the "Vikhyat Foundation" for its important work of preserving cultural heritage along with social service and organizing to various programs to promote talent.',
     imageUrl: 'testimonial-6'
   },
 ];
