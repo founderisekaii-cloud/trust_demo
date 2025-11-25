@@ -33,7 +33,7 @@ export function PageHero({ title, subtitle }: { title: string, subtitle: string 
             <Link href="/our-activity">Our Activity</Link>
           </Button>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/about-us#best-wishers">Well Wisher</Link>
+            <Link href="/what-we-do">What We Do</Link>
           </Button>
         </div>
       </div>

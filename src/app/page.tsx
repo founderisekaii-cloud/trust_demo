@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TESTIMONIALS } from '@/lib/data';
+import { ArrowRight } from 'lucide-react';
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -38,7 +39,7 @@ function Hero() {
             <Link href="/our-activity">Our Activity</Link>
           </Button>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/about-us#best-wishers">Well Wisher</Link>
+            <Link href="/what-we-do">What We Do</Link>
           </Button>
         </div>
       </div>
@@ -61,38 +62,22 @@ function Section({ title, children }: { title: string, children: React.ReactNode
     );
 }
 
-function BestWishers() {
+function BestWishersCta() {
   return (
-    <section id="best-wishers" className="py-16 md:py-24 bg-secondary scroll-mt-20">
+    <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">From Our Best Wishers</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Words of encouragement and support from leaders and partners who believe in our vision.
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-headline font-bold">Endorsed by Leaders, Powered by Community</h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Our vision is shared and supported by respected politians, business leaders, and community advocates. Read their words of encouragement and discover why they stand with us.
           </p>
-        </div>
-        <div className="mt-12 max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((testimonial) => {
-            const image = findImage(testimonial.imageUrl);
-            return (
-              <Card key={testimonial.id}>
-                <CardContent className="p-6">
-                  <blockquote className="italic text-muted-foreground">"{testimonial.quote}"</blockquote>
-                  <div className="mt-4 flex items-center gap-3">
-                    {image && (
-                      <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                        <Image src={image.imageUrl} alt={testimonial.name} width={48} height={48} className="object-cover w-full" data-ai-hint={image.imageHint} />
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-primary">{testimonial.title}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+          <div className="mt-8">
+            <Button asChild size="lg">
+              <Link href="/about-us#best-wishers">
+                See Our Supporters <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -135,7 +120,7 @@ export default function Home() {
         To establish and maintain welfare hostels, ashrams, dharmshalas, educational and skill
 training centers.
       </Section>
-      <BestWishers />
+      <BestWishersCta />
       <FinalCta />
     </main>
   );
