@@ -11,7 +11,7 @@ const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 function Hero() {
   return (
-    <section className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center text-white">
+    <section className="relative h-[40vh] md:h-[50vh] w-full flex items-center justify-center text-white">
       <Image
         src="/images/background.jpg"
         alt="Vikhyat Foundation background"
