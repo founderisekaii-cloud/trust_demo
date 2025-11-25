@@ -79,15 +79,15 @@ export function ShareDialog({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="relative">
-                <Input value={shareUrl} readOnly className="pr-12" />
+                <Input value={shareUrl} readOnly className="pr-12" aria-label="Shareable link" />
                 <Button 
                     size="icon" 
                     variant="ghost" 
                     className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8"
                     onClick={handleCopy}
+                    aria-label="Copy link"
                 >
                     {hasCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-                    <span className="sr-only">Copy link</span>
                 </Button>
             </div>
         </div>
