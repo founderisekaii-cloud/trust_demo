@@ -165,6 +165,7 @@ export function DonationForm() {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Email Address</FormLabel>
+
                                     <FormControl>
                                         <Input type="email" placeholder="Enter your email" {...field} />
                                     </FormControl>
@@ -194,10 +195,8 @@ export function DonationForm() {
             </CardContent>
         </Card>
         <DialogContent>
-            <DialogHeader>
-                <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
-                <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
-            </DialogHeader>
+            <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
+            <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
         </DialogContent>
     </Dialog>
   );
