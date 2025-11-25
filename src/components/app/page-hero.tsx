@@ -11,6 +11,7 @@ export function PageHero({ title, subtitle }: { title: string, subtitle: string 
         src="/images/background.jpg"
         alt="Vikhyat Foundation background"
         fill
+        sizes="100vw"
         className="object-cover"
         priority
       />

@@ -70,6 +70,7 @@ export default function NewsArticlePage({ params }: Props) {
                 src={image.imageUrl}
                 alt={article.title}
                 fill
+                sizes="100vw"
                 className="object-cover"
                 priority
                 data-ai-hint={image.imageHint}

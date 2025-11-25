@@ -61,6 +61,7 @@ export default function InitiativeDetailPage({ params }: Props) {
                                 src={image.imageUrl}
                                 alt={initiative.title}
                                 fill
+                                sizes="100vw"
                                 className="object-cover"
                                 data-ai-hint={image.imageHint}
                                 />
