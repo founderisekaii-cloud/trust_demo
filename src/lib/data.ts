@@ -180,8 +180,8 @@ export const TESTIMONIALS = [
   },
   {
     id: 2,
-    name: 'Mr. Lokesh Ullhas Patil',
-    title: 'Businessman',
+    name: 'Mr. Lokesh Ulhas Patil',
+    title: 'Politician',
     quote: 'The need of the hour today is IT Skills along with education. I wish the “Vikhayt Foundation” to all the best for this initiative of going to the localities and educating the college students there about the importance of IT Skills and also providing them with training.',
     imageUrl: 'testimonial-2'
   },

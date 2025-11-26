@@ -29,7 +29,7 @@ const OurStory = () => {
             )}
             <h2 className="text-3xl md:text-4xl font-headline font-bold">Our Story & Chairperson</h2>
             <div className="mt-6 text-lg text-muted-foreground space-y-4">
-              <p className="font-semibold text-foreground">Shakuntala Raghunath Lokhande (Chaireperson)</p>
+              <p className="font-semibold text-foreground">Shakuntala Raghunath Lokhande (chairperson)</p>
               <p>
                 This renowned foundation was born from a simple yet powerful idea. But since then, real, lasting change has been possible, made possible by a community deeply rooted in commitment. We saw untapped potential, unheard voices, and unmet needs in the population, and we were motivated to take action. Our journey began not with a grand act, but with a focused local initiative. This process of deep listening became the cornerstone of our philosophy. Rather than imposing solutions, we worked to empower residents, providing them with the tools, resources, and platform to take responsibility for
 their own development.
