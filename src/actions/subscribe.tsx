@@ -1,4 +1,4 @@
-'use server';
+'use client';
 
 import { z } from 'zod';
 import { sendEmail } from './send-email';
@@ -41,26 +41,21 @@ export async function subscribeToAction(formData: unknown) {
   const { email } = parsed.data;
 
   try {
-    // Send two emails in parallel: one to admin, one to the new subscriber
-    const [adminEmailResult, userEmailResult] = await Promise.all([
-      sendEmail({
+    // In a static export, this will log to the browser console.
+    console.log("New subscriber form submission:", { email });
+
+    await sendEmail({
         to: 'vikhyatfoundation@gmail.com',
         subject: 'New Newsletter Subscriber',
         html: createAdminNotificationHtml(email),
         from: `Vikhyat Foundation Forms <contact@vikhyatfoundation.com>`,
-      }),
-      sendEmail({
-        to: email,
-        subject: 'Welcome to the Vikhyat Foundation Movement!',
-        html: createSubscriberConfirmationHtml(email),
-      })
-    ]);
-
-    if (!adminEmailResult.success || !userEmailResult.success) {
-      console.error('One or more subscription emails failed to send.', { adminEmailResult, userEmailResult });
-      // Still return success to the UI, as the primary action is what matters.
-      return { success: true, error: null };
-    }
+    });
+    
+    await sendEmail({
+      to: email,
+      subject: 'Welcome to the Vikhyat Foundation Movement!',
+      html: createSubscriberConfirmationHtml(email),
+    })
 
     return { success: true, error: null };
   } catch (error) {

@@ -1,7 +1,6 @@
-
 'use client';
 
-import { useActionState, useEffect, useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -24,16 +23,8 @@ const donationSchema = z.object({
 
 type DonationFormValues = z.infer<typeof donationSchema>;
 
-
-const initialState = {
-  success: false,
-  order: null,
-  error: null,
-};
-
 export function DonationForm() {
   const { toast } = useToast();
-  const [state, formAction] = useActionState(createDonationOrder, initialState);
   const [isPending, startTransition] = useTransition();
   const [isRzpyOpen, setIsRzpyOpen] = useState(false);
   
@@ -42,94 +33,19 @@ export function DonationForm() {
     defaultValues: {
       name: '',
       email: '',
-      amount: 0,
+      amount: 500,
     },
   });
 
   function onSubmit(values: DonationFormValues) {
-    startTransition(() => {
-      formAction(values);
+    // This functionality requires a server and is disabled for static export.
+    console.log("Donation form submitted with values:", values);
+    toast({
+        variant: 'destructive',
+        title: 'Functionality Disabled',
+        description: 'Online donations require a server and are not available in this static version of the site.',
     });
   }
-
-
-  useEffect(() => {
-    if (state.success && state.order) {
-      const { amount, id: order_id, key, name, email } = state.order;
-
-      const options = {
-        key,
-        amount,
-        currency: "INR",
-        name: "Vikhyat Foundation",
-        description: "Donation to support our causes",
-        image: "/images/logo.png",
-        order_id,
-        handler: function (response: any) {
-          console.log(response);
-          toast({
-            title: 'Payment Successful!',
-            description: `Thank you for your generous donation, ${name}!`,
-          });
-          form.reset();
-        },
-        prefill: {
-          name,
-          email,
-        },
-        theme: {
-          color: "#3399cc",
-        },
-        modal: {
-            ondismiss: function() {
-                setIsRzpyOpen(false);
-                toast({
-                    variant: 'destructive',
-                    title: 'Payment Canceled',
-                    description: 'The payment process was not completed.',
-                });
-            }
-        }
-      };
-
-      const rzp = new Razorpay(options);
-      rzp.on('payment.failed', function (response: any) {
-        console.error(response);
-        toast({
-          variant: 'destructive',
-          title: 'Uh oh! Payment Failed.',
-          description: response.error.description || 'Something went wrong. Please try again.',
-        });
-      });
-      rzp.open();
-      setIsRzpyOpen(true);
-
-    } else if (!state.success && state.error) {
-      const formErrors = state.error as any;
-       if (formErrors._form) {
-         toast({
-            variant: 'destructive',
-            title: 'An error occurred',
-            description: formErrors._form.join(', '),
-         });
-       }
-    }
-  }, [state, toast, form]);
-
-  useEffect(() => {
-    if (state.error) {
-        const fieldErrors = state.error as any;
-        for (const fieldName in fieldErrors) {
-            if (Object.prototype.hasOwnProperty.call(fieldErrors, fieldName) && fieldName !== '_form') {
-                form.setError(fieldName as keyof DonationFormValues, {
-                    type: 'manual',
-                    message: fieldErrors[fieldName][0],
-                });
-            }
-        }
-    }
-  }, [state.error, form]);
-
 
   return (
     <Dialog open={isRzpyOpen} onOpenChange={setIsRzpyOpen}>
@@ -195,8 +111,10 @@ export function DonationForm() {
             </CardContent>
         </Card>
         <DialogContent>
+          <DialogHeader>
             <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
             <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
+          </DialogHeader>
         </DialogContent>
     </Dialog>
   );

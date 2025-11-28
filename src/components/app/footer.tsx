@@ -19,7 +19,14 @@ export function Footer() {
     setIsSubmitting(true);
 
     try {
-      const result = await subscribeToAction({ email });
+      // For static export, we log to console instead of calling a server action.
+      console.log('New subscriber email:', email);
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const result = await subscribeToAction({ email }); // This will now log to console
+      
       if (result.success) {
         toast({
           title: 'Success!',

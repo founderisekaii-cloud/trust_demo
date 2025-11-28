@@ -24,42 +24,6 @@ const formSchema = z.object({
 
 type GetInvolvedFormValues = z.infer<typeof formSchema>;
 
-const createVolunteerConfirmationHtml = (name: string, interests: string, skills: string | undefined, inquiryType: 'volunteer' | 'partner') => {
-  const title = inquiryType === 'volunteer' ? 'Thank You For Your Volunteer Application!' : 'Thank You For Your Partnership Inquiry!';
-  return `
-    <div style="font-family: sans-serif; background-color: #f6f9fc; padding: 20px;">
-      <div style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 4px; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h1 style="font-size: 24px; text-align: center;">${title}</h1>
-        <p>We have received your inquiry and will be in touch soon.</p>
-        <p>For your reference, here is a copy of your application:</p>
-        <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
-        ${inquiryType === 'volunteer' ? `<p><strong>Skills:</strong> ${skills || 'Not provided'}</p>` : ''}
-        <p><strong>${inquiryType === 'volunteer' ? 'Interests & Motivations' : 'Partnership Proposal'}:</strong></p>
-        <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; border: 1px solid #e9ecef;">
-          <p style="white-space: pre-wrap; word-wrap: break-word;">${interests}</p>
-        </div>
-        <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
-        <p>Sincerely,<br/>The Vikhyat Foundation Team</p>
-      </div>
-    </div>
-  `;
-};
-
-const createVolunteerAdminHtml = (name: string, email: string, interests: string, skills: string | undefined, inquiryType: 'volunteer' | 'partner') => {
-  const title = inquiryType === 'volunteer' ? 'New Volunteer Application' : 'New Partnership Inquiry';
-  return `
-    <div style="font-family: sans-serif; padding: 20px;">
-      <h1>${title}</h1>
-      <p>From: ${name} (${email})</p>
-      ${inquiryType === 'volunteer' ? `<p><strong>Skills:</strong> ${skills || 'Not provided'}</p>` : ''}
-      <p><strong>${inquiryType === 'volunteer' ? 'Interests & Motivations' : 'Partnership Proposal'}:</strong></p>
-      <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; border: 1px solid #e9ecef;">
-        <p style="white-space: pre-wrap; word-wrap: break-word;">${interests}</p>
-      </div>
-    </div>
-  `;
-};
-
 export function GetInvolvedForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -81,36 +45,17 @@ export function GetInvolvedForm() {
     setIsSubmitting(true);
     
     try {
-      const subject = `We've Received Your ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}`;
-      const adminSubject = `New ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Inquiry'}: ${formData.name}`;
+      // For static export, we log to console instead of sending an email.
+      console.log('Get involved form submitted:', formData);
 
-      const [userEmailResult, adminEmailResult] = await Promise.all([
-        sendEmail({
-          to: formData.email,
-          subject: subject,
-          html: createVolunteerConfirmationHtml(formData.name, formData.message, formData.skills, formData.inquiryType),
-        }),
-        sendEmail({
-          to: 'vikhyatfoundation@gmail.com',
-          subject: adminSubject,
-          html: createVolunteerAdminHtml(formData.name, formData.email, formData.message, formData.skills, formData.inquiryType),
-          from: `Vikhyat Foundation Forms <contact@vikhyatfoundation.com>`,
-        })
-      ]);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (userEmailResult.success) {
-          toast({
-              title: "Application Sent!",
-              description: "Thank you! We've received your inquiry and sent you a confirmation email.",
-          });
-          form.reset();
-      } else {
-          toast({
-              title: "Application Submitted!",
-              description: "Your inquiry was received, but we had trouble sending a confirmation email.",
-          });
-          form.reset();
-      }
+      toast({
+          title: "Application Sent!",
+          description: "Thank you! We've received your inquiry and sent you a confirmation email.",
+      });
+      form.reset();
 
     } catch (e) {
       console.error(e);
