@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useTransition } from 'react';
+import { useEffect, useTransition, useActionState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -36,7 +35,7 @@ const initialState = {
 export function DonationForm() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  const [state, formAction] = useFormState(createDonationOrder, initialState);
+  const [state, formAction] = useActionState(createDonationOrder, initialState);
   const [isRzpyOpen, setIsRzpyOpen] = React.useState(false);
 
 
@@ -49,64 +48,12 @@ export function DonationForm() {
     },
   });
 
-  const onSubmit = (formData: FormData) => {
-    startTransition(() => {
-        formAction(formData);
-    });
-  };
+  const onSubmit = (data: DonationFormValues) => {
+    console.log('Form submitted with:', data);
+    alert(`Thank you for your interest, ${data.name}! We have received your submission to donate ₹${data.amount}. As this is a static site, payment processing is currently disabled.`);
+    form.reset();
+};
 
-  useEffect(() => {
-    if (state.success && state.order) {
-      const { amount, id: order_id, currency } = state.order;
-      const { name, email } = form.getValues();
-
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: amount.toString(),
-        currency,
-        name: 'Vikhyat Foundation',
-        description: 'Thank you for your generous donation.',
-        order_id,
-        handler: function (response: any) {
-          toast({
-            title: 'Payment Successful!',
-            description: `Thank you, ${name}. We have sent a confirmation to your email.`,
-          });
-          form.reset();
-        },
-        prefill: {
-          name,
-          email,
-        },
-        theme: {
-          color: '#3399cc',
-        },
-      };
-
-      const paymentObject = new Razorpay(options);
-      setIsRzpyOpen(true);
-      paymentObject.open();
-      paymentObject.on('payment.failed', function (response: any) {
-        toast({
-          variant: 'destructive',
-          title: 'Payment Failed',
-          description: `Error: ${response.error.description}`,
-        });
-        setIsRzpyOpen(false);
-      });
-    }
-
-    if (!state.success && state.error) {
-        const fieldErrors = state.error as any;
-        if (fieldErrors._form) {
-             toast({
-                variant: 'destructive',
-                title: 'Something went wrong',
-                description: fieldErrors._form.join(', '),
-            });
-        }
-    }
-  }, [state, form, toast]);
 
   return (
      <Dialog open={isRzpyOpen} onOpenChange={setIsRzpyOpen}>
@@ -122,7 +69,7 @@ export function DonationForm() {
             </CardHeader>
             <CardContent>
                 <Form {...form}>
-                    <form action={onSubmit} className="space-y-6">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         <FormField
                             control={form.control}
                             name="name"
@@ -132,7 +79,7 @@ export function DonationForm() {
                                     <FormControl>
                                         <Input placeholder="Enter your full name" {...field} />
                                     </FormControl>
-                                    <FormMessage>{(state.error as any)?.name?.[0]}</FormMessage>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -146,7 +93,7 @@ export function DonationForm() {
                                     <FormControl>
                                         <Input type="email" placeholder="Enter your email" {...field} />
                                     </FormControl>
-                                     <FormMessage>{(state.error as any)?.email?.[0]}</FormMessage>
+                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -159,7 +106,7 @@ export function DonationForm() {
                                     <FormControl>
                                         <Input type="number" placeholder="Enter amount" {...field} min="500" />
                                     </FormControl>
-                                    <FormMessage>{(state.error as any)?.amount?.[0]}</FormMessage>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -172,10 +119,10 @@ export function DonationForm() {
             </CardContent>
         </Card>
         <DialogContent>
-            <DialogHeader>
-                <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
-                <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
-            </DialogHeader>
+          <DialogHeader>
+            <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
+            <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
+          </DialogHeader>
         </DialogContent>
     </Dialog>
   );
