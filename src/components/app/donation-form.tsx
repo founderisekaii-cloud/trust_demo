@@ -19,7 +19,7 @@ declare const Razorpay: any;
 const donationSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  amount: z.coerce.number().min(1, { message: 'Donation amount must be at least ₹1.' }),
+  amount: z.coerce.number().min(500, { message: 'Donation amount must be at least ₹500.' }),
 });
 
 type DonationFormValues = z.infer<typeof donationSchema>;
@@ -180,7 +180,7 @@ export function DonationForm() {
                                 <FormItem>
                                     <FormLabel>Donation Amount (INR)</FormLabel>
                                     <FormControl>
-                                        <Input type="number" placeholder="Enter amount" {...field} min="1" />
+                                        <Input type="number" placeholder="Enter amount" {...field} min="500" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -8,7 +8,7 @@ import { sendEmail } from './send-email';
 const donationSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  amount: z.coerce.number().min(1, { message: 'Donation amount must be at least ₹1.' }),
+  amount: z.coerce.number().min(500, { message: 'Donation amount must be at least ₹500.' }),
 });
 
 const createDonationEmailHtml = (donorName: string, amount: number, orderId: string) => `

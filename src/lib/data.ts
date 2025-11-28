@@ -188,7 +188,7 @@ export const TESTIMONIALS = [
   {
     id: 3,
     name: 'Dr. Pradnya G. Bengale',
-    title: 'Well Wisher',
+    title: 'Doctor',
     quote: 'The Vikhyat Foundation is doing work that befits the phrase "Human service is true wealth". Today, it is very important to create public awareness among the people about health problems and their solutions. Thank you, Vikhyat Foundation',
     imageUrl: 'testimonial-3'
   },
