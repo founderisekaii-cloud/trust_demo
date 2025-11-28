@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeartHandshake, Loader2 } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 import * as React from 'react';
 
 
@@ -25,6 +25,7 @@ type DonationFormValues = z.infer<typeof donationSchema>;
 
 
 export function DonationForm() {
+  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<DonationFormValues>({
@@ -37,10 +38,79 @@ export function DonationForm() {
   });
 
   const onSubmit = (data: DonationFormValues) => {
-    startTransition(() => {
-        console.log('Form submitted with:', data);
-        alert(`Thank you for your interest, ${data.name}! We have received your submission to donate ₹${data.amount}. As this is a static site, payment processing is currently disabled.`);
-        form.reset();
+    startTransition(async () => {
+      try {
+        // Step 1: Create the order by calling our PHP script
+        const orderResponse = await fetch('/api/create-order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amount: data.amount * 100 }), // Amount in paise
+        });
+
+        if (!orderResponse.ok) {
+            const errorData = await orderResponse.json();
+            throw new Error(errorData.error || `Server responded with ${orderResponse.status}`);
+        }
+
+        const orderData = await orderResponse.json();
+        const order_id = orderData.order_id;
+        
+        if (!order_id) {
+          throw new Error("Failed to create Razorpay order.");
+        }
+
+        // Step 2: Open Razorpay Checkout
+        const options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use public key from env
+            amount: data.amount * 100,
+            currency: 'INR',
+            name: 'Vikhyat Foundation',
+            description: 'Donation to support our cause',
+            image: '/images/logo.png',
+            order_id: order_id,
+            handler: function (response: any) {
+                // This function is called after a successful payment
+                console.log('Payment successful:', response);
+                toast({
+                    title: 'Thank You!',
+                    description: 'Your generous donation has been received.',
+                });
+                form.reset();
+                // Here you could also send payment details to your backend for verification
+            },
+            prefill: {
+                name: data.name,
+                email: data.email,
+            },
+            notes: {
+                address: 'Vikhyat Foundation Office',
+            },
+            theme: {
+                color: '#3399cc',
+            },
+        };
+        
+        const rzpy = new Razorpay(options);
+        rzpy.on('payment.failed', function (response: any) {
+            console.error('Payment failed:', response.error);
+            toast({
+                variant: 'destructive',
+                title: 'Payment Failed',
+                description: response.error.description || 'An unknown error occurred.',
+            });
+        });
+        
+        rzpy.open();
+
+      } catch (error: any) {
+         toast({
+            variant: 'destructive',
+            title: 'Uh oh! Something went wrong.',
+            description: error.message || 'Could not initiate payment.',
+        });
+      }
     });
   };
 

@@ -38,19 +38,35 @@ export function ContactForm() {
   async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
     
-    // This is a client-side only submission for static export
-    console.log("Contact Form Submitted:", data);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/send-email.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    toast({
-      title: 'Success!',
-      description: 'Your message has been sent successfully!',
-    });
-    form.reset();
-    
-    setIsSubmitting(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Something went wrong');
+      }
+
+      toast({
+        title: 'Success!',
+        description: 'Your message has been sent successfully!',
+      });
+      form.reset();
+
+    } catch (error: any) {
+       toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message || 'Could not send your message.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
