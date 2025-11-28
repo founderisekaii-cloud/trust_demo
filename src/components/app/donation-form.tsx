@@ -63,7 +63,7 @@ export function DonationForm() {
 
         // Step 2: Open Razorpay Checkout
         const options = {
-            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use public key from env
+            key: 'YOUR_RAZORPAY_KEY_ID', // Your public key from Razorpay dashboard
             amount: data.amount * 100,
             currency: 'INR',
             name: 'Vikhyat Foundation',
