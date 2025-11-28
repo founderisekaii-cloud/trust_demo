@@ -21,6 +21,18 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
+const createContactEmailHtml = (data: ContactFormValues) => `
+  <div style="font-family: sans-serif; padding: 20px;">
+    <h1>New Contact Form Submission</h1>
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>Email:</strong> ${data.email}</p>
+    <p><strong>Subject:</strong> ${data.subject}</p>
+    <hr />
+    <p><strong>Message:</strong></p>
+    <p>${data.message}</p>
+  </div>
+`;
+
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -39,12 +51,13 @@ export function ContactForm() {
     setIsSubmitting(true);
     
     try {
-      // For static export, we log to console instead of sending an email.
-      console.log('Contact form submitted:', data);
+      await sendEmail({
+        to: 'vikhyatfoundation@gmail.com',
+        from: `Vikhyat Foundation Contact Form <contact@vikhyatfoundation.com>`,
+        subject: `New Message from ${data.name}: ${data.subject}`,
+        html: createContactEmailHtml(data),
+      });
 
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
       toast({
         title: 'Success!',
         description: 'Your message has been sent successfully!',

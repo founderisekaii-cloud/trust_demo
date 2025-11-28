@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import { z } from 'zod';
 import { sendEmail } from './send-email';
@@ -31,7 +31,7 @@ const createAdminNotificationHtml = (subscriberEmail: string) => `
   </div>
 `;
 
-export async function subscribeToAction(formData: unknown) {
+export async function subscribeToAction(formData: { email: string }) {
   const parsed = subscribeSchema.safeParse(formData);
 
   if (!parsed.success) {
@@ -41,9 +41,6 @@ export async function subscribeToAction(formData: unknown) {
   const { email } = parsed.data;
 
   try {
-    // In a static export, this will log to the browser console.
-    console.log("New subscriber form submission:", { email });
-
     await sendEmail({
         to: 'vikhyatfoundation@gmail.com',
         subject: 'New Newsletter Subscriber',

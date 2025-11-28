@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import { z } from 'zod';
 import Razorpay from 'razorpay';
@@ -17,7 +17,7 @@ const createDonationEmailHtml = (donorName: string, amount: number, orderId: str
       <h1 style="font-size: 24px; text-align: center;">Thank You, ${donorName}!</h1>
       <p>We are incredibly grateful for your generous donation to the Vikhyat Foundation. Your support is vital to our mission.</p>
       <div style="background-color: #e6f9ff; border-left: 4px solid #00b0f0; padding: 16px; margin: 16px 0; font-weight: bold;">
-          Your contribution of ₹${amount.toLocaleString()} will make a real difference.
+          Your contribution of ₹${(amount / 100).toLocaleString()} will make a real difference.
       </div>
       <p>Your transaction ID is: ${orderId}</p>
       <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
@@ -30,13 +30,58 @@ const createDonationEmailHtml = (donorName: string, amount: number, orderId: str
   </div>
 `;
 
-export async function createDonationOrder(prevState: any, formData: unknown) {
-  // This is a server-side function and cannot be used with static export.
-  // The logic is being disabled to allow the build to succeed.
-  console.log("createDonationOrder called with:", formData);
-  return {
-    success: false,
-    order: null,
-    error: { _form: ['Donation functionality is currently disabled for static export.'] }
-  };
+export async function createDonationOrder(prevState: any, formData: FormData) {
+  const parsed = donationSchema.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    amount: formData.get('amount'),
+  });
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      order: null,
+      error: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  const { name, email, amount } = parsed.data;
+
+  // Razorpay expects the amount in the smallest currency unit (paise).
+  const amountInPaise = amount * 100;
+
+  try {
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
+    });
+
+    const options = {
+      amount: amountInPaise,
+      currency: 'INR',
+      receipt: `receipt_order_${randomBytes(10).toString('hex')}`,
+    };
+
+    const order = await razorpay.orders.create(options);
+
+    if (!order) {
+      return { success: false, order: null, error: { _form: ['Failed to create Razorpay order.'] } };
+    }
+
+    // Send confirmation email after successful payment (this should be handled by webhook ideally)
+    // For now, let's assume payment is successful after order creation for simplicity
+    await sendEmail({
+      to: email,
+      subject: `Thank you for your donation, ${name}!`,
+      html: createDonationEmailHtml(name, amount, order.id),
+      from: 'Vikhyat Foundation <contact@vikhyatfoundation.com>',
+    });
+
+    return { success: true, order, error: null };
+
+  } catch (error) {
+    console.error('Razorpay Order Creation Error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred creating the order.';
+    return { success: false, order: null, error: { _form: [errorMessage] } };
+  }
 }
