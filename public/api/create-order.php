@@ -1,82 +1,63 @@
 <?php
+// Suppress warnings and notices to ensure clean JSON output
+error_reporting(0);
+
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
-
-// --- IMPORTANT: REPLACE WITH YOUR ACTUAL RAZORPAY KEYS ---
+// --- IMPORTANT: REPLACE WITH YOUR RAZORPAY KEYS ---
 $keyId = 'YOUR_RAZORPAY_KEY_ID';
 $keySecret = 'YOUR_RAZORPAY_KEY_SECRET';
+// ----------------------------------------------------
 
-// Read the incoming POST data
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE);
+$data = json_decode(file_get_contents('php://input'), true);
 
-if (json_last_error() !== JSON_ERROR_NONE || !isset($input['amount'])) {
+$amount = $data['amount'] ?? 0;
+
+if ($amount < 50000) { // Assuming minimum 500 INR (50000 paise)
     http_response_code(400);
-    echo json_encode(['error' => 'Invalid JSON or missing amount']);
+    echo json_encode(['error' => 'Invalid amount. Minimum is 500 INR.']);
     exit;
 }
 
-$amount = $input['amount'];
-$receiptId = 'rcpt_' . time();
-
-// Prepare the order data for Razorpay API
 $orderData = [
-    'receipt'         => $receiptId,
+    'receipt'         => 'rcptid_' . uniqid(),
     'amount'          => $amount,
     'currency'        => 'INR',
-    'payment_capture' => 1 // Auto-capture the payment
+    'payment_capture' => 1 // Auto capture
 ];
 
-$orderDataJson = json_encode($orderData);
+$api_url = 'https://api.razorpay.com/v1/orders';
 
-// Initialize cURL session
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, 'https://api.razorpay.com/v1/orders');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $orderDataJson);
+$ch = curl_init($api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($orderData));
 curl_setopt($ch, CURLOPT_USERPWD, $keyId . ':' . $keySecret);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/x-www-form-urlencoded'
+]);
 
-$headers = array();
-$headers[] = 'Content-Type: application/json';
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+$response = curl_exec($ch);
+$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curl_error = curl_error($ch);
+curl_close($ch);
 
-// Execute cURL and get the result
-$result = curl_exec($ch);
-
-// Check for cURL errors
-if (curl_errno($ch)) {
+if ($curl_error) {
     http_response_code(500);
-    echo json_encode(['error' => 'Curl error: ' . curl_error($ch)]);
-    curl_close($ch);
+    echo json_encode(['error' => 'cURL Error creating order: ' . $curl_error]);
     exit;
 }
 
-// Get HTTP status code
-$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-// Handle Razorpay API response
-if ($httpcode >= 200 && $httpcode < 300) {
-    $razorpayOrder = json_decode($result, true);
-    if (json_last_error() === JSON_ERROR_NONE) {
-        http_response_code(200);
-        echo json_encode(['order_id' => $razorpayOrder['id']]);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Failed to parse Razorpay response']);
-    }
+if ($http_code >= 200 && $http_code < 300) {
+    $response_data = json_decode($response, true);
+    http_response_code(200);
+    echo json_encode(['order_id' => $response_data['id']]);
 } else {
-    http_response_code($httpcode);
-    echo $result; // Forward Razorpay's error response
+    http_response_code($http_code);
+    echo json_encode(['error' => 'Failed to create Razorpay order.', 'details' => json_decode($response)]);
 }
 ?>
