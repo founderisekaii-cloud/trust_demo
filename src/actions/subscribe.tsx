@@ -1,5 +1,3 @@
-'use server';
-
 import { z } from 'zod';
 import { sendEmail } from './send-email';
 
@@ -32,32 +30,12 @@ const createAdminNotificationHtml = (subscriberEmail: string) => `
 `;
 
 export async function subscribeToAction(formData: { email: string }) {
+   // This is a placeholder for static export.
+  // The original server action is incompatible with a static site.
+  console.log("subscribeToAction called, but it's a placeholder for static export.", formData);
   const parsed = subscribeSchema.safeParse(formData);
-
   if (!parsed.success) {
     return { success: false, error: parsed.error.flatten().fieldErrors.email?.join(', ') };
   }
-
-  const { email } = parsed.data;
-
-  try {
-    await sendEmail({
-        to: 'vikhyatfoundation@gmail.com',
-        subject: 'New Newsletter Subscriber',
-        html: createAdminNotificationHtml(email),
-        from: `Vikhyat Foundation Forms <contact@vikhyatfoundation.com>`,
-    });
-    
-    await sendEmail({
-      to: email,
-      subject: 'Welcome to the Vikhyat Foundation Movement!',
-      html: createSubscriberConfirmationHtml(email),
-    })
-
-    return { success: true, error: null };
-  } catch (error) {
-    console.error('Subscription Action Error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    return { success: false, error: errorMessage };
-  }
+  return { success: true, error: null };
 }

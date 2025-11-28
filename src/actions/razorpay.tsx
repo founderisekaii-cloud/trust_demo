@@ -1,5 +1,3 @@
-'use server';
-
 import { z } from 'zod';
 import Razorpay from 'razorpay';
 import { randomBytes } from 'crypto';
@@ -31,57 +29,13 @@ const createDonationEmailHtml = (donorName: string, amount: number, orderId: str
 `;
 
 export async function createDonationOrder(prevState: any, formData: FormData) {
-  const parsed = donationSchema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    amount: formData.get('amount'),
-  });
+  // This is a placeholder for static export.
+  // The original server action is incompatible with a static site.
+  console.log("createDonationOrder called, but it's a placeholder for static export.");
 
-  if (!parsed.success) {
-    return {
-      success: false,
-      order: null,
-      error: parsed.error.flatten().fieldErrors,
-    };
-  }
-
-  const { name, email, amount } = parsed.data;
-
-  // Razorpay expects the amount in the smallest currency unit (paise).
-  const amountInPaise = amount * 100;
-
-  try {
-    const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID!,
-      key_secret: process.env.RAZORPAY_KEY_SECRET!,
-    });
-
-    const options = {
-      amount: amountInPaise,
-      currency: 'INR',
-      receipt: `receipt_order_${randomBytes(10).toString('hex')}`,
-    };
-
-    const order = await razorpay.orders.create(options);
-
-    if (!order) {
-      return { success: false, order: null, error: { _form: ['Failed to create Razorpay order.'] } };
-    }
-
-    // Send confirmation email after successful payment (this should be handled by webhook ideally)
-    // For now, let's assume payment is successful after order creation for simplicity
-    await sendEmail({
-      to: email,
-      subject: `Thank you for your donation, ${name}!`,
-      html: createDonationEmailHtml(name, amount, order.id),
-      from: 'Vikhyat Foundation <contact@vikhyatfoundation.com>',
-    });
-
-    return { success: true, order, error: null };
-
-  } catch (error) {
-    console.error('Razorpay Order Creation Error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred creating the order.';
-    return { success: false, order: null, error: { _form: [errorMessage] } };
-  }
+  return {
+    success: false,
+    order: null,
+    error: { _form: ['Payment processing is disabled for this static version of the site.'] },
+  };
 }

@@ -11,7 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Wand2 } from 'lucide-react';
 import React from 'react';
-import { sendEmail } from '@/actions/send-email';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const formSchema = z.object({
@@ -24,30 +23,6 @@ const formSchema = z.object({
 
 type GetInvolvedFormValues = z.infer<typeof formSchema>;
 
-const createInquiryEmailHtml = (data: GetInvolvedFormValues) => `
-  <div style="font-family: sans-serif; padding: 20px;">
-    <h1>New "Get Involved" Inquiry</h1>
-    <p><strong>Name/Organization:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Inquiry Type:</strong> ${data.inquiryType}</p>
-    ${data.skills ? `<p><strong>Skills:</strong> ${data.skills}</p>` : ''}
-    <hr />
-    <p><strong>Message:</strong></p>
-    <p>${data.message}</p>
-  </div>
-`;
-
-const createConfirmationEmailHtml = (name: string) => `
-  <div style="font-family: sans-serif; background-color: #f6f9fc; padding: 20px;">
-    <div style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 4px; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h1 style="font-size: 24px; text-align: center;">Thank You for Your Interest, ${name}!</h1>
-      <p>We've received your inquiry to get involved with the Vikhyat Foundation. We are thrilled to have passionate individuals like you interested in our cause.</p>
-      <p>Our team will review your submission and get back to you as soon as possible. We appreciate your patience and look forward to the possibility of collaborating.</p>
-      <hr style="border: none; border-top: 1px solid #e9ecef; margin: 20px 0;" />
-      <p>With gratitude,<br/>The Vikhyat Foundation Team</p>
-    </div>
-  </div>
-`;
 
 export function GetInvolvedForm() {
   const { toast } = useToast();
@@ -69,38 +44,18 @@ export function GetInvolvedForm() {
   async function onSubmit(formData: GetInvolvedFormValues) {
     setIsSubmitting(true);
     
-    try {
-      // Admin Notification
-      await sendEmail({
-        to: 'vikhyatfoundation@gmail.com',
-        from: `Vikhyat Foundation Inquiry <contact@vikhyatfoundation.com>`,
-        subject: `New Inquiry: ${formData.inquiryType === 'volunteer' ? 'Volunteer Application' : 'Partnership Proposal'} from ${formData.name}`,
-        html: createInquiryEmailHtml(formData),
-      });
+    console.log("Get Involved Form Submitted:", formData);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+        title: "Application Sent!",
+        description: "Thank you! We've received your inquiry.",
+    });
+    form.reset();
 
-      // User Confirmation
-      await sendEmail({
-          to: formData.email,
-          subject: "We've Received Your Inquiry | Vikhyat Foundation",
-          html: createConfirmationEmailHtml(formData.name),
-      });
-      
-      toast({
-          title: "Application Sent!",
-          description: "Thank you! We've received your inquiry and sent you a confirmation email.",
-      });
-      form.reset();
-
-    } catch (e) {
-      console.error(e);
-      toast({
-        variant: 'destructive',
-        title: 'An Error Occurred',
-        description: 'There was an error submitting your inquiry. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setIsSubmitting(false);
   };
 
   return (

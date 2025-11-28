@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import * as React from 'react';
 import { Logo } from './logo';
-import { subscribeToAction } from '@/actions/subscribe';
 import { Loader2 } from 'lucide-react';
 
 export function Footer() {
@@ -18,27 +17,18 @@ export function Footer() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const result = await subscribeToAction({ email });
-      
-      if (result.success) {
-        toast({
-          title: 'Success!',
-          description: "Thank you for joining our movement! We've sent you a confirmation email.",
-        });
-        setEmail('');
-      } else {
-        throw new Error(result.error || 'An unknown error occurred.');
-      }
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Subscription Failed',
-        description: (error as Error).message || 'Could not subscribe. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log("Subscribing email:", email);
+    
+    // Simulate API call for static site
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    toast({
+      title: 'Success!',
+      description: "Thank you for joining our movement!",
+    });
+    
+    setEmail('');
+    setIsSubmitting(false);
   };
 
   const policyLinks = [

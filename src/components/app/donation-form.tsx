@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useTransition, useActionState } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,8 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
-import { createDonationOrder } from '@/actions/razorpay';
 import { HeartHandshake, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import * as React from 'react';
@@ -25,19 +23,9 @@ const donationSchema = z.object({
 
 type DonationFormValues = z.infer<typeof donationSchema>;
 
-const initialState = {
-  success: false,
-  order: null,
-  error: null,
-};
-
 
 export function DonationForm() {
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  const [state, formAction] = useActionState(createDonationOrder, initialState);
-  const [isRzpyOpen, setIsRzpyOpen] = React.useState(false);
-
 
   const form = useForm<DonationFormValues>({
     resolver: zodResolver(donationSchema),
@@ -49,14 +37,15 @@ export function DonationForm() {
   });
 
   const onSubmit = (data: DonationFormValues) => {
-    console.log('Form submitted with:', data);
-    alert(`Thank you for your interest, ${data.name}! We have received your submission to donate ₹${data.amount}. As this is a static site, payment processing is currently disabled.`);
-    form.reset();
-};
+    startTransition(() => {
+        console.log('Form submitted with:', data);
+        alert(`Thank you for your interest, ${data.name}! We have received your submission to donate ₹${data.amount}. As this is a static site, payment processing is currently disabled.`);
+        form.reset();
+    });
+  };
 
 
   return (
-     <Dialog open={isRzpyOpen} onOpenChange={setIsRzpyOpen}>
         <Card>
             <CardHeader className="text-center">
                 <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit">
@@ -118,12 +107,5 @@ export function DonationForm() {
                 </Form>
             </CardContent>
         </Card>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="sr-only">Razorpay Payment</DialogTitle>
-            <DialogDescription className="sr-only">Complete your donation through the Razorpay payment gateway.</DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-    </Dialog>
   );
 }

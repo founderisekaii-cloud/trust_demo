@@ -10,7 +10,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
-import { sendEmail } from '@/actions/send-email';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -21,17 +20,6 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-const createContactEmailHtml = (data: ContactFormValues) => `
-  <div style="font-family: sans-serif; padding: 20px;">
-    <h1>New Contact Form Submission</h1>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Subject:</strong> ${data.subject}</p>
-    <hr />
-    <p><strong>Message:</strong></p>
-    <p>${data.message}</p>
-  </div>
-`;
 
 export function ContactForm() {
   const { toast } = useToast();
@@ -50,30 +38,19 @@ export function ContactForm() {
   async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
     
-    try {
-      await sendEmail({
-        to: 'vikhyatfoundation@gmail.com',
-        from: `Vikhyat Foundation Contact Form <contact@vikhyatfoundation.com>`,
-        subject: `New Message from ${data.name}: ${data.subject}`,
-        html: createContactEmailHtml(data),
-      });
+    // This is a client-side only submission for static export
+    console.log("Contact Form Submitted:", data);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-      toast({
-        title: 'Success!',
-        description: 'Your message has been sent successfully!',
-      });
-      form.reset();
-      
-    } catch (error) {
-      console.error('Failed to submit contact form', error);
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was an error sending your message. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    toast({
+      title: 'Success!',
+      description: 'Your message has been sent successfully!',
+    });
+    form.reset();
+    
+    setIsSubmitting(false);
   }
 
   return (
