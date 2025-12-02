@@ -1,8 +1,12 @@
-<LimitExcept GET POST OPTIONS>
-  Order allow,deny
-  Deny from all
-</LimitExcept>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Allow POST, GET, OPTIONS methods
+  RewriteCond %{REQUEST_METHOD} !^(POST|GET|OPTIONS)$
+  RewriteRule .* - [F,L]
+</IfModule>
 
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [QSA,L]
+# Ensure PHP files are handled by the PHP interpreter
+<FilesMatch "\.php$">
+  SetHandler application/x-httpd-php
+</FilesMatch>
