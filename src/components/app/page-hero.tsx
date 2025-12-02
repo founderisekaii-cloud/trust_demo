@@ -30,10 +30,10 @@ export function PageHero({ title, subtitle }: { title: string, subtitle: string 
         </div>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/our-activity">Our Activity</Link>
+            <Link href="/what-we-do">What We Do</Link>
           </Button>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/what-we-do">What We Do</Link>
+            <Link href="/our-activity">Our Activity</Link>
           </Button>
         </div>
       </div>
