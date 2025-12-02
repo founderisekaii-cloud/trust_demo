@@ -171,7 +171,7 @@ export function DonationForm() {
                         />
                         <Button type="submit" className="w-full" disabled={isPending}>
                             {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                            {isPending ? 'Processing...' : 'Donate Now'}
+                            {isPending ? 'Processing...' : 'Donate Now (min ₹500)'}
                         </Button>
                     </form>
                 </Form>

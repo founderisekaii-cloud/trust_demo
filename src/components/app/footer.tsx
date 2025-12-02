@@ -16,19 +16,38 @@ export function Footer() {
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send-email.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Newsletter Subscriber',
+          email: email,
+          subject: 'New Newsletter Subscription',
+          message: `Please add ${email} to the mailing list.`,
+          isSubscription: true,
+        }),
+      });
 
-    console.log("Subscribing email:", email);
-    
-    // Simulate API call for static site
-    await new Promise(resolve => setTimeout(resolve, 1000));
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Something went wrong');
+      }
 
-    toast({
-      title: 'Success!',
-      description: "Thank you for joining our movement!",
-    });
-    
-    setEmail('');
-    setIsSubmitting(false);
+      toast({
+        title: 'Success!',
+        description: 'Thank you for joining our movement!',
+      });
+      setEmail('');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message || 'Could not subscribe.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const policyLinks = [

@@ -174,14 +174,14 @@ export const TESTIMONIALS = [
   {
     id: 1,
     name: 'Mr. Sachin Sukhadev Khandekar',
-    title: 'Politian',
+    title: 'politican ',
     quote: "The Vikhyat Foundation is a social organization that is currently working towards the comprehensive development and rehabilitation of people in remote and ultra-remote areas. My warmest wishes for this work of the renowned foundation and its future endeavors.",
     imageUrl: 'testimonial-1'
   },
   {
     id: 2,
     name: 'Mr. Lokesh Ulhas Patil',
-    title: 'Politician',
+    title: 'businessman',
     quote: 'The need of the hour today is IT Skills along with education. I wish the “Vikhayt Foundation” to all the best for this initiative of going to the localities and educating the college students there about the importance of IT Skills and also providing them with training.',
     imageUrl: 'testimonial-2'
   },
