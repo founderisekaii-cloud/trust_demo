@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Force HTTPS (Redirect http to https)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Allow POST requests for PHP files
+  # This is the critical fix for the "405 Method Not Allowed" error.
+  RewriteCond %{REQUEST_METHOD} POST
+  RewriteCond %{REQUEST_URI} \.php$
+  RewriteRule ^ - [L]
+
+  # 3. Hide .html extensions (Clean URLs)
+  # If a user visits /about-us, load about-us.html silently
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+
+  # 4. Custom Error Page (Optional - redirect 404s to homepage)
+  ErrorDocument 404 /index.html
+</IfModule>
