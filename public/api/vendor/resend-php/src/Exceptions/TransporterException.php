@@ -1,25 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Resend\Exceptions;
 
 use Exception;
-use Psr\Http\Client\ClientExceptionInterface;
+use Throwable;
 
 final class TransporterException extends Exception
 {
     /**
      * Create a new exception.
      */
-    public function __construct(private readonly ClientExceptionInterface $clientException)
+    public function __construct(private readonly Throwable $throwable)
     {
-        parent::__construct($clientException->getMessage(), $clientException->getCode());
+        $message = $this->throwable->getMessage();
+        $code = (int) $this->throwable->getCode();
+
+        parent::__construct($message, $code);
     }
 
     /**
-     * Get the client exception.
+     * Get the throwable.
      */
-    public function getClientException(): ClientExceptionInterface
+    public function getThrowable(): Throwable
     {
-        return $this->clientException;
+        return $this->throwable;
     }
 }

@@ -1,69 +1,58 @@
 <?php
-// Disable error reporting for production
 error_reporting(0);
-ini_set('display_errors', 0);
-
-// Allow POST requests from any origin
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
-}
+// Use the bundled autoloader
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config.inc.php';
 
-// Include the configuration and the new autoloader
-require_once 'config.inc.php';
-require_once 'vendor/autoload.php';
-
-// Import the Razorpay API class
 use Razorpay\Api\Api;
 
-// Check if the required constants are defined
-if (!defined('RAZORPAY_KEY_ID') || !defined('RAZORPAY_KEY_SECRET')) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Server configuration error: Razorpay keys are not defined.']);
-    exit;
-}
+$data = json_decode(file_get_contents("php://input"), true);
 
-// Get the POST data
-$input = file_get_contents('php://input');
-$data = json_decode($input, true);
-
-// Basic validation
-if (json_last_error() !== JSON_ERROR_NONE || !isset($data['amount']) || !is_numeric($data['amount'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || json_last_error() !== JSON_ERROR_NONE) {
     http_response_code(400);
-    echo json_encode(['error' => 'Invalid input. Required field: amount (numeric).']);
+    echo json_encode(['error' => 'Invalid request.']);
     exit;
 }
 
-$amount = intval($data['amount']);
-$receiptId = 'rcpt_' . time();
+$amount = $data['amount'] ?? 0;
+
+if ($amount < 50000) { // Amount is in paise, so 500 INR = 50000 paise
+    http_response_code(400);
+    echo json_encode(['error' => 'Donation amount must be at least ₹500.']);
+    exit;
+}
 
 try {
-    // Initialize Razorpay client
     $api = new Api(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET);
-    
-    // Create the order
-    $order = $api->order->create([
-        'receipt' => $receiptId,
-        'amount' => $amount,
-        'currency' => 'INR',
-        'payment_capture' => 1 // Auto-capture payment
-    ]);
 
-    if (!$order || !isset($order['id'])) {
-        throw new Exception("Failed to create order with Razorpay.");
+    $orderData = [
+        'receipt'         => 'rcptid_' . time(),
+        'amount'          => $amount,
+        'currency'        => 'INR',
+        'payment_capture' => 1 // Auto capture
+    ];
+
+    $razorpayOrder = $api->order->create($orderData);
+    $order_id = $razorpayOrder['id'];
+
+    if ($order_id) {
+        http_response_code(200);
+        echo json_encode(['order_id' => $order_id]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to create Razorpay order.']);
     }
-
-    http_response_code(200);
-    echo json_encode(['order_id' => $order['id']]);
-
-} catch (Exception $e) {
+} catch(Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to create payment order: ' . $e->getMessage()]);
+    echo json_encode([
+        'error' => 'An error occurred with the payment gateway.',
+        'details' => $e->getMessage()
+    ]);
 }
-
 ?>

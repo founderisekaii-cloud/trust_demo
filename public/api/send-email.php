@@ -1,71 +1,59 @@
 <?php
-// Disable error reporting for production
 error_reporting(0);
-ini_set('display_errors', 0);
-
-// Allow POST requests from any origin
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
-}
+// Use the bundled autoloader
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config.inc.php';
 
-// Include the configuration and the new autoloader
-require_once 'config.inc.php';
-require_once 'vendor/autoload.php';
+// Decode the incoming JSON payload
+$data = json_decode(file_get_contents("php://input"), true);
 
-// Check if the required constants are defined
-if (!defined('RESEND_API_KEY') || !defined('SENDER_EMAIL') || !defined('CONTACT_FORM_TO_EMAIL')) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Server configuration error: API keys or email constants are not defined.']);
-    exit;
-}
-
-// Get the POST data
-$input = file_get_contents('php://input');
-$data = json_decode($input, true);
-
-// Basic validation
-if (json_last_error() !== JSON_ERROR_NONE || !isset($data['email']) || !isset($data['subject']) || !isset($data['message'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || json_last_error() !== JSON_ERROR_NONE) {
     http_response_code(400);
-    echo json_encode(['error' => 'Invalid input. Required fields: email, subject, message.']);
+    echo json_encode(['error' => 'Invalid request.']);
     exit;
 }
 
-$name = $data['name'] ?? 'No name provided';
-$email = $data['email'];
-$subject = $data['subject'];
-$message = $data['message'];
-$isSubscription = isset($data['isSubscription']) && $data['isSubscription'];
+// Set a default 'from' name if one isn't provided (for subscriptions)
+$fromName = $data['name'] ?? 'Newsletter Subscriber';
+
+$resend = Resend::client(RESEND_API_KEY);
 
 try {
-    // Initialize Resend client
-    $resend = Resend::client(RESEND_API_KEY);
-
-    $toEmail = $isSubscription ? SUBSCRIBE_TO_EMAIL : CONTACT_FORM_TO_EMAIL;
-    $fromAddress = 'Vikhyat Foundation <' . SENDER_EMAIL . '>';
-    
-    $resend->emails->send([
-        'from' => $fromAddress,
-        'to' => [$toEmail],
-        'subject' => $subject,
-        'html' => nl2br(htmlspecialchars($message)),
-        'reply_to' => $email,
-        'headers' => [
-            'X-Entity-Ref-ID' => 'Vikhyat-Contact-Form-Submission',
-        ],
+    $result = $resend->emails->send([
+        'from' => 'Vikhyat Foundation <' . SENDER_EMAIL . '>',
+        'to' => [CONTACT_FORM_TO_EMAIL],
+        'subject' => $data['subject'] ?? 'New Newsletter Subscription',
+        'reply_to' => $data['email'],
+        'html' => '
+            <div style="font-family: sans-serif; line-height: 1.6;">
+                <h2>New Message via Website Contact Form</h2>
+                <p><strong>From:</strong> ' . htmlspecialchars($fromName) . '</p>
+                <p><strong>Email:</strong> ' . htmlspecialchars($data['email']) . '</p>
+                <hr>
+                <p><strong>Message:</strong></p>
+                <p>' . nl2br(htmlspecialchars($data['message'] ?? 'This user has subscribed to the newsletter.')) . '</p>
+            </div>'
     ]);
-    
-    http_response_code(200);
-    echo json_encode(['success' => true, 'message' => 'Email sent successfully.']);
+
+    if ($result->id) {
+        http_response_code(200);
+        echo json_encode(['success' => true, 'message' => 'Email sent successfully.']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to send email. No ID returned.']);
+    }
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to send email: ' . $e->getMessage()]);
+    echo json_encode([
+        'error' => 'An error occurred while sending the email.',
+        'details' => $e->getMessage()
+    ]);
 }
-
 ?>

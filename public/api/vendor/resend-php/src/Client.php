@@ -1,52 +1,88 @@
 <?php
 
-namespace Resend;
+declare(strict_types=1);
+
+namespace Resend\Client;
 
 use Resend\Contracts\Client as ClientContract;
-use Resend\Transporters\HttpTransporter;
-use Resend\ValueObjects\ApiKey;
+use Resend\Exceptions\ErrorException;
+use Resend\Exceptions\TransporterException;
+use Resend\Exceptions\UnprocessableEntityException;
 use Resend\ValueObjects\Transporter\BaseUri;
 use Resend\ValueObjects\Transporter\Headers;
+use Resend\ValueObjects\Transporter\Payload;
+use Resend\ValueObjects\Transporter\Response;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 
 final class Client implements ClientContract
 {
     /**
-     * The transporter to be used by the client.
+     * Create a new HTTP Client instance.
      */
-    private HttpTransporter $transporter;
-
-    /**
-     * Create a new client instance.
-     */
-    public function __construct(ApiKey $apiKey)
-    {
-        $baseUri = BaseUri::from('api.resend.com');
-        $headers = Headers::withAuthorization($apiKey);
-
-        $this->transporter = new HttpTransporter($baseUri, $headers);
+    public function __construct(
+        private readonly ClientInterface $client,
+        private readonly BaseUri $baseUri,
+        private readonly Headers $headers,
+        private readonly RequestFactoryInterface $requestFactory,
+        private readonly StreamFactoryInterface $streamFactory
+    ) {
+        //
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function apiKeys(): Resources\ApiKey
+    public function request(Payload $payload): Response
     {
-        return new Resources\ApiKey($this->transporter);
+        $request = $this->requestFactory->createRequest(
+            $payload->method()->value,
+            $this->baseUri->toString() . $payload->uri()->toString(),
+        );
+
+        $body = json_encode($payload->parameters(), JSON_THROW_ON_ERROR);
+
+        $stream = $this->streamFactory->createStream($body);
+
+        $request = $request->withBody($stream);
+
+        foreach ($this->headers->toArray() as $name => $value) {
+            $request = $request->withHeader($name, $value);
+        }
+
+        try {
+            $response = $this->client->sendRequest($request);
+        } catch (ClientExceptionInterface $clientException) {
+            throw new TransporterException($clientException);
+        }
+
+        $contents = $response->getBody()->getContents();
+
+        $this->throwIfJsonError($response, $contents);
+
+        $response = Response::from($contents);
+
+        if (422 === $response->statusCode()) {
+            throw new UnprocessableEntityException($response);
+        }
+
+        if ($response->isError()) {
+            throw new ErrorException($response);
+        }
+
+        return $response;
     }
 
     /**
-     * {@inheritDoc}
+     * Throw an exception if the response is a JSON error.
      */
-    public function domains(): Resources\Domain
+    private function throwIfJsonError(ResponseInterface $response, string $contents): void
     {
-        return new Resources\Domain($this->transporter);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function emails(): Resources\Email
-    {
-        return new Resources\Email($this->transporter);
+        if (str_starts_with($response->getHeaderLine('Content-Type'), 'application/json')) {
+            json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+        }
     }
 }

@@ -1,29 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Resend\Contracts;
 
-use Resend\Client as ResendClient;
-use Resend\Resources;
+use Resend\ValueObjects\Transporter\Payload;
+use Resend\ValueObjects\Transporter\Response;
 
 interface Client
 {
     /**
-     * Create a new client instance.
+     * Send a request to the Resend API.
      */
-    public function __construct(\Resend\ValueObjects\ApiKey $apiKey);
-
-    /**
-     * Get the API Key resource.
-     */
-    public function apiKeys(): Resources\ApiKey;
-
-    /**
-     * Get the Domain resource.
-     */
-    public function domains(): Resources\Domain;
-
-    /**
-     * Get the Email resource.
-     */
-    public function emails(): Resources\Email;
+    public function request(Payload $payload): Response;
 }

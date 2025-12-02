@@ -1,37 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Resend\Exceptions;
 
 use Exception;
+use Resend\ValueObjects\Transporter\Response;
 
 final class ErrorException extends Exception
 {
     /**
      * Create a new exception.
-     *
-     * @param  array<array-key, mixed>  $error
-     * @return void
      */
-    public function __construct(private readonly array $error)
+    public function __construct(private readonly Response $response)
     {
-        $message = $error['message'] ?? 'Unknown error';
+        $message = $response->error()->message;
+        $code = $response->error()->type;
 
-        parent::__construct($message);
+        parent::__construct($message, 0);
     }
 
     /**
-     * Get the error message.
+     * Get the response.
      */
-    public function getErrorMessage(): ?string
+    public function getResponse(): Response
     {
-        return $this->error['message'];
-    }
-
-    /**
-     * Get the error type.
-     */
-    public function getErrorType(): ?string
-    {
-        return $this->error['type'];
+        return $this->response;
     }
 }
