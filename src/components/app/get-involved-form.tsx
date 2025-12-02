@@ -44,9 +44,8 @@ export function GetInvolvedForm() {
   async function onSubmit(formData: GetInvolvedFormValues) {
     setIsSubmitting(true);
     
-    // In a real application, you would send this data to your backend.
-    // For this static example, we'll just show a success message.
-    
+    // This form is for demonstration and doesn't send data to a backend.
+    // In a real application, you would handle the submission here.
     toast({
         title: "Inquiry Sent!",
         description: "Thank you for your interest! We will review your submission and get back to you soon.",
