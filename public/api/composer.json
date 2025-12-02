@@ -1,0 +1,13 @@
+{
+    "name": "vikhyat/api",
+    "description": "Backend API handlers for the Vikhyat Foundation website.",
+    "require": {
+        "resend/resend-php": "^1.0",
+        "razorpay/razorpay": "2.*"
+    },
+    "authors": [
+        {
+            "name": "Firebase Studio"
+        }
+    ]
+}

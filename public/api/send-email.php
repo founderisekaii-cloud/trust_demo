@@ -1,69 +1,79 @@
 <?php
-// Include the central configuration file
-require_once 'config.inc.php';
-
-// Set headers for CORS and JSON response
+error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Read the incoming JSON data
-$data = json_decode(file_get_contents('php://input'), true);
+require 'vendor/autoload.php';
+require_once 'config.inc.php';
 
-// Basic validation
-if (!$data || !isset($data['email']) || !isset($data['subject']) || !isset($data['message'])) {
-    http_response_code(400);
-    echo json_encode(["error" => "Invalid input. Missing required fields."]);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method Not Allowed']);
     exit;
 }
 
-// Extract data from the request
-$from_name = $data['name'] ?? 'Anonymous';
-$from_email = $data['email'];
-$subject = $data['subject'];
-$message_body = $data['message'];
-$is_subscription = isset($data['isSubscription']) && $data['isSubscription'];
+$data = json_decode(file_get_contents('php://input'), true);
 
-$to_email = $is_subscription ? SUBSCRIBE_TO_EMAIL : CONTACT_FORM_TO_EMAIL;
+if (json_last_error() !== JSON_ERROR_NONE) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid JSON input.']);
+    exit;
+}
 
-// --- Construct the email payload for Resend API ---
-$payload = [
-    'from' => 'Vikhyat Foundation <' . SENDER_EMAIL . '>',
-    'to' => [$to_email],
-    'subject' => $subject,
-    'html' => nl2br(htmlspecialchars($message_body)),
-    'reply_to' => $from_email // So you can reply directly to the user
-];
+$name = $data['name'] ?? 'N/A';
+$email = $data['email'] ?? null;
+$subject = $data['subject'] ?? 'No Subject';
+$message = $data['message'] ?? '';
+$isSubscription = isset($data['isSubscription']) && $data['isSubscription'];
 
-// --- Initialize cURL session ---
-$ch = curl_init('https://api.resend.com/emails');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . RESEND_API_KEY
-]);
+if (!$email) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Email is required.']);
+    exit;
+}
 
-// --- Execute cURL session and get the response ---
-$response = curl_exec($ch);
-$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
+$resend = Resend::client(RESEND_API_KEY);
 
-// --- Handle the response ---
-if ($http_code >= 200 && $http_code < 300) {
+try {
+    if ($isSubscription) {
+        // --- ADMIN NOTIFICATION FOR SUBSCRIPTION ---
+        $resend->emails->send([
+            'from' => 'Vikhyat Foundation <' . SENDER_EMAIL . '>',
+            'to' => [SUBSCRIBE_TO_EMAIL],
+            'subject' => 'New Newsletter Subscriber',
+            'html' => "<h1>New Subscriber</h1><p>A new person has subscribed to your newsletter: <strong>{$email}</strong></p>",
+        ]);
+        
+        // --- SUBSCRIBER CONFIRMATION ---
+        $resend->emails->send([
+            'from' => 'Vikhyat Foundation <' . SENDER_EMAIL . '>',
+            'to' => [$email],
+            'subject' => 'Welcome to the Vikhyat Foundation Newsletter!',
+            'html' => '<h1>Thank You for Subscribing!</h1><p>You are now part of our community. We will keep you updated on our latest initiatives.</p>',
+        ]);
+
+    } else {
+        // --- CONTACT FORM SUBMISSION ---
+        $resend->emails->send([
+            'from' => 'Vikhyat Foundation <' . SENDER_EMAIL . '>',
+            'to' => [CONTACT_FORM_TO_EMAIL],
+            'subject' => "New Contact Form Message: {$subject}",
+            'reply_to' => $email,
+            'html' => "<h1>New Message from {$name} ({$email})</h1><p>{$message}</p>",
+        ]);
+    }
+
     http_response_code(200);
-    echo json_encode(["success" => true, "message" => "Email sent successfully!"]);
-} else {
-    http_response_code($http_code);
-    // Return the error from Resend if available, otherwise a generic error
-    $error_details = json_decode($response, true);
+    echo json_encode(['success' => true, 'message' => 'Email sent successfully.']);
+
+} catch (\Exception $e) {
+    http_response_code(500);
     echo json_encode([
-        "error" => "Failed to send email.",
-        "details" => $error_details['message'] ?? 'An unknown error occurred with the email service.',
-        "statusCode" => $http_code
+        'success' => false,
+        'error' => 'Failed to send email: ' . $e->getMessage()
     ]);
 }
 ?>
