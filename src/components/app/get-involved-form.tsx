@@ -44,14 +44,12 @@ export function GetInvolvedForm() {
   async function onSubmit(formData: GetInvolvedFormValues) {
     setIsSubmitting(true);
     
-    console.log("Get Involved Form Submitted:", formData);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // In a real application, you would send this data to your backend.
+    // For this static example, we'll just show a success message.
     
     toast({
-        title: "Application Sent!",
-        description: "Thank you! We've received your inquiry.",
+        title: "Inquiry Sent!",
+        description: "Thank you for your interest! We will review your submission and get back to you soon.",
     });
     form.reset();
 
