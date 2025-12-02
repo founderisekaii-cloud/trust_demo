@@ -1,66 +1,64 @@
 <?php
 error_reporting(0);
-require_once 'config.php';
+include 'config.inc.php';
 
-// Set headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Get the posted data
+// Read the incoming JSON data
 $data = json_decode(file_get_contents("php://input"), true);
-$amount = $data['amount']; // Amount in paise
+$amount = $data['amount'];
 
-if (empty($amount) || !is_numeric($amount)) {
-    http_response_code(400);
-    echo json_encode(["error" => "Invalid amount provided."]);
-    exit();
+if (empty($amount)) {
+    echo json_encode(['error' => 'Amount is required.']);
+    exit;
 }
 
 $key_id = RAZORPAY_KEY_ID;
 $key_secret = RAZORPAY_KEY_SECRET;
 
-// Prepare order data
-$order_data = [
-    'receipt'         => 'rcptid_' . time(),
-    'amount'          => $amount,
-    'currency'        => 'INR',
-    'payment_capture' => 1 // Auto-capture payment
+$url = 'https://api.razorpay.com/v1/orders';
+$receipt_id = 'receipt_' . time();
+$data = [
+    'receipt' => $receipt_id,
+    'amount' => $amount,
+    'currency' => 'INR',
+    'payment_capture' => 1
 ];
+$json_data = json_encode($data);
 
-$order_payload = json_encode($order_data);
+$ch = curl_init();
 
-// Initialize cURL session
-$ch = curl_init('https://api.razorpay.com/v1/orders');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $order_payload);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Content-Length: ' . strlen($order_payload)
-]);
+curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_USERPWD, $key_id . ':' . $key_secret);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json'
+]);
 
-// Execute cURL session
 $response = curl_exec($ch);
-$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$curl_error = curl_error($ch);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+if (curl_errno($ch)) {
+    $error_msg = curl_error($ch);
+    curl_close($ch);
+    echo json_encode(['error' => 'cURL Error: ' . $error_msg]);
+    exit;
+}
+
 curl_close($ch);
 
-// Check response
-if ($http_code === 200 || $http_code === 201) {
-    $response_data = json_decode($response, true);
-    http_response_code(200);
-    echo json_encode(["order_id" => $response_data['id']]);
-} else {
-    http_response_code(500);
-    $response_data = json_decode($response, true);
-    $error_message = $response_data['error']['description'] ?? 'An unknown error occurred with Razorpay.';
-    if ($curl_error) {
-        $error_message = "cURL Error: " . $curl_error;
-    }
-    echo json_encode(["success" => false, "error" => $error_message, "details" => $response]);
+$order_data = json_decode($response, true);
+
+if ($http_status != 200) {
+    echo json_encode(['error' => 'Razorpay API Error: ' . ($order_data['error']['description'] ?? 'Unknown error')]);
+    exit;
 }
+
+echo json_encode(['order_id' => $order_data['id']]);
 ?>

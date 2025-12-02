@@ -41,7 +41,7 @@ export function DonationForm() {
     startTransition(async () => {
       try {
         // Step 1: Create the order by calling our PHP script
-        const orderResponse = await fetch('/api/create-order.php', {
+        const orderResponse = await fetch('./api/create-order.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,20 +50,20 @@ export function DonationForm() {
         });
 
         if (!orderResponse.ok) {
-            const errorData = await orderResponse.json();
-            throw new Error(errorData.error || `Server responded with ${orderResponse.status}`);
+            const errorText = await orderResponse.text();
+            throw new Error(`Server responded with ${orderResponse.status}: ${errorText}`);
         }
 
         const orderData = await orderResponse.json();
         const order_id = orderData.order_id;
         
-        if (!order_id) {
-          throw new Error("Failed to create Razorpay order.");
+        if (!order_id || orderData.error) {
+          throw new Error(orderData.error || "Failed to create Razorpay order.");
         }
 
         // Step 2: Open Razorpay Checkout
         const options = {
-            key: 'YOUR_RAZORPAY_KEY_ID', // Your public key from Razorpay dashboard
+            key: 'rzp_live_RmhWSJOttVe0m9', // Your public key from Razorpay dashboard
             amount: data.amount * 100,
             currency: 'INR',
             name: 'Vikhyat Foundation',
@@ -78,7 +78,13 @@ export function DonationForm() {
                     description: 'Your generous donation has been received.',
                 });
                 form.reset();
-                // Here you could also send payment details to your backend for verification
+                document.body.style.overflow = 'auto';
+            },
+            modal: {
+                ondismiss: function() {
+                    console.log('Checkout form closed');
+                    document.body.style.overflow = 'auto';
+                }
             },
             prefill: {
                 name: data.name,
@@ -100,6 +106,7 @@ export function DonationForm() {
                 title: 'Payment Failed',
                 description: response.error.description || 'An unknown error occurred.',
             });
+            document.body.style.overflow = 'auto';
         });
         
         rzpy.open();
