@@ -4,80 +4,70 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-header("Content-Type: application/json");
+// Set headers for CORS and content type
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-require_once __DIR__ . '/config.inc.php';
+// Include the autoloader and the configuration file
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config.inc.php';
 
-$data = json_decode(file_get_contents("php://input"), true);
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method Not Allowed']);
+    exit();
+}
 
-if (!$data) {
+// Get the raw POST data
+$json = file_get_contents('php://input');
+$data = json_decode($json);
+
+// Basic validation
+if (!$data || !isset($data->email) || !isset($data->name) || !isset($data->message)) {
     http_response_code(400);
-    echo json_encode(["error" => "Invalid JSON input"]);
-    exit;
+    echo json_encode(['error' => 'Bad Request: Missing required fields.']);
+    exit();
 }
 
-$name = $data['name'] ?? 'Anonymous';
-$email = $data['email'] ?? '';
-$subject = $data['subject'] ?? 'No Subject';
-$message = $data['message'] ?? '';
+// Initialize the Resend client with the API key from config
+$resend = Resend::client(RESEND_API_KEY);
 
-if (empty($email)) {
-    http_response_code(400);
-    echo json_encode(["error" => "Email address is required."]);
-    exit;
-}
+// Determine if it's a newsletter subscription
+$isSubscription = isset($data->isSubscription) && $data->isSubscription;
 
-// Check for the 'isSubscription' flag for newsletter subscriptions
-$isSubscription = $data['isSubscription'] ?? false;
-if ($isSubscription) {
-    $emailSubject = 'New Newsletter Subscription';
-    $emailBody = "<p>A new user has subscribed to the newsletter:</p><p><b>Email:</b> {$email}</p>";
-} else {
-    $emailSubject = "New Contact Form Message: " . $subject;
-    $emailBody = "
-        <h1>New Message from Vikhyat Foundation Website</h1>
-        <p>You have received a new message through your contact form.</p>
-        <hr>
-        <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
-        <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
-        <p><strong>Subject:</strong> " . htmlspecialchars($subject) . "</p>
-        <hr>
-        <h2>Message:</h2>
-        <p>" . nl2br(htmlspecialchars($message)) . "</p>
-    ";
-}
-
+$subject = $isSubscription ? 'New Newsletter Subscription' : ($data->subject ?? 'New Contact Form Submission');
+$body = $isSubscription ? "Please add {$data->email} to the mailing list." : "Name: {$data->name}<br>Email: {$data->email}<br><br>Message:<br>{$data->message}";
+$replyTo = $isSubscription ? SENDER_EMAIL : $data->email;
 
 try {
-    $resend = Resend::client(RESEND_API_KEY);
-
     $result = $resend->emails->send([
-        'from' => SENDER_EMAIL_FROM,
-        'to' => [ADMIN_EMAIL],
-        'subject' => $emailSubject,
-        'html' => $emailBody,
-        'reply_to' => $email,
+        'from' => SENDER_NAME . ' <' . SENDER_EMAIL . '>',
+        'to' => [RECIPIENT_EMAIL],
+        'subject' => $subject,
+        'html' => $body,
+        'reply_to' => $replyTo
     ]);
-    
-    // On success, Resend returns an object with an 'id'. If not, something went wrong.
-    if (isset($result->id)) {
+
+    // Check if the email was sent successfully
+    if ($result->id) {
         http_response_code(200);
-        echo json_encode(["message" => "Email sent successfully!"]);
+        echo json_encode(['message' => 'Email sent successfully.']);
     } else {
-        // If there's no ID, something failed silently on Resend's side
-        throw new Exception('Failed to send email. Resend API did not return a success ID.');
+        http_response_code(500);
+        // Provide a more descriptive error based on Resend's potential response
+        $error_message = 'Failed to send email. Resend API did not return a success ID.';
+        if (isset($result->error)) {
+             $error_message = $result->error->message ?? 'Unknown Resend API error.';
+        }
+        echo json_encode(['error' => $error_message]);
     }
 
 } catch (\Exception $e) {
-    // Catch any exception and return a detailed error
     http_response_code(500);
-    echo json_encode([
-        "error" => "An error occurred while sending the email.",
-        "details" => $e->getMessage(),
-        "trace" => $e->getTraceAsString() // Provide a stack trace for deep debugging
-    ]);
+    // Return the actual exception message for debugging
+    echo json_encode(['error' => 'An exception occurred: ' . $e->getMessage()]);
 }
+?>
